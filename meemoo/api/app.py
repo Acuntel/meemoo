@@ -13,6 +13,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from meemoo import __version__
+from meemoo.api.guardian_routes import router as guardian_router
 from meemoo.core.config import get_settings
 from meemoo.core.logging import setup_logging
 
@@ -31,6 +32,8 @@ def create_app() -> FastAPI:
     @app.get("/api/v1/health")
     def health() -> dict[str, str]:
         return {"status": "ok", "service": "meemoo", "version": __version__}
+
+    app.include_router(guardian_router)
 
     if WEB_DIST.is_dir():
         app.mount("/", StaticFiles(directory=WEB_DIST, html=True), name="web")

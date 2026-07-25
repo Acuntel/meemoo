@@ -234,22 +234,58 @@
         the adapter sub-item above
 
 ## Phase 5 — Guardian (most tests)
-- [ ] Escalation state machine exactly per spec (IDLE → CHECK_IN_DUE → CHECKING →
-      OK/NO_RESPONSE → CONCERN → verify → ESCALATE_L1 → L2 → L3) as a pure,
-      fully-tested module; person.down enters CONCERN from any state
-- [ ] L3 = ring configured test number + full-screen alert; auto-911 gated OFF
-      behind a config flag that ships off (documented TODO)
-- [ ] Contacts (ordered, prefs), acknowledgment from dashboard halts escalation
-      (+ Twilio SMS reply when creds exist)
-- [ ] Check-in scheduler (APScheduler): default 9a/1p/6p/9p; check-in = sim round
-      + real voice check-in
-- [ ] Notifier adapter: Twilio impl (demo) + simulated-call UI impl; own-telephony
-      replacement documented as a roadmap item
-- [ ] Immutable audit rows for every transition w/ evidence links; false-alarm
-      counter surfaced
-- [ ] pytest: full state walk, "help me" bypass, ack halting, timeout ladders,
-      no-response → L2 → L3
-- Gate: guardian test suite green; simulated end-to-end fall → L1 → ack works
+- [x] Escalation state machine exactly per spec (IDLE → CHECK_IN_DUE → CHECKING →
+      OK/NO_RESPONSE → CONCERN → verify ×2 → ESCALATE_L1 → L2 → L3) as a PURE
+      side-effect-free module (guardian/machine.py + types.py; effects out as
+      data); person.down → CONCERN from every non-escalated state
+  - [x] MONOTONIC-URGENCY reading of "from ANY state" (documented in
+        machine.py + test-asserted): person.down/distress never DOWNGRADE an
+        active escalation — repeated person.down at L2 must not reset the
+        ack timer/verify loop or the ladder could livelock below L3
+- [x] L3 = ring configured TEST number (GUARDIAN_TEST_NUMBER) + full-screen
+      alert (escalation.l3 payload); auto-911 flag exists, SHIPS OFF, and is
+      deliberately unimplemented — Art. IV §1 regulatory gate (TODO in
+      service._run_notify; test proves flag-on still never dials 911)
+- [x] Contacts CRUD (ordered, relationship, phone, sms/call prefs) —
+      guardian/contacts.py + REST /api/v1/devices/{id}/contacts; ack from
+      dashboard-less API (POST /api/v1/alerts/{id}/ack) halts the live machine
+      via guardian/registry.py; Twilio inbound-SMS webhook
+      (POST /api/v1/twilio/sms, "ACK" reply) acks by contact phone match
+- [x] Check-in scheduler (guardian/scheduler.py, APScheduler cron): default
+      9a/1p/6p/9p, checkin_schedule rows override; checkin.due → guardian
+      speaks the greeting through the real voice pipeline + publishes
+      flight.dispatch
+  - [ ] flight.dispatch is consumed by a stand-in whale until Phase 6 ships
+        SimulatedBlimp (e2e test uses SimWhale; real sim round lands there)
+- [x] Notifier adapter (guardian/notifier.py): SimulatedNotifier (publishes
+      notify.sent simulated:True — the fake incoming-call screen's feed) +
+      TwilioNotifier (stdlib HTTP, demo-only per Art. III §3, own-telephony
+      SIP/dialer replacement documented in module docstring); factory degrades
+      to simulated on missing creds, never crashes
+  - [ ] Twilio LIVE send unverified (no creds in this env; request shape,
+        auth, TwiML + failure paths are stub-tested) — needs Brady's Twilio
+        creds + a real ring test
+  - [ ] fake incoming-call screen UI itself lands in Phase 7 (topic ready)
+- [x] Immutable audit rows for every transition + every notify attempt
+      (hash-chained via append_audit, evidence event ids, version stamps,
+      guardian-sm-v1 config stamp); false-alarms/week counter computed from
+      guardian.false_alarm event rows + surfaced at
+      GET /api/v1/metrics/false-alarms (Art. VIII §3 headline)
+- [x] pytest (63 guardian tests; 356 total green): full state walk, "help me"
+      bypass straight to L1 (from every lower state), ack halts at L1/L2/L3
+      w/ who/when/latency, timeout ladders L1→L2→L3 with exact configured
+      durations, person.down from EVERY state, scheduler cron registration +
+      fire, audit rows immutable (UPDATE rejected) + chain verifies,
+      zero-creds path walks to L3 on SimulatedNotifier with no DB/voice
+  - [ ] ⚠️ .env.example not updated (Brady's .env hook): add
+        GUARDIAN_TEST_NUMBER (L3 rings this, never 911; unset = simulated)
+        and GUARDIAN_AUTO_911=false (ships off; unimplemented — Art. IV §1)
+- Gate: ✅ 2026-07-25 `make check` ALL GREEN (356 pytest); e2e test
+  (tests/guardian/test_e2e.py) walks fake person.down → whale dispatch →
+  two spoken asks through the REAL VoicePipeline (NullTTS timed audio into
+  the sink) → L1 alert + simulated notify → ack via REST API → machine IDLE,
+  ladder dead, audit walk exact; `make demo-guardian` shows both the ack
+  path and the no-ack L3 ladder headless
 
 ## Phase 6 — Flight + dock sim (honest physics)
 - [ ] `FlightController` interface per spec + `DockController` sibling

@@ -1,7 +1,7 @@
 # Meemoo — single-laptop dev workflow (Constitution Art. IX §4).
 # Requires: uv (https://docs.astral.sh/uv/), node 20+.
 
-.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain
+.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain demo-guardian
 
 # ------------------------------------------------------------------ install
 install:
@@ -37,6 +37,11 @@ demo-brain:
 	uv run python -m meemoo.brain.demo --provider fake
 	uv run python -m meemoo.brain.demo --provider scripted
 	uv run python -m meemoo.brain.demo --compare-presets
+
+# Step-05 gate: simulated fall → verify → L1 → ack (then the no-ack L3 ladder).
+demo-guardian:
+	uv run python -m meemoo.guardian.demo
+	uv run python -m meemoo.guardian.demo --no-ack
 
 # --------------------------------------------------------------------- test
 test:

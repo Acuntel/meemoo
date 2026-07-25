@@ -34,11 +34,14 @@ VOICE_SPEAKING: Final = "voice.speaking"  # payload {"on": bool} — ducking hoo
 CHECKIN_DUE: Final = "checkin.due"
 ESCALATION_L1: Final = "escalation.l1"
 ESCALATION_L2: Final = "escalation.l2"
-ESCALATION_L3: Final = "escalation.l3"
+ESCALATION_L3: Final = "escalation.l3"  # payload includes {"full_screen_alert": True}
 ESCALATION_ACKNOWLEDGED: Final = "escalation.acknowledged"
 ESCALATION_RESOLVED: Final = "escalation.resolved"
+GUARDIAN_STATE: Final = "guardian.state"  # every transition, for the dashboard
+NOTIFY_SENT: Final = "notify.sent"  # payload {"simulated": bool, ...} — drives fake call UI
 
 # --- Flight -----------------------------------------------------------------
+FLIGHT_DISPATCH: Final = "flight.dispatch"  # guardian requests a flight (Phase 6 subscribes)
 FLIGHT_TAKEOFF: Final = "flight.takeoff"
 FLIGHT_WAYPOINT_REACHED: Final = "flight.waypoint_reached"
 FLIGHT_BATTERY: Final = "flight.battery"

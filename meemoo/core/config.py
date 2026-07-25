@@ -38,6 +38,15 @@ class Settings(BaseSettings):
     twilio_auth_token: str | None = None
     twilio_from_number: str | None = None
 
+    # --- Guardian (Art. IV) ---
+    # L3 rings THIS number — never 911. Unset = simulated ring only.
+    guardian_test_number: str | None = None
+    # Auto-911 gate: exists so the gate is explicit, SHIPS OFF, and the feature
+    # is deliberately unimplemented pending a signed regulatory review
+    # (Constitution Art. IV §1). Setting it true logs an error and still rings
+    # the test number only.
+    guardian_auto_911: bool = False
+
     # --- Storage ---
     meemoo_db_path: str = "data/meemoo.db"
     # Fernet key for encrypting provider keys at rest. Never logged. If unset,
