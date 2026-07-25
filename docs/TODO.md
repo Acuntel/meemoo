@@ -115,25 +115,63 @@
         session can't open a camera/window — needs a human at the machine)
 
 ## Phase 3 — Voice (own-stack)
-- [ ] Audio I/O abstraction (server mic/speaker now; blimp satellite later; own
-      framed transport protocol ~200 lines)
-- [ ] STT: Moonshine v2 Streaming behind an `STT` interface (faster-whisper as
-      alternate impl — we already have working code from restoration-one)
-- [ ] TTS: Pocket TTS or Chatterbox behind a `TTS` interface; Piper as offline
-      floor; 3 voice characters (older man / child / female) selectable per device
-- [ ] Silero VAD + smart-turn endpointing; partial-transcript streaming
-- [ ] **Distress detector: local keyword/intent check for "help me / I need help /
-      call someone / emergency" on EVERY utterance — no LLM, no network; fires
-      Guardian directly** + pytest proving the bypass
-- [ ] Wake word: openWakeWord (dev) behind a `WakeWord` interface; push-to-talk
-      in UI as v1 trigger; "Hey <name>" model training deferred until rename
-- [ ] Conversation sessions (rolling context, 45 s silence close), transcript
-      storage default ON with per-device toggle; raw audio discarded post-STT
-- [ ] Spoken AI disclosure at session start + periodic reminder + 988 crisis
-      protocol path (deterministic, logged)
-- [ ] Barge-in not required, not architected out (ducking hooks in place)
-- Gate: mic → text → (echo brain) → speech loop < 2 s on the MacBook; distress
-  bypass test green with network disabled
+- [x] Audio I/O abstraction (voice/audio_io.py: MicSource/SpeakerSink via lazy
+      sounddevice + Buffer/Collect/Null fakes; -15 dB partial ducking, never
+      mute) + **MST/1 own framed satellite transport** (voice/transport.py:
+      magic/version/type/seq/len/CRC32, 10 frame types, garbage-resilient
+      incremental decoder — NOT Wyoming, spec in module docstring)
+- [x] STT behind `STT` interface: MoonshineSTT primary + FasterWhisperSTT
+      fallback (restoration-one pattern: int8 CPU, vad_filter, beam 1) — both
+      lazy imports; factory degrades to None (text mode), never crashes
+  - [ ] ⚠️ live-mic verification pending on Brady's Mac: `uv sync --group voice`
+        (+ Moonshine is NOT on PyPI — install line in voice/stt.py docstring);
+        Moonshine v2 *streaming* API + elderly-speech eval set still owed
+- [x] TTS behind `TTS` interface: PocketTTS primary → PiperTTS floor → NullTTS
+      (logs line + timed silence, keeps headless timing honest); 3 voice
+      characters committed in voice/voices.py (elder_male/child/female with
+      per-engine params)
+  - [ ] ⚠️ Pocket-vs-Chatterbox 1-hour side-by-side listening NOT done (needs
+        ears + hardware); all VoiceSpecs marked verified=False; Piper has no
+        true child voice — amy@0.85 length_scale is the committed floor approx
+  - [ ] Piper voice downloads on Brady's Mac: `uv run python -m
+        piper.download_voices en_GB-alan-medium en_US-amy-medium
+        en_US-lessac-medium --data-dir data/voices`
+- [x] VAD behind interface: SileroVAD (lazy pysilero-vad, ONNX no-torch) +
+      adaptive EnergyVAD pure-python floor; SilenceEndpointer with
+      elderly-pause-tolerant 1.0 s end-of-turn; `partial()` on the STT interface
+  - [ ] smart-turn v3 semantic endpointing not integrated (model download story
+        pending) — SilenceEndpointer is the honest stand-in behind the same API
+  - [ ] pipeline does not yet publish `utterance.partial` (needs live streaming
+        STT; topic reserved in core/topics.py)
+- [x] **Distress detector (voice/distress.py + voice/phrases.py): pure-stdlib
+      fuzzy phrase match (token Levenshtein ≤1) on EVERY final transcript,
+      publishes `utterance.distress` + deterministic spoken ack — no LLM, no
+      network, brain provably never called; pytest proves the bypass with all
+      API keys absent AND socket connects monkeypatched to raise**
+- [x] Wake word: `WakeWord` interface — PushToTalk v1 trigger + lazy
+      OpenWakeWord (stock model); custom "hey meemoo" model = hardware-phase
+      (1–2 wk training per maintainers); distress detector architecturally
+      separate from wake (Art. IV §5)
+- [x] Conversation sessions (voice/session.py): rolling 40-msg context, 45 s
+      silence close via injectable clock, transcript storage default ON with
+      per-device `Device.store_transcripts` toggle (OFF ⇒ not even a
+      Conversation row), raw audio buffer cleared + logged post-STT — no audio
+      field exists anywhere in the session/message path
+- [x] Spoken AI disclosure at session start + 600 s periodic re-disclosure +
+      deterministic "are you real?" answer + 988 crisis protocol
+      (voice/crisis.py: fixed template response, `utterance.crisis` published,
+      escalation-version-stamped logging) — all template text, no model
+- [x] Barge-in scaffolding: mic ducking hooks around playback + always-on
+      "stop" detector halts playback independent of AEC (research 02 §D.3);
+      full AEC = hardware phase
+- Gate: ✅ 2026-07-25 headless — `make check` ALL GREEN (230 pytest, 109 voice);
+  `make demo-voice` / `python -m meemoo.voice.demo --voices-check` speaks the
+  3 characters + logs measured TTFA per reply; `--say "help me"` shows the
+  bypass firing; distress tests green offline (keys absent + network dead)
+  - [ ] live mic→speaker run on Brady's Mac (headless session has no audio
+        hardware): `uv sync --group voice`, download Piper voices, then
+        `make demo-voice` — verify audible replies in all 3 voices and
+        TTFA < 2 s with a real STT engine loaded
 
 ## Phase 4 — Brain
 - [ ] Provider adapter interface `complete(messages, model, max_tokens)`;

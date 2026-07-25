@@ -22,7 +22,13 @@ PERSON_RECOVERED: Final = "person.recovered"
 
 # --- Voice ------------------------------------------------------------------
 UTTERANCE_HEARD: Final = "utterance.heard"
+UTTERANCE_PARTIAL: Final = "utterance.partial"  # streaming partial transcript
 DISTRESS_HEARD: Final = "utterance.distress"  # local keyword hit — Art. IV §4/§5
+CRISIS_HEARD: Final = "utterance.crisis"  # deterministic 988 protocol — Art. V §5
+STOP_HEARD: Final = "voice.stop"  # barge-in: stop playback immediately
+VOICE_SESSION_OPENED: Final = "voice.session_opened"
+VOICE_SESSION_CLOSED: Final = "voice.session_closed"
+VOICE_SPEAKING: Final = "voice.speaking"  # payload {"on": bool} — ducking hook
 
 # --- Guardian ---------------------------------------------------------------
 CHECKIN_DUE: Final = "checkin.due"

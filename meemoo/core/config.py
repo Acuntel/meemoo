@@ -13,6 +13,9 @@ from typing import Literal
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 VideoSource = Literal["webcam", "mjpeg_url", "file"]
+SttEngine = Literal["auto", "moonshine", "faster_whisper", "off"]
+TtsEngine = Literal["auto", "pocket", "piper", "null"]
+VadEngine = Literal["auto", "silero", "energy"]
 
 
 class Settings(BaseSettings):
@@ -46,6 +49,15 @@ class Settings(BaseSettings):
     video_source: VideoSource = "webcam"
     video_url: str | None = None  # mjpeg_url source (future blimp camera)
     video_file: str | None = None  # file source (recorded test clips)
+
+    # --- Voice (every stage optional; the loop degrades to text/null mode) ---
+    voice_stt: SttEngine = "auto"  # auto | moonshine | faster_whisper | off
+    voice_tts: TtsEngine = "auto"  # auto | pocket | piper | null
+    voice_vad: VadEngine = "auto"  # auto | silero | energy
+    voice_character: str = "elder_male"  # elder_male | child | female
+    voice_silence_close_s: float = 45.0  # session closes after this much silence
+    voice_redisclosure_s: float = 600.0  # periodic AI re-disclosure interval
+    piper_voices_dir: str = "data/voices"  # downloaded Piper .onnx voices live here
 
     # --- Server ---
     meemoo_host: str = "127.0.0.1"

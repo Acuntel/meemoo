@@ -1,7 +1,7 @@
 # Meemoo — single-laptop dev workflow (Constitution Art. IX §4).
 # Requires: uv (https://docs.astral.sh/uv/), node 20+.
 
-.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build
+.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice
 
 # ------------------------------------------------------------------ install
 install:
@@ -24,6 +24,13 @@ web-dev:
 # .env file-protection hook blocks — see meemoo/core/migrate.py).
 migrate:
 	uv run python -m meemoo.core.migrate
+
+# --------------------------------------------------------------------- demo
+# Step-03 gate: talk to the laptop, hear Meemoo in each of the three voices.
+# Live mic/speaker needs `uv sync --group voice`; degrades to typed input.
+demo-voice:
+	uv run python -m meemoo.voice.demo --voices-check
+	uv run python -m meemoo.voice.demo
 
 # --------------------------------------------------------------------- test
 test:

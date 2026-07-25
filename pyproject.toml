@@ -29,6 +29,17 @@ perception = [
     "mediapipe>=0.10.14",
     "numpy>=1.26",
 ]
+# Live-audio extras: NOT needed for tests (fakes cover every stage).
+# `uv sync --group voice` for the mic/speaker demo / real installs.
+# Moonshine (primary STT) is not on PyPI at pin time — install separately:
+#   uv pip install "useful-moonshine-onnx @ git+https://git@github.com/usefulsensors/moonshine.git#subdirectory=moonshine-onnx"
+voice = [
+    "sounddevice>=0.4.7",
+    "faster-whisper>=1.0",
+    "piper-tts>=1.2",
+    "pysilero-vad>=2.0",
+    "numpy>=1.26",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -56,7 +67,20 @@ warn_unreachable = true
 files = ["meemoo", "tests"]
 
 [[tool.mypy.overrides]]
-module = ["apscheduler.*", "cv2.*", "mediapipe.*", "ultralytics.*", "numpy.*"]
+module = [
+    "apscheduler.*",
+    "cv2.*",
+    "mediapipe.*",
+    "ultralytics.*",
+    "numpy.*",
+    "sounddevice.*",
+    "faster_whisper.*",
+    "moonshine_onnx.*",
+    "piper.*",
+    "pysilero_vad.*",
+    "pocket_tts.*",
+    "openwakeword.*",
+]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
