@@ -12,16 +12,36 @@ yet, the entire brain is being built against stand-ins: laptop webcam/mic as the
 blimp's senses, a 2D simulator as the aircraft. When real hardware arrives, only the
 I/O drivers get swapped.
 
+## How to build (the /clear workflow)
+
+Each build step is a self-contained prompt; context lives in this repo, so a
+fresh session loses nothing. In Claude Code, from this directory:
+
+```
+/clear
+/build-step 0
+```
+
+…then `/build-step 1`, `2`, … in order. Each step reads the constitution and
+TODO, builds, verifies its gate, checks off TODO, commits, pushes, and updates
+memory. Steps: 0 scaffold · 1 core · 2 perception · 3 voice · 4 brain ·
+5 guardian · 6 flight+dock sim · 7 API+web · 8 integration · 9 hardware bench
+(see docs/HARDWARE_MANUAL.md) · 10 Isaac 3D investigation · 11 go-live gates.
+
 ## Status
 
-**Phase: research.** Nothing is built yet. Current documents:
+**Phase: ready to build.** Research + constitution complete. Current documents:
 
 | Doc | What it is |
 |---|---|
 | [docs/MASTER_PROMPT.md](docs/MASTER_PROMPT.md) | The full build spec (modules, data model, demo script, quality bar) |
-| docs/RESEARCH.md | Deep research: competitors, physics/size, docking, silence, medical regs *(in progress)* |
-| docs/CONSTITUTION.md | What Meemoo must be + what we work around *(after research Q&A)* |
-| docs/TODO.md | Every piece of software to build and test *(after constitution)* |
+| [docs/RESEARCH.md](docs/RESEARCH.md) | Research synthesis (7 deep-dives in docs/research/) |
+| [docs/CONSTITUTION.md](docs/CONSTITUTION.md) | The binding rules — read before building anything |
+| [docs/BUILD_PLAN.md](docs/BUILD_PLAN.md) | Feasibility verdict, wings decision, system map, test strategy |
+| [docs/TODO.md](docs/TODO.md) | Phase checklist — source of truth for progress |
+| [docs/build-steps/](docs/build-steps/) | Self-contained step prompts for /build-step |
+| [docs/HARDWARE_MANUAL.md](docs/HARDWARE_MANUAL.md) | Zero-experience hardware guide + bench tests |
+| [docs/ORDER_LIST.md](docs/ORDER_LIST.md) | Exact parts, prices, where to buy |
 
 ## Core principles (short form)
 
