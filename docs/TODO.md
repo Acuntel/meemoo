@@ -32,8 +32,8 @@
 - [x] `.env.example` with every variable documented; config loader (pydantic
       settings) that never crashes on missing optionals
 - [x] CI: GitHub Actions — ruff, mypy, pytest, web typecheck+build
-      (workflow committed 07-25; ⚠️ Acuntel Actions billing was blocked 07-21 —
-      verify runs actually start after push; local `make check` is the fallback)
+      (✅ VERIFIED 07-25: run 30164091952 completed green on push — Acuntel
+      Actions billing block from 07-21 is no longer biting on this repo)
 
 ## Phase 1 — Core
 - [ ] Async pub/sub event bus (typed topics, wildcard subscribe, replay-last for
