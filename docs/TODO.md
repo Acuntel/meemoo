@@ -69,25 +69,50 @@
   full schema; audit_log/events reject UPDATE+DELETE in tests
 
 ## Phase 2 — Perception (base-station camera = the detector)
-- [ ] Video ingest: `webcam` | `mjpeg_url` | `file` sources behind one interface
-- [ ] Motion gate (frame-diff @ 3 fps) → MediaPipe Pose Full @ 15 fps when active;
-      person never dropped from tracking by the motion gate once seen
-- [ ] Signals: torso_angle, support_y, elevation vs calibrated floor line,
-      v_descent, motion_energy, vis_frac (all torso-length-normalized)
-- [ ] Floor-line + furniture-zone calibration with learning phase (YOLOv8n COCO
-      bootstrap at install; reduced-sensitivity first 7–14 days, user-visible)
-- [ ] Fall state machine — **persistence-primary**: UPRIGHT → DESCENDING →
+- [x] Video ingest: `webcam` | `mjpeg_url` | `file` sources behind one interface
+      (perception/video.py; cv2 lazy — package imports and tests run without it;
+      live video needs `uv sync --group perception`)
+- [x] Motion gate (frame-diff @ 3 fps) → MediaPipe Pose Full @ 15 fps when active;
+      person never dropped from tracking by the motion gate once seen (pure
+      `next_tier()` rule + tests; candidate path pins TRACKING even when occluded)
+- [x] Signals: torso_angle, support_y, elevation vs calibrated floor line,
+      v_descent, motion_energy, vis_frac (all torso-length-normalized; windowed
+      MEDIAN baselines by frame-count so 5 fps sources stay under STILL_MOTION)
+- [x] Floor-line + furniture-zone calibration with learning phase (YOLOv8n COCO
+      bootstrap at install — lazy/optional ultralytics; reduced-sensitivity first
+      7–14 days = non-ballistic candidates demoted to SOFT, ballistic stays hard;
+      placement check refuses to arm without floor in lower third)
+- [x] Fall state machine — **persistence-primary**: UPRIGHT → DESCENDING →
       GROUNDED_CANDIDATE → CONFIRMED_DOWN → VERIFYING → ESCALATE, plus LONG_LIE
-      and VANISHED_DOWN parallel paths, CANDIDATE_SOFT for deliberate
-      floor-sitters, ballistic-override of furniture suppression, RECOVERED
-- [ ] `candidate.fall` at ~5 s (dispatch blimp), `person.down` at 15 s,
-      `person.recovered`
-- [ ] Thumbnails + rolling 60 s skeleton ring buffer (JSONL) per candidate event
-- [ ] Annotated live feed over WebSocket
-- [ ] Test fixtures: GMDCSA-24 + CaucaFall → extract landmark JSONL (committed),
-      fetch script for raw clips (gitignored); pytest against the 3 spec
-      scenarios with per-event recall asserted at 100% on bundled fall clips
-- Gate: all perception tests green; live annotated webcam view works
+      (with noise hysteresis) and VANISHED_DOWN parallel paths, CANDIDATE_SOFT
+      for deliberate floor-sitters, ballistic-override of furniture suppression,
+      RECOVERED + SNOOZED (voice-ok while still on floor; new ballistic re-arms)
+- [x] `candidate.fall` at ~5 s (dispatch blimp), `person.down` at 15 s,
+      `person.recovered`; thresholds committed as
+      meemoo/perception/golden_thresholds.json (version-stamped via registry)
+- [x] Thumbnails + rolling 60 s skeleton ring buffer (JSONL) per candidate event
+      (thumbnail JPEG only when cv2 present; skeleton JSONL always)
+- [x] Annotated frames (skeleton/bbox/state banner) published through FrameHub
+  - [ ] /ws/video WebSocket endpoint consumes FrameHub — lands in Phase 7
+        (per docs/build-steps/step-02.md §6)
+- [x] Test fixtures + pytest: 3 spec scenarios, per-event recall asserted 100%
+      at candidate stage on bundled fall clips, false-candidate rate per
+      ADL-minute, time-to-candidate ≤ 6 s, person.down at 15±1 s, learning-phase
+      + voice-ok/help/snooze units (121 tests green)
+  - [ ] ⚠️ Bundled landmark JSONL is SYNTHETIC (20 clips, procedural stick-figure
+        w/ honest §A.3 kinematics, expectations embedded in headers) — real
+        GMDCSA-24 + CaucaFall extraction pending: run
+        tests/fixtures/clips/fetch.py (~0.5 GB, gitignored) then
+        tests/fixtures/extract_landmarks.py on a machine with
+        `uv sync --group perception`; annotate floor_line/rest_zones/expect per
+        clip before they join the assertion suite
+- Gate: all perception tests green ✅ 2026-07-25 (`make check` ALL GREEN, 121
+  pytest); fall/ADL/recovery replay verified headless via
+  `python -m meemoo.perception.demo --landmarks <clip.jsonl>` (candidate.fall →
+  person.down → person.recovered fire as specced)
+  - [ ] live webcam annotated window on Brady's Mac: `uv sync --group
+        perception` then `uv run python -m meemoo.perception.demo` (headless
+        session can't open a camera/window — needs a human at the machine)
 
 ## Phase 3 — Voice (own-stack)
 - [ ] Audio I/O abstraction (server mic/speaker now; blimp satellite later; own

@@ -22,6 +22,13 @@ dev = [
     "mypy>=1.11",
     "httpx>=0.27",
 ]
+# Live-video extras: NOT needed for tests (fixtures are landmark JSONL).
+# `uv sync --group perception` for the webcam demo / real installs.
+perception = [
+    "opencv-python>=4.10",
+    "mediapipe>=0.10.14",
+    "numpy>=1.26",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -38,6 +45,10 @@ target-version = "py311"
 # E722 (bare except) is in "E" — bare excepts are banned by Constitution Art. IX.
 select = ["E", "F", "W", "I", "UP", "B", "SIM", "T20"]
 
+[tool.ruff.lint.per-file-ignores]
+# fixture/fetch scripts are CLI tools — print is their UI
+"tests/fixtures/**" = ["T201"]
+
 [tool.mypy]
 python_version = "3.11"
 strict = true
@@ -45,7 +56,7 @@ warn_unreachable = true
 files = ["meemoo", "tests"]
 
 [[tool.mypy.overrides]]
-module = ["apscheduler.*"]
+module = ["apscheduler.*", "cv2.*", "mediapipe.*", "ultralytics.*", "numpy.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

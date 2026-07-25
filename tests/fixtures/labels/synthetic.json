@@ -1,0 +1,227 @@
+{
+  "fall_forward_ballistic": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 345,
+    "duration_s": 23.0
+  },
+  "fall_backward": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 345,
+    "duration_s": 23.0
+  },
+  "fall_lateral": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 331,
+    "duration_s": 22.1
+  },
+  "fall_end_seated": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 338,
+    "duration_s": 22.5
+  },
+  "fall_out_of_bed": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 382,
+    "duration_s": 25.5
+  },
+  "fall_night_lowvis": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 345,
+    "duration_s": 23.0
+  },
+  "fall_occluded_legs": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 345,
+    "duration_s": 23.0
+  },
+  "fall_slow_collapse": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 521,
+    "duration_s": 52.1
+  },
+  "fall_vanish_bottom": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 323,
+    "duration_s": 21.5
+  },
+  "fall_longlie_unmapped": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 520,
+    "duration_s": 104.0
+  },
+  "fall_no_response": {
+    "label": "fall",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen"
+    ],
+    "frames": 606,
+    "duration_s": 60.6
+  },
+  "adl_walk": {
+    "label": "adl",
+    "omnifall_classes": [
+      "walk",
+      "sit_down",
+      "sitting",
+      "lie_down",
+      "lying",
+      "stand_up"
+    ],
+    "frames": 285,
+    "duration_s": 19.0
+  },
+  "adl_sit_chair": {
+    "label": "adl",
+    "omnifall_classes": [
+      "walk",
+      "sit_down",
+      "sitting",
+      "lie_down",
+      "lying",
+      "stand_up"
+    ],
+    "frames": 517,
+    "duration_s": 34.5
+  },
+  "adl_lie_couch": {
+    "label": "adl",
+    "omnifall_classes": [
+      "walk",
+      "sit_down",
+      "sitting",
+      "lie_down",
+      "lying",
+      "stand_up"
+    ],
+    "frames": 648,
+    "duration_s": 43.2
+  },
+  "adl_lie_bed": {
+    "label": "adl",
+    "omnifall_classes": [
+      "walk",
+      "sit_down",
+      "sitting",
+      "lie_down",
+      "lying",
+      "stand_up"
+    ],
+    "frames": 530,
+    "duration_s": 53.0
+  },
+  "adl_yoga_floor": {
+    "label": "adl",
+    "omnifall_classes": [
+      "walk",
+      "sit_down",
+      "sitting",
+      "lie_down",
+      "lying",
+      "stand_up"
+    ],
+    "frames": 482,
+    "duration_s": 96.4
+  },
+  "adl_pickup_floor": {
+    "label": "adl",
+    "omnifall_classes": [
+      "walk",
+      "sit_down",
+      "sitting",
+      "lie_down",
+      "lying",
+      "stand_up"
+    ],
+    "frames": 138,
+    "duration_s": 9.2
+  },
+  "adl_sit_floor_short": {
+    "label": "adl",
+    "omnifall_classes": [
+      "walk",
+      "sit_down",
+      "sitting",
+      "lie_down",
+      "lying",
+      "stand_up"
+    ],
+    "frames": 423,
+    "duration_s": 28.2
+  },
+  "recovery_fall_standup": {
+    "label": "recovery",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen",
+      "stand_up",
+      "walk"
+    ],
+    "frames": 263,
+    "duration_s": 17.5
+  },
+  "recovery_after_down": {
+    "label": "recovery",
+    "omnifall_classes": [
+      "walk",
+      "fall",
+      "fallen",
+      "stand_up",
+      "walk"
+    ],
+    "frames": 503,
+    "duration_s": 33.5
+  }
+}

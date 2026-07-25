@@ -16,6 +16,7 @@ from typing import Final
 
 # --- Perception -------------------------------------------------------------
 PERSON_DETECTED: Final = "person.detected"
+CANDIDATE_FALL: Final = "candidate.fall"  # internal ~5 s signal — dispatch blimp, no alarm
 PERSON_DOWN: Final = "person.down"
 PERSON_RECOVERED: Final = "person.recovered"
 

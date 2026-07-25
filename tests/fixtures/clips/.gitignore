@@ -1,0 +1,5 @@
+# raw datasets are fetched, never committed (licensing + size — research 05 §B)
+*
+!__init__.py
+!fetch.py
+!.gitignore
