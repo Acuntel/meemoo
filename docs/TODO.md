@@ -174,26 +174,64 @@
         TTFA < 2 s with a real STT engine loaded
 
 ## Phase 4 — Brain
-- [ ] Provider adapter interface `complete(messages, model, max_tokens)`;
-      adapters: Anthropic, OpenAI, Google, Ollama — one file each, fifth provider
-      = one new file
-- [ ] Tier routing (reflex / conversation / reasoning) by task type; per-request
-      + per-day token/cost logging → cost meter
-- [ ] Personality assembly: base template (short spoken-length replies) + preset
-      role/personality + owner custom context + device context (person's name,
-      reminders, mode) + structured memory facts
-- [ ] **Preset library**: 5 roles × personality sub-presets (Trainer: hardcore /
-      encouraging / keeps-it-simple; Hospital Check-in; Companion; Tour Guide;
-      Tutor) as versioned YAML — editable raw context for power users
-- [ ] Memory: post-conversation fact extraction into memory_facts (explicit,
-      inspectable, deletable — names/workouts/preferences; NO biometrics);
-      mood-note summary per conversation
-- [ ] Scripted no-API-key fallback: templated check-in dialogue; safety loop
-      never depends on a third party
-- [ ] Medical-question refusal-and-handoff rail; anti-repetition paraphrase bank
-      with logged repetition rate
-- Gate: same conversation runs on Anthropic, Ollama, and scripted fallback by
-  flipping config; cost meter moves
+- [x] Provider adapter interface `complete(messages, model, max_tokens,
+      system=)` + streaming variant (brain/types.py); adapters one file each in
+      brain/providers/: Anthropic (official SDK, lazy; refusal handled before
+      content; server-side `fallbacks: "default"` opted in on opus-5/fable-5;
+      real token streaming), OpenAI (SDK, lazy), Google (google-genai, lazy),
+      Ollama (stdlib HTTP against OLLAMA_URL — the first-class offline brain);
+      fifth provider = one new file, PROVEN twice (fake.py ships as the fifth;
+      tests also inject a synthetic sixth module and the factory just works)
+  - [ ] ⚠️ adapters verified against stubbed SDK/HTTP in tests (request shape,
+        response/usage parsing, refusal) — LIVE run with real keys pending on
+        Brady's Mac: `uv sync --group brain` then
+        `uv run python -m meemoo.brain.demo` with ANTHROPIC_API_KEY (and/or
+        `--provider ollama --model llama3.2` with Ollama running)
+  - [ ] streaming is real for Anthropic; other adapters use the default
+        single-chunk stream() until live streaming is needed
+- [x] Tier routing (brain/router.py): task type → reflex/conversation/reasoning;
+      per-device model_config rows override defaults (haiku-4.5 / sonnet-5 /
+      opus-5 = the spec's cheap/mid/strong); Art. IV note enforced in
+      architecture — brain publishes NO escalation topics, LLM never gates
+      escalation. Cost meter (brain/usage.py): per-request usage rows + daily
+      aggregate; versioned pricing table
+  - [ ] ⚠️ OpenAI/Google pricing entries are ESTIMATES (Anthropic rows are
+        first-party rates) — owner should verify before trusting the meter
+        across vendors
+- [x] Personality assembly (brain/personality.py): base template (short
+      spoken-length replies, TTS-safe) + preset role/personality + owner custom
+      context + device context (name/reminders/mode/room) + memory facts;
+      prompt version registered in the escalation-record registry
+- [x] **Preset library** (brain/presets/*.yaml + loader): companion, trainer
+      (hardcore / encouraging / keeps_it_simple), hospital_checkin (no-ranking
+      language baked in per Art. IV §2), tour_guide, tutor — versioned YAML,
+      raw-editable
+- [x] Memory (brain/memory.py): post-conversation extraction into memory_facts
+      via reflex tier (strict JSON, category whitelist, biometric-token facts
+      DROPPED in code per Art. V §1) + mood-note onto the conversation row;
+      no provider ⇒ graceful skip
+- [x] Scripted no-API-key fallback (brain/scripted.py): greeting → "are you
+      feeling alright?" → branch → reminder → close; zero keys/network; the
+      engine degrades to it on missing provider AND on provider failure
+- [x] Medical-question refusal-and-handoff rail (brain/medical.py):
+      deterministic regex detector runs BEFORE any model; fixed handoff
+      template (tests prove the model is never consulted). Anti-repetition
+      paraphrase bank (brain/paraphrase.py): 10+ variants per intent, sampled
+      without replacement in a window, repetition-rate metric logged; Fasola
+      continuity lines (name at greet/farewell, last-session reference,
+      next-check-in forward reference)
+- [x] Engine (brain/engine.py): ConversationBrain callable drops into
+      VoicePipeline(brain=…) — wired in voice/demo.py; refusal ⇒ deterministic
+      warm line; rolling 40-msg context; preset switch at runtime
+- Gate: ✅ 2026-07-25 — same check-in conversation through the REAL Anthropic
+  adapter (stubbed SDK), REAL Ollama adapter (stubbed local HTTP), and
+  scripted fallback purely by model_config flip; system prompt byte-identical
+  across providers (tests/brain/test_engine.py); cost meter accumulates
+  per-request rows + daily total; `--compare-presets` shows encouraging vs
+  hardcore trainer tone flip; repetition rate printed by
+  `make demo-brain` (293 pytest green — 63 brain, `make check` ALL GREEN)
+  - [ ] live-provider gate run on Brady's Mac (real key / local Ollama) — see
+        the adapter sub-item above
 
 ## Phase 5 — Guardian (most tests)
 - [ ] Escalation state machine exactly per spec (IDLE → CHECK_IN_DUE → CHECKING →

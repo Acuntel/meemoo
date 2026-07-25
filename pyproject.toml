@@ -12,6 +12,7 @@ dependencies = [
     "pydantic-settings>=2.3",
     "cryptography>=42",
     "websockets>=12",
+    "pyyaml>=6",
 ]
 
 [dependency-groups]
@@ -39,6 +40,14 @@ voice = [
     "piper-tts>=1.2",
     "pysilero-vad>=2.0",
     "numpy>=1.26",
+]
+# Hosted-LLM extras: NOT needed for tests (FakeProvider + stubs cover the
+# adapters; scripted fallback needs nothing). `uv sync --group brain` to talk
+# to real providers. Ollama needs no SDK (stdlib HTTP against ollama_url).
+brain = [
+    "anthropic>=0.40",
+    "openai>=1.40",
+    "google-genai>=1.0",
 ]
 
 [build-system]
@@ -80,6 +89,10 @@ module = [
     "pysilero_vad.*",
     "pocket_tts.*",
     "openwakeword.*",
+    "anthropic.*",
+    "openai.*",
+    "google.*",
+    "yaml.*",
 ]
 ignore_missing_imports = true
 

@@ -1,7 +1,7 @@
 # Meemoo — single-laptop dev workflow (Constitution Art. IX §4).
 # Requires: uv (https://docs.astral.sh/uv/), node 20+.
 
-.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice
+.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain
 
 # ------------------------------------------------------------------ install
 install:
@@ -31,6 +31,12 @@ migrate:
 demo-voice:
 	uv run python -m meemoo.voice.demo --voices-check
 	uv run python -m meemoo.voice.demo
+
+# Step-04 gate: same check-in conversation across providers by config flip.
+demo-brain:
+	uv run python -m meemoo.brain.demo --provider fake
+	uv run python -m meemoo.brain.demo --provider scripted
+	uv run python -m meemoo.brain.demo --compare-presets
 
 # --------------------------------------------------------------------- test
 test:

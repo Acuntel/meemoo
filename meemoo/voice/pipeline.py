@@ -8,7 +8,9 @@ Processing order for EVERY final transcript is safety-first and fixed
    consulted; a deterministic acknowledgment template is spoken;
 3. 988 crisis protocol — deterministic template response, logged;
 4. "are you real?" — the identical honest answer (Art. V §5);
-5. only then the brain (a templated placeholder until Phase 4).
+5. only then the brain — ``meemoo.brain.engine.ConversationBrain`` in the
+   real wiring; ``templated_brain`` stays as the dependency-free default so
+   the pipeline is testable in isolation.
 
 Raw audio is deleted the moment transcription finishes (Art. V §2): the
 utterance buffer is cleared and its size logged; no audio bytes are ever
@@ -37,7 +39,7 @@ from meemoo.voice.vad import SilenceEndpointer
 
 logger = logging.getLogger(__name__)
 
-Brain = Callable[[str], str]  # placeholder signature until Phase 4's adapter
+Brain = Callable[[str], str]  # ConversationBrain is callable with exactly this shape
 
 
 def templated_brain(text: str) -> str:
@@ -178,7 +180,7 @@ class VoicePipeline:
             await self._speak(REALNESS_ANSWER, heard_at)
             return
 
-        # 5. the brain (templated placeholder until Phase 4).
+        # 5. the brain (ConversationBrain when wired; templated default).
         reply = self._brain(text)
         self._sessions.add_assistant(reply)
         await self._speak(reply, heard_at)

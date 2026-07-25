@@ -22,6 +22,8 @@ import argparse
 import asyncio
 import sys
 
+from meemoo.brain.engine import ConversationBrain
+from meemoo.brain.personality import DeviceContext
 from meemoo.core.bus import EventBus
 from meemoo.core.config import get_settings
 from meemoo.core.logging import setup_logging
@@ -44,6 +46,8 @@ def build_pipeline(bus: EventBus, source: AudioSource, live: bool) -> VoicePipel
         None,  # demo runs memory-only; the API app wires the real DB factory
         silence_close_s=settings.voice_silence_close_s,
     )
+    # The real brain (step 04): configured provider if any, scripted otherwise.
+    brain = ConversationBrain(device=DeviceContext(person_name="friend"))
     return VoicePipeline(
         bus,
         source=source,
@@ -52,6 +56,7 @@ def build_pipeline(bus: EventBus, source: AudioSource, live: bool) -> VoicePipel
         tts=create_tts(),
         vad=create_vad(),
         sessions=sessions,
+        brain=brain,
         voice_key=settings.voice_character,
     )
 
