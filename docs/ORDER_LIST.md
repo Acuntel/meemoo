@@ -1,4 +1,4 @@
-# Helpee — Bench Experiment Order List (Phase 9)
+# Meemoo — Bench Experiment Order List (Phase 9)
 
 > Created 2026-07-25. Everything needed for the noise test, leak test, and the
 > funnel-vs-winch capture test — before any custom envelope or PCB exists.

@@ -1,4 +1,4 @@
-# Helpee — Build TODO
+# Meemoo — Build TODO
 
 > Created 2026-07-25 after the constitution. Phases execute in order; within a
 > phase, items are roughly ordered. Every phase ends with its gate passing.
@@ -6,9 +6,13 @@
 > source of truth across sessions.
 
 ## Phase 0 — Project scaffold
-- [ ] Rename: Brady picks the product name → rename repo, package dir, docs
-      references, wake-word plan (cheap now, expensive later)
-- [ ] Python project: `pyproject.toml`, `helpee/` package, ruff + mypy config,
+- [x] Rename: **Meemoo** locked 2026-07-25 — repo now Acuntel/meemoo, local
+      folder ~/dev/meemoo, living docs renamed; wake word = "Hey Meemoo"
+- [ ] Formal USPTO trademark screen for "Meemoo" (robotics/health classes) +
+      register domains (meemoo.io OPEN, heymeemoo.com OPEN, getmeemoo.com OPEN
+      as of 2026-07-25; meemoo.com parked-for-sale aftermarket; meemoo.ai taken
+      2025-07-27)
+- [ ] Python project: `pyproject.toml`, `meemoo/` package, ruff + mypy config,
       pytest scaffold, Makefile (`make dev`, `make test`, `make check`)
 - [ ] Web project: Vite + React + TS + Tailwind under `web/`, built assets served
       by FastAPI

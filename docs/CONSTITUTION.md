@@ -1,8 +1,11 @@
-# The Helpee Constitution
+# The Meemoo Constitution
 
 > Ratified 2026-07-25 from Brady's decisions on the research question list.
-> "Helpee" is the WORKING CODENAME — a rename is pending Brady's pick from the
-> candidate list; on selection, rename the repo, package dirs, and wake-word plan.
+> **The name is MEEMOO** — locked by Brady 2026-07-25 (naming history:
+> "Drift" in the original spec → "Helpee" working codename → Meemoo). Historical
+> research reports in docs/research/ still say Helpee; they are archival.
+> Wake word: "Hey Meemoo" — vowel-heavy (survives presbycusis), no collision
+> with the "help" distress word. Pending: formal USPTO/trademark screen (Phase 0).
 > This document is binding on every future build session. When a feature request
 > conflicts with an Article, the Article wins unless Brady amends it here.
 
@@ -85,7 +88,7 @@ stack. We ship safety as architecture, not promises.
 
 1. **No auto-911.** L3 rings configured humans and shows a full-screen alert.
    Autonomous emergency dispatch requires a signed regulatory review to add.
-2. **No clinical ranking, ever** (Brady: "it definitely won't rank"). Helpee
+2. **No clinical ranking, ever** (Brady: "it definitely won't rank"). Meemoo
    reports observations ("no movement for 4 minutes in the bedroom"), never
    severity scores, diagnoses, or care recommendations to staff.
 3. **No physiological measurement** in v1 (no temperature, no BP) and no
@@ -111,7 +114,7 @@ stack. We ship safety as architecture, not promises.
 
 ## Article V — Memory & privacy
 
-1. **Helpee remembers people — without biometrics.** Names, preferences, previous
+1. **Meemoo remembers people — without biometrics.** Names, preferences, previous
    workouts, conversation context: YES, stored as explicit structured memory +
    conversational context, keyed by schedule/room/self-identification.
    **Face-recognition templates and voiceprints: NEVER** (Illinois BIPA;
@@ -189,7 +192,7 @@ stack. We ship safety as architecture, not promises.
 2. Reminder adherence with prompts-required.
 3. **False alarms per week as a published headline number.**
 4. **Human-contact tracking — the anti-substitution metric:** calls placed,
-   visits arranged. Rising Helpee usage with falling human contact = defined
+   visits arranged. Rising Meemoo usage with falling human contact = defined
    product failure.
 5. Reliability: hours of unattended operation per human intervention — the metric
    no wheeled or rotored competitor can match.

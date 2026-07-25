@@ -1,4 +1,4 @@
-# Helpee
+# Meemoo
 
 A small, cute, animal-shaped helium blimp that floats at eye level and serves as a
 companion + safety check-in device for older adults — at home, in nursing homes, and
@@ -20,7 +20,7 @@ I/O drivers get swapped.
 |---|---|
 | [docs/MASTER_PROMPT.md](docs/MASTER_PROMPT.md) | The full build spec (modules, data model, demo script, quality bar) |
 | docs/RESEARCH.md | Deep research: competitors, physics/size, docking, silence, medical regs *(in progress)* |
-| docs/CONSTITUTION.md | What Helpee must be + what we work around *(after research Q&A)* |
+| docs/CONSTITUTION.md | What Meemoo must be + what we work around *(after research Q&A)* |
 | docs/TODO.md | Every piece of software to build and test *(after constitution)* |
 
 ## Core principles (short form)
