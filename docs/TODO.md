@@ -12,14 +12,28 @@
       register domains (meemoo.io OPEN, heymeemoo.com OPEN, getmeemoo.com OPEN
       as of 2026-07-25; meemoo.com parked-for-sale aftermarket; meemoo.ai taken
       2025-07-27)
-- [ ] Python project: `pyproject.toml`, `meemoo/` package, ruff + mypy config,
+  - [x] Preliminary name screen run 2026-07-25 (TESS unreachable headless;
+        via USPTO mirrors/aggregators — NOT a formal clearance). Findings:
+        **"MEEMOO" is a LIVE registered US mark, Reg. 5547233 (SN 87536621),
+        owner Tham Pash, registered 2018-08-21, toys/sporting-goods class** —
+        real conflict risk for a cute companion robot (toys adjacency);
+        also SN 98240802 "MEEMOO" (Shaoxing Chuyu Trading, fabrics class,
+        filed 2023-10-25, status unverified); EU: "meemoo media in motion"
+        EUTM 008258551 + meemoo.be = Flemish media-archive institute. No hit
+        surfaced in robotics/software/health classes in this quick pass.
+  - [ ] Formal attorney clearance (Classes 9/42/44 + toys-adjacency opinion
+        vs Reg. 5547233) before any public launch — Brady + counsel
+  - [ ] Register open domains (Brady): meemoo.io / heymeemoo.com / getmeemoo.com
+        still showing OPEN as of 07-25 — grab before publicity
+- [x] Python project: `pyproject.toml`, `meemoo/` package, ruff + mypy config,
       pytest scaffold, Makefile (`make dev`, `make test`, `make check`)
-- [ ] Web project: Vite + React + TS + Tailwind under `web/`, built assets served
+- [x] Web project: Vite + React + TS + Tailwind under `web/`, built assets served
       by FastAPI
-- [ ] `.env.example` with every variable documented; config loader (pydantic
+- [x] `.env.example` with every variable documented; config loader (pydantic
       settings) that never crashes on missing optionals
-- [ ] CI: GitHub Actions — ruff, mypy, pytest, web typecheck+build
-      (⚠️ check Acuntel Actions billing status first — was blocked 07-21)
+- [x] CI: GitHub Actions — ruff, mypy, pytest, web typecheck+build
+      (workflow committed 07-25; ⚠️ Acuntel Actions billing was blocked 07-21 —
+      verify runs actually start after push; local `make check` is the fallback)
 
 ## Phase 1 — Core
 - [ ] Async pub/sub event bus (typed topics, wildcard subscribe, replay-last for
