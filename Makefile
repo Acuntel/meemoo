@@ -1,7 +1,7 @@
 # Meemoo — single-laptop dev workflow (Constitution Art. IX §4).
 # Requires: uv (https://docs.astral.sh/uv/), node 20+.
 
-.PHONY: dev api web-dev install test lint type check web-install web-typecheck web-build
+.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build
 
 # ------------------------------------------------------------------ install
 install:
@@ -18,6 +18,12 @@ api:
 
 web-dev:
 	cd web && npm run dev
+
+# ------------------------------------------------------------------ migrate
+# Programmatic Alembic runner (stock CLI needs migrations/env.py, which the
+# .env file-protection hook blocks — see meemoo/core/migrate.py).
+migrate:
+	uv run python -m meemoo.core.migrate
 
 # --------------------------------------------------------------------- test
 test:

@@ -36,18 +36,37 @@
       Actions billing block from 07-21 is no longer biting on this repo)
 
 ## Phase 1 — Core
-- [ ] Async pub/sub event bus (typed topics, wildcard subscribe, replay-last for
-      late subscribers) + unit tests
-- [ ] SQLAlchemy models + migrations: devices, persons, contacts, provider_keys
-      (encrypted), model_config, checkin_schedule, events (append-only), 
+- [x] Async pub/sub event bus (typed topics in core/topics.py, wildcard
+      subscribe, replay-last for late subscribers, safe concurrent publishers)
+      + unit tests (tests/test_bus.py)
+- [x] SQLAlchemy models + migrations: devices, persons, contacts, provider_keys
+      (encrypted), model_config, checkin_schedule, events (append-only),
       conversations, messages, alerts, usage, routes, waypoints, settings,
       **consent records (person-scoped, roommate/surrogate-ready), audit_log
-      (append-only, tamper-evident), memory_facts (structured per-person memory:
-      names, preferences, workout history — NO biometric fields by design)**
-- [ ] Structured logging (JSON + human console), model/prompt/threshold version
-      stamping on every escalation-relevant record
-- [ ] Fernet encryption for provider keys; never logged
-- Gate: `pytest` green; bus + models covered
+      (append-only via SQLite triggers, tamper-evident sha256 hash chain +
+      verify_audit_chain), memory_facts (structured per-person memory —
+      NO biometric fields by design, test-enforced)** + dock_telemetry
+      (load-cell/helium — Art. VII §5)
+  - [x] Alembic revisions 0001+0002 in migrations/versions/ (standard format);
+        `make migrate` applies them
+  - [ ] ⚠️ Stock `alembic` CLI unusable: it hard-requires migrations/env.py and
+        Brady's .env file-protection hook blocks creating any path matching
+        ".env" (grep pattern also matches "…/env.py"). Runner
+        meemoo/core/migrate.py (programmatic Alembic, same alembic_version
+        table) covers upgrade; Brady: whitelist or create migrations/env.py
+        himself to restore the CLI (content = standard env.py reading
+        MEEMOO_DB_PATH; see meemoo/core/migrate.py docstring)
+  - [ ] ⚠️ .env.example not updated (same hook): new optional var
+        MEEMOO_FERNET_KEY_FILE (default data/fernet.key) — where the generated
+        Fernet key lives when MEEMOO_FERNET_KEY is unset; Brady to add the line
+- [x] Structured logging (JSON + human console), model/prompt/threshold version
+      stamping on every escalation-relevant record (core/versioning.py registry
+      + escalation_extra() log helper + version columns on audit_log/alerts)
+- [x] Fernet encryption for provider keys (core/secrets.py: env key or
+      generated 0600 key file); tests prove key material never in logs/repr
+- Gate: ✅ 2026-07-25 `make check` ALL GREEN (ruff+mypy strict+34 pytest+web) —
+  bus pub/sub/wildcard/replay/unsubscribe/concurrency covered; migration builds
+  full schema; audit_log/events reject UPDATE+DELETE in tests
 
 ## Phase 2 — Perception (base-station camera = the detector)
 - [ ] Video ingest: `webcam` | `mjpeg_url` | `file` sources behind one interface

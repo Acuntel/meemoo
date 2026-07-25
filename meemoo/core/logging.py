@@ -11,6 +11,8 @@ import logging
 import sys
 from datetime import UTC, datetime
 
+from meemoo.core.versioning import version_fields
+
 _SETUP_DONE = False
 
 
@@ -47,6 +49,20 @@ class ConsoleFormatter(logging.Formatter):
         if record.exc_info and record.exc_info[0] is not None:
             base = f"{base}\n{self.formatException(record.exc_info)}"
         return base
+
+
+def escalation_extra(**fields: object) -> dict[str, dict[str, object]]:
+    """``extra=`` dict for escalation-relevant log lines, version-stamped.
+
+    Merges the caller's fields with the active model/prompt/threshold versions
+    (see :mod:`meemoo.core.versioning`) so every escalation record says which
+    brain and thresholds were in force. Usage::
+
+        logger.warning("escalating to L1", extra=escalation_extra(alert_id=7))
+    """
+    merged: dict[str, object] = dict(version_fields())
+    merged.update(fields)
+    return {"fields": merged}
 
 
 def setup_logging(*, json_output: bool = False, level: str = "INFO") -> None:

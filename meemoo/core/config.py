@@ -37,9 +37,10 @@ class Settings(BaseSettings):
 
     # --- Storage ---
     meemoo_db_path: str = "data/meemoo.db"
-    # Fernet key for encrypting provider keys at rest; generated on first run
-    # (Phase 1). Never logged.
+    # Fernet key for encrypting provider keys at rest. Never logged. If unset,
+    # a key is generated to meemoo_fernet_key_file on first use (never crashes).
     meemoo_fernet_key: str | None = None
+    meemoo_fernet_key_file: str = "data/fernet.key"
 
     # --- Perception input ---
     video_source: VideoSource = "webcam"
