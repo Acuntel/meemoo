@@ -390,7 +390,8 @@
   through a REAL browser (Studio → Ruth extraction → review shows Ruth →
   save → banner → dashboard shows whale docked + next check-in 13:00), all
   four WebSockets streamed live data, OpenAPI rendered, `make check` ALL
-  GREEN (455 pytest + web build)
+  GREEN (454 pytest passed + the 1 documented Phase-6 docking-gate skip +
+  web build)
   - [ ] full demo script steps 1–6 ON BRADY'S MAC (audio legs): step 3 real
         speaker/mic audio, step 4 live-webcam fall, step 5 spoken "help me",
         step 6 live-key provider flip — everything headless-verifiable
