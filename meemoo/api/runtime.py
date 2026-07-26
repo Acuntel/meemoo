@@ -35,6 +35,8 @@ from meemoo.guardian.notifier import make_notifier
 from meemoo.guardian.registry import set_active_service
 from meemoo.guardian.scheduler import CheckinScheduler
 from meemoo.guardian.service import GuardianService
+from meemoo.perception.pipeline import PerceptionPipeline
+from meemoo.perception.registry import set_active_pipeline
 from meemoo.voice.audio_io import BufferSource, create_mic, create_speaker
 from meemoo.voice.pipeline import VoicePipeline
 from meemoo.voice.session import SessionManager
@@ -58,6 +60,7 @@ class AppRuntime:
         self.device_id = device_id
         self.bus = EventBus()
         self.sim: SimulatedBlimp | None = None
+        self.perception: PerceptionPipeline | None = None
         self.guardian: GuardianService | None = None
         self.scheduler: CheckinScheduler | None = None
         self.pipeline: VoicePipeline | None = None
@@ -98,6 +101,9 @@ class AppRuntime:
         self._tasks.append(asyncio.create_task(self.pipeline.run()))
         self._tasks.append(asyncio.create_task(self._session_ticker(sessions)))
 
+        # --- perception (camera → fall detection; absence is normal) --------
+        self._try_start_perception()
+
         # --- flight sim (real-time loop publishing to the bus) --------------
         self.sim = SimulatedBlimp(self._settings.meemoo_plan, device_id=self.device_id)
         set_active_sim(self.sim)
@@ -128,12 +134,54 @@ class AppRuntime:
             }},
         )
 
+    def _try_start_perception(self) -> None:
+        """Start camera perception when a source opens; degrade honestly.
+
+        Headless dev has no cv2/webcam — that is the NORMAL case, logged at
+        info, and /ws/video keeps answering ``ready: false``. Demo-script
+        step 4 stays available headless via POST /api/v1/perception/replay.
+        """
+        if self._settings.video_source == "off":
+            logger.info("perception disabled (VIDEO_SOURCE=off)")
+            return
+        try:
+            from meemoo.perception.calibration import CalibrationState
+            from meemoo.perception.pose import MediaPipePose
+            from meemoo.perception.video import open_source
+
+            source = open_source(self._settings)
+            calibration = CalibrationState()
+            # Dev floor prior (same as perception/demo.py): flat floor near the
+            # frame bottom until the install flow calibrates properly.
+            calibration.floor.a, calibration.floor.b = 0.0, 0.92
+            calibration.floor.fitted = True
+            self.perception = PerceptionPipeline(
+                self.bus, self._settings, source, MediaPipePose(), calibration
+            )
+            set_active_pipeline(self.perception)
+            self._tasks.append(asyncio.create_task(self.perception.run()))
+            logger.info(
+                "perception started (dev floor prior active — run install "
+                "calibration for real use)",
+                extra={"fields": {"source": self._settings.video_source}},
+            )
+        except Exception as exc:  # any failure = no camera; never crash startup
+            self.perception = None
+            logger.info(
+                "camera perception unavailable — video stays ready:false",
+                extra={"fields": {"reason": str(exc)}},
+            )
+
     # ------------------------------------------------------------------ stop
     async def stop(self) -> None:
         if self.scheduler is not None:
             self.scheduler.stop()
         if self.guardian is not None:
             await self.guardian.stop()
+        if self.perception is not None:
+            self.perception.stop()
+            set_active_pipeline(None)
+            self.perception = None
         for task in self._tasks:
             task.cancel()
         for task in self._tasks:

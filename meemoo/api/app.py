@@ -22,6 +22,7 @@ from meemoo.api.events_ws import router as events_ws_router
 from meemoo.api.fleet_routes import router as fleet_router
 from meemoo.api.guardian_routes import router as guardian_router
 from meemoo.api.metrics_routes import router as metrics_router
+from meemoo.api.perception_routes import router as perception_router
 from meemoo.api.provider_routes import router as provider_router
 from meemoo.api.sim_routes import router as sim_router
 from meemoo.api.studio_routes import router as studio_router
@@ -82,6 +83,7 @@ def create_app() -> FastAPI:
     app.include_router(provider_router)
     app.include_router(studio_router)
     app.include_router(metrics_router)
+    app.include_router(perception_router)
     app.include_router(events_ws_router)
     app.include_router(video_ws_router)
     app.include_router(voice_ws_router)

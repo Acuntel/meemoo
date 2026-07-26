@@ -12,7 +12,7 @@ from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-VideoSource = Literal["webcam", "mjpeg_url", "file"]
+VideoSource = Literal["webcam", "mjpeg_url", "file", "off"]
 SttEngine = Literal["auto", "moonshine", "faster_whisper", "off"]
 TtsEngine = Literal["auto", "pocket", "piper", "null"]
 VadEngine = Literal["auto", "silero", "energy"]
@@ -54,7 +54,7 @@ class Settings(BaseSettings):
     meemoo_fernet_key: str | None = None
     meemoo_fernet_key_file: str = "data/fernet.key"
 
-    # --- Perception input ---
+    # --- Perception input ("off" = camera perception disabled) ---
     video_source: VideoSource = "webcam"
     video_url: str | None = None  # mjpeg_url source (future blimp camera)
     video_file: str | None = None  # file source (recorded test clips)

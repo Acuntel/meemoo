@@ -53,3 +53,17 @@ def get_session_factory() -> sessionmaker[Session]:
 def create_all(engine: Engine) -> None:
     """Create the full schema (incl. append-only triggers) — tests/dev only."""
     Base.metadata.create_all(engine)
+
+
+def reset_db() -> None:
+    """Dispose the process-wide engine/factory (tests that re-root the cwd).
+
+    The engine binds a *relative* SQLite path at connect time; a test that
+    boots the runtime in a fresh tmp cwd must drop the previous test's pooled
+    connections or reads silently hit the old file.
+    """
+    global _engine, _session_factory
+    if _engine is not None:
+        _engine.dispose()
+    _engine = None
+    _session_factory = None
