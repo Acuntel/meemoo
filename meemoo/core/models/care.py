@@ -30,7 +30,12 @@ class CheckinSchedule(Base):
 
 
 class Conversation(Base):
-    """One voice session; ``mood_note`` is the brain's post-chat summary."""
+    """One voice session; ``mood_note`` is the brain's post-chat summary.
+
+    ``trigger`` records the initiator ("ptt"/"wake" = user-initiated,
+    "checkin" = robot-initiated) — the primary axis of the engagement
+    trajectory metric (Constitution Art. VIII §1; research 07 §F.1–2).
+    """
 
     __tablename__ = "conversations"
 
@@ -40,6 +45,7 @@ class Conversation(Base):
     started_at: Mapped[datetime] = mapped_column(nullable=False, default=utcnow)
     ended_at: Mapped[datetime | None] = mapped_column()
     mode: Mapped[str] = mapped_column(String(20), nullable=False, default="companion")
+    trigger: Mapped[str] = mapped_column(String(20), nullable=False, default="unknown")
     mood_note: Mapped[str | None] = mapped_column(Text)
 
 

@@ -1,1 +1,63 @@
 @import "tailwindcss";
+
+/* Meemoo — warm, calm, rounded. The worried-daughter-at-11pm bar:
+   soft colors, generous whitespace, zero jargon (Constitution / step-07 §4). */
+
+@theme {
+  --color-cream: #faf6ef;
+  --color-card: #fffdf9;
+  --color-ink: #40382f;
+  --color-ink-soft: #857a6c;
+  --color-ink-faint: #b4a996;
+  --color-sage: #7fa98e;
+  --color-sage-deep: #567e66;
+  --color-sage-soft: #e4efe7;
+  --color-peach: #f2c9a3;
+  --color-peach-soft: #fbeedd;
+  --color-sky: #a9c6e2;
+  --color-sky-soft: #e9f1f9;
+  --color-rose: #dc9a8f;
+  --color-rose-soft: #f9e8e4;
+  --color-line: #ece4d6;
+  --font-sans: "Avenir Next", "Nunito", ui-rounded, system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes ring-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(220 154 143 / 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 26px rgb(220 154 143 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(220 154 143 / 0);
+  }
+}
+
+.animate-bob {
+  animation: bob 3.2s ease-in-out infinite;
+}
+
+.animate-ring {
+  animation: ring-pulse 1.6s ease-out infinite;
+}

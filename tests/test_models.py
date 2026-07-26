@@ -50,7 +50,7 @@ def migrated_engine(tmp_path: Path) -> Engine:
     """A real file DB built by the Alembic migration chain (not create_all)."""
     engine = make_engine(tmp_path / "test.db")
     applied = migrate.upgrade(engine)
-    assert applied == ["0001", "0002"]
+    assert applied == ["0001", "0002", "0003"]
     return engine
 
 

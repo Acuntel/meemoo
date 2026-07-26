@@ -173,7 +173,11 @@ class SessionManager:
         if self._db_factory is None:
             return None
         with self._db_factory() as db:
-            row = Conversation(device_id=session.device_id, person_id=session.person_id)
+            row = Conversation(
+                device_id=session.device_id,
+                person_id=session.person_id,
+                trigger=session.trigger,
+            )
             db.add(row)
             db.commit()
             return int(row.id)

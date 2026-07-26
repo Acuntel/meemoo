@@ -93,8 +93,9 @@
 - [x] Thumbnails + rolling 60 s skeleton ring buffer (JSONL) per candidate event
       (thumbnail JPEG only when cv2 present; skeleton JSONL always)
 - [x] Annotated frames (skeleton/bbox/state banner) published through FrameHub
-  - [ ] /ws/video WebSocket endpoint consumes FrameHub — lands in Phase 7
-        (per docs/build-steps/step-02.md §6)
+  - [x] /ws/video WebSocket endpoint consumes FrameHub — landed in Phase 7
+        (api/video_ws.py via perception/registry.py; honest ready:false
+        without a camera)
 - [x] Test fixtures + pytest: 3 spec scenarios, per-event recall asserted 100%
       at candidate stage on bundled fall clips, false-candidate rate per
       ADL-minute, time-to-candidate ≤ 6 s, person.down at 15±1 s, learning-phase
@@ -339,24 +340,61 @@
   >95% Monte-Carlo bar is the honest miss recorded above
 
 ## Phase 7 — API + Web
-- [ ] REST CRUD `/api/v1/...` for all tables; OpenAPI docs work
-- [ ] WebSockets: /ws/video, /ws/sim, /ws/events, /ws/voice (browser PTT)
+- [x] REST CRUD `/api/v1/...` for all tables (devices, persons, contacts,
+      consent, settings, keys write-only+masked, model-config tiers, presets,
+      voices, schedule, routes, alerts+ack, conversations, events, usage,
+      studio extract/apply/current, metrics, CSV export); OpenAPI /docs renders
+      (verified live 200); AppRuntime (api/runtime.py) boots sim + guardian +
+      scheduler + voice inside the API process — startup NEVER crashes, falls
+      to honest API-only mode (MEEMOO_RUNTIME=0 to disable; MEEMOO_PLAN picks
+      the floor plan); migration 0003 adds Conversation.trigger (engagement
+      user-initiated axis)
+- [x] WebSockets: /ws/video, /ws/sim, /ws/events, /ws/voice (browser PTT) —
+      all four verified streaming against the LIVE server (ws_gate run
+      07-26): sim plan+snapshots; events carried a full manual round
+      (checkin.due → guardian → flight.dispatch → voice.speaking); video
+      honest ready:false with no camera; voice replied AS RUTH (studio config
+      → brain) and flagged the "help me" distress bypass on the same socket
   - [x] /ws/sim + GET /api/v1/sim/state landed in Phase 6 (snapshot stream
         via flight/registry.py; honest ready:false with no sim registered)
-- [ ] **Setup Studio**: chat-style config (LLM extracts structured config from
-      plain language → review/edit → save), preset role picker + personality
-      sub-presets, voice selection with audio preview, provider/key management
-      (managed-mode default framing; BYO = advanced), cost readout, privacy
-      toggles, activity modes
-- [ ] **Family Dashboard**: Today timeline w/ mood notes, Live View (sim +
-      annotated feed + battery/dock), Alerts w/ Acknowledge + evidence, History
-      + cost meter; warm calm design (worried-daughter-at-11pm bar)
-- [ ] **Research-credibility layer**: engagement trajectory (user-initiated share
-      over time), adherence w/ prompts-required, false-alarms/week headline,
-      human-contact tracking, abandonment early-warning composite, data export
-      (CSV), synthetic-data demo mode (clearly labeled)
-- [ ] Simulated incoming-call screen for credential-less escalation demo
-- Gate: full demo script steps 1–6 pass end-to-end on the MacBook
+  - [ ] browser-mic PTT leg (lib/mic.ts → binary PCM16 → STT) is built but
+        unverifiable headless (no mic, no STT engine installed) — typed path
+        fully verified; test on Brady's Mac after `uv sync --group voice`
+- [x] **Setup Studio** (web/src/pages/studio/): chat-style config (extract →
+      review/edit chips → save; deterministic keyless path verified in a real
+      browser — "Ruth" run), role picker (5 roles) + personality sub-presets +
+      voice cards w/ audio preview (endpoint 503s honestly headless), managed
+      default framing + BYO keys/tiers under "Advanced" w/ estimated monthly
+      cost, contacts ("Who to ring"), privacy panel (transcript toggle,
+      privacy pause, per-recipient permission matrix, consent view)
+- [x] **Family Dashboard**: Today (timeline w/ mood notes, next check-in,
+      run-round button, human-contact log), Live (sim + camera + live event
+      feed + TalkWidget on the real pipeline), Alerts w/ Acknowledge +
+      evidence line, History (expandable conversations, detections, cost
+      meter, CSV export); warm calm palette, layout-smoked
+- [x] **Research-credibility layer** (Insights): engagement trajectory w/
+      week-6 marker, adherence w/ prompts-required (honest-empty until the
+      reminder engine emits events), false-alarms/week headline card,
+      human-contact tracking + "We called/visited" logging, abandonment
+      composite, CSV export, demo mode clearly labeled SYNTHETIC
+- [x] Simulated incoming-call screen — verified END-TO-END in a real browser
+      07-26: "help me" over /ws/voice → guardian L1 → notify.sent(simulated)
+      → full-screen takeover "Meemoo is calling Brady" → Acknowledge click →
+      overlay clears, machine back to IDLE (zero contacts = honest no-call;
+      escalation.l3 also takes over, red, with the no-auto-911 line)
+- [x] ui-reviewer/layout-smoke pass 07-26: Playwright screenshots of all 6
+      tabs at 1440px + 390px, zero horizontal overflow, visual review done
+      (headless chromium — not a deploy, so the authed `smoke:layout -- --live`
+      rule doesn't apply yet)
+- Gate: ✅ step-07 gate PASSED headless 07-26 — demo steps 1–2 clicked
+  through a REAL browser (Studio → Ruth extraction → review shows Ruth →
+  save → banner → dashboard shows whale docked + next check-in 13:00), all
+  four WebSockets streamed live data, OpenAPI rendered, `make check` ALL
+  GREEN (455 pytest + web build)
+  - [ ] full demo script steps 1–6 ON BRADY'S MAC (audio legs): step 3 real
+        speaker/mic audio, step 4 live-webcam fall, step 5 spoken "help me",
+        step 6 live-key provider flip — everything headless-verifiable
+        already is; these need ears, a webcam, and a real key
 
 ## Phase 8 — Integration hardening
 - [ ] Run the demo script cold from `make dev` on a clean checkout; fix breaks

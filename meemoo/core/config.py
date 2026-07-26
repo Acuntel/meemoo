@@ -71,6 +71,11 @@ class Settings(BaseSettings):
     # --- Server ---
     meemoo_host: str = "127.0.0.1"
     meemoo_port: int = 8000
+    # Full runtime (sim + guardian + scheduler + voice) inside the API process.
+    # Off = API-only (live endpoints answer ready:false honestly). MEEMOO_RUNTIME.
+    meemoo_runtime: bool = True
+    # Floor plan the runtime sim flies ("apartment" | "facility_wing" | path).
+    meemoo_plan: str = "apartment"
 
     # --- Logging ---
     log_level: str = "INFO"
