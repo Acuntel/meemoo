@@ -1,0 +1,22 @@
+{
+  "name": "apartment",
+  "bounds": [0.0, 0.0, 9.0, 6.5],
+  "rooms": [
+    { "name": "living room", "x": 0.0, "y": 0.0, "w": 4.5, "h": 4.0 },
+    { "name": "kitchen", "x": 4.5, "y": 0.0, "w": 2.5, "h": 3.0 },
+    { "name": "bedroom", "x": 4.5, "y": 3.0, "w": 4.5, "h": 3.5 },
+    { "name": "bathroom", "x": 7.0, "y": 0.0, "w": 2.0, "h": 3.0 },
+    { "name": "hallway", "x": 0.0, "y": 4.0, "w": 4.5, "h": 2.5 }
+  ],
+  "dock": { "x": 0.6, "y": 2.0, "z": 1.2, "heading_deg": 0.0 },
+  "vents": [
+    { "x": 5.5, "y": 1.0, "dir_deg": 90.0, "force_gf": 2.0, "radius_m": 0.9 },
+    { "x": 2.2, "y": 5.8, "dir_deg": 270.0, "force_gf": 1.5, "radius_m": 0.8 }
+  ],
+  "waypoints": [
+    { "label": "living room", "kind": "area", "x": 2.8, "y": 2.2 },
+    { "label": "kitchen", "kind": "area", "x": 5.6, "y": 1.6 },
+    { "label": "Ruth's chair", "kind": "person", "x": 6.6, "y": 4.6 },
+    { "label": "hallway", "kind": "area", "x": 2.0, "y": 5.0 }
+  ]
+}

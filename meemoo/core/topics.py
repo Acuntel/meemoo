@@ -46,6 +46,7 @@ FLIGHT_TAKEOFF: Final = "flight.takeoff"
 FLIGHT_WAYPOINT_REACHED: Final = "flight.waypoint_reached"
 FLIGHT_BATTERY: Final = "flight.battery"
 FLIGHT_LANDED: Final = "flight.landed"
+FLIGHT_STATE: Final = "flight.state"  # docking-phase changes {"phase": ..., "retries": ...}
 
 # --- Dock (its own device — Constitution Art. II §3) ------------------------
 DOCK_REQUESTED: Final = "dock.requested"

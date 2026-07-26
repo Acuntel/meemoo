@@ -1,0 +1,25 @@
+{
+  "name": "facility_wing",
+  "bounds": [0.0, 0.0, 18.0, 8.0],
+  "rooms": [
+    { "name": "corridor", "x": 0.0, "y": 3.0, "w": 18.0, "h": 2.0 },
+    { "name": "room 101", "x": 0.0, "y": 0.0, "w": 4.5, "h": 3.0 },
+    { "name": "room 102", "x": 4.5, "y": 0.0, "w": 4.5, "h": 3.0 },
+    { "name": "room 103", "x": 9.0, "y": 0.0, "w": 4.5, "h": 3.0 },
+    { "name": "room 104", "x": 13.5, "y": 0.0, "w": 4.5, "h": 3.0 },
+    { "name": "day room", "x": 0.0, "y": 5.0, "w": 9.0, "h": 3.0 },
+    { "name": "nurses station", "x": 9.0, "y": 5.0, "w": 9.0, "h": 3.0 }
+  ],
+  "dock": { "x": 17.3, "y": 6.5, "z": 1.2, "heading_deg": 180.0 },
+  "vents": [
+    { "x": 4.0, "y": 4.0, "dir_deg": 0.0, "force_gf": 2.0, "radius_m": 1.2 },
+    { "x": 12.0, "y": 4.0, "dir_deg": 180.0, "force_gf": 2.0, "radius_m": 1.2 }
+  ],
+  "waypoints": [
+    { "label": "room 101 bed", "kind": "person", "x": 2.2, "y": 1.4 },
+    { "label": "room 102 bed", "kind": "person", "x": 6.8, "y": 1.4 },
+    { "label": "room 103 bed", "kind": "person", "x": 11.2, "y": 1.4 },
+    { "label": "room 104 bed", "kind": "person", "x": 15.8, "y": 1.4 },
+    { "label": "day room", "kind": "area", "x": 4.5, "y": 6.5 }
+  ]
+}

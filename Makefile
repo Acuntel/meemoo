@@ -1,7 +1,7 @@
 # Meemoo — single-laptop dev workflow (Constitution Art. IX §4).
 # Requires: uv (https://docs.astral.sh/uv/), node 20+.
 
-.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain demo-guardian
+.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain demo-guardian demo-flight
 
 # ------------------------------------------------------------------ install
 install:
@@ -42,6 +42,11 @@ demo-brain:
 demo-guardian:
 	uv run python -m meemoo.guardian.demo
 	uv run python -m meemoo.guardian.demo --no-ack
+
+# Step-06 manual gate: watch the whale fly a round, dock, charge, depart
+# (ASCII debug view; drop --fast for real-time pacing).
+demo-flight:
+	uv run python -m meemoo.flight.demo --fast
 
 # --------------------------------------------------------------------- test
 test:
