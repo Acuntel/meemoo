@@ -405,6 +405,33 @@
       fake-vs-real table
 - [ ] Layout smoke per Brady's UI-push rule before any deploy
 
+## Phase 7.5 — Product review round 1 (Brady, 2026-07-27)
+- [ ] Tab restructure: Today / Studio / Live / History; Live jumps first with
+      red pulse when a round or alert is live; DELETE Alerts + Insights pages
+      (fold alert cards into Live; metrics stay API+export only)
+- [ ] Today layout: sim flight view bigger in its own box; merge live updates
+      + "happening now" into the Right-now box; zero fake data when idle
+- [ ] Conversations: >1 min shows summary first (transcript kept underneath),
+      <1 min shows full text
+- [ ] Copy sweep: remove ALL em dashes from product copy; remove
+      "never kept/never written down" privacy claims (A2); warm plain language
+- [ ] Cost meter out of consumer UI (Advanced only); subscription plan picker
+      (needs/frequency questions -> plan tier) as the consumer face
+- [ ] Privacy: custom-duration pause next to the one-touch pause
+- [ ] Logo: animal mark (round beluga direction) + wordmark SVG, favicon,
+      header
+- [ ] Onboarding wizard: dwelling type -> space capture (~20 photos/room,
+      re-capture flow) -> pin drop + name waypoints ("Ruth's chair") ->
+      off-limit zones (bathrooms default-prompted) -> pairing code entry ->
+      plan picker
+- [ ] Off-limit zones enforced: excluded from all routes/goto, auto-purge rule
+      wired (A3)
+- [ ] Voice motion commands: stop/left/right/up/down/come here/go to <pin>/
+      spin; capability model with graceful declines; 1.3 m/s cap in sim (A5)
+- [ ] Live tab: "through Meemoo's eyes" camera view (webcam stand-in now,
+      blimp MJPEG later) + talk-to-Meemoo widget verified end to end
+- [ ] Pairing-code device flow (replacement-unit model, A1)
+
 ## Phase 9 — Hardware bench (parallel track, ~$200)
 - [ ] Order docs/ORDER_LIST.md parts
 - [ ] Noise: motor+prop on the bench → SPL @ 1 m (validate the 35–45 dB estimate)

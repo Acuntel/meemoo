@@ -212,3 +212,71 @@ stack. We ship safety as architecture, not promises.
 4. `make dev` runs everything on a laptop. Target hardware: dedicated base
    station (Mac mini class — Brady will purchase); dev on MacBook.
 5. Every feature must survive the demo script end-to-end before it's "done."
+
+
+---
+
+## Amendments — ratified 2026-07-27 (Brady's first product review)
+
+**A1. Business model sharpened (amends Art. VII).** The aircraft is a cheap
+REPLACEABLE CONSUMABLE; the dock + base station are the durable brain. When
+motors wear out (brushed coreless live ~50-200 flight hours) the customer is
+shipped a whole new aircraft: unbox, type the pairing code printed on it, it
+auto-connects, done. No repairs, no parts, no guilt. Target aircraft COGS at
+scale: $30-50 (path: one custom PCB replacing all breakouts, custom envelope,
+volume parts). THE SUBSCRIPTION IS THE BUSINESS: consumer onboarding asks what
+they need and how often, then routes to a plan tier; replacement units, helium
+logistics, and the models are all inside the subscription. The cost meter is
+hidden from the consumer UI (Advanced only); consumers see plans, not tokens.
+
+**A2. Data retention (amends Art. V.2).** Transcript AND raw-audio retention
+are configurable and default ON (Brady's call; superseding the earlier
+never-retain-audio rule). UI copy must never promise deletion we don't do.
+HARD GATE unchanged: no sale, sharing, or external use of any user data
+without counsel review first (Art. VI go-live gate). Claude's on-record read:
+monetizing elder-care audio is the highest-legal-risk move available in this
+category (BIPA, wiretap statutes, AI-companion laws, FTC health-breach rule);
+decision deferred to counsel, not taken now.
+
+**A3. Rooms and intimacy (extends Art. V).** Onboarding requires marking
+OFF-LIMIT ZONES (every bathroom prompted by default): Meemoo never enters,
+never points a camera in, and auto-purges anything accidentally captured from
+one. If the system ever recognizes intimate activity, it deletes the material
+completely and leaves the area. Bathrooms are out of scope as a product
+surface entirely (no bathroom sensing of any kind).
+
+**A4. The 911 code word (extends Art. IV.1 — still OFF).** Future design, not
+v1: the user may set a rare spoken code phrase (e.g. "green peppers and
+apples") that authorizes a direct 911 call when spoken. Everything else still
+routes to the contact ladder. Ships only after the trust bar + regulatory
+review in Art. VI; documented now so the architecture reserves the hook.
+
+**A5. Motion and manners (amends Art. I).** Max speed ~1.3 m/s (3 mph). Voice
+motion commands are first-class: stop (hard requirement, instant), left,
+right, up, down, come here, go to <named pin>, plus tricks (spin). Meemoo
+carries a CAPABILITY MODEL: it knows what it can and cannot do and declines
+gracefully ("I can't roll, but I can spin"). The kill switch is a SMALL red
+tail knob labeled plainly (pull to rest); not a big tail. Prop shrouds:
+rejected for prototype by Brady; auto-revisit at the facility/go-live gate
+(safety reviewers will require them).
+
+**A6. Spaces, not houses (amends Art. VII).** Onboarding asks what kind of
+place this is (house, apartment, facility room, hospital room) and shapes the
+map, routes, and defaults accordingly. Onboarding includes: guided space
+capture (~20 detailed photos per covered room, re-capturable when furniture
+moves), on-screen PIN DROPPING with names ("Ruth's chair") that become real
+waypoints, off-limit zones (A3), and the pairing-code flow (A1).
+
+**A7. UI doctrine (amends Art. VIII surface).** Consumer tabs: Today, Studio,
+Live, History. When something is LIVE (round in progress, alert active), Live
+jumps to first position with a red pulse indicator. No Alerts tab (alerts
+live inside Live + Today's Right-now box). No Insights tab (the research
+metrics stay in the API/export, out of the consumer's face). Conversations
+longer than a minute show a summary first (full transcript kept underneath);
+shorter ones show the whole thing. No em dashes anywhere in product copy.
+No fake/placeholder data on the consumer surface: if it isn't flying, say so.
+
+**A8. Facility integration (extends Art. VII).** Roadmap: connector that
+pushes structured check-in facts into the care software nurses already use
+(PointClickCare / MatrixCare class) so nothing gets re-typed from a clipboard.
+Post-v1, behind the BAA + counsel gates.

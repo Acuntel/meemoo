@@ -27,6 +27,7 @@
 | 28 mm mylar speaker 8 Ω 1 W | 2 | $4 | Speech intelligibility test |
 | VL53L1X ToF breakout | 1 | $8 | Altitude hold later |
 | MPU6050 IMU breakout | 1 | $4 | Swing damping later |
+| PMW3901 optical flow breakout | 1 | $10 | Onboard velocity sensing (Brady-approved 07-27); the chip cheap drones use to hold position |
 
 ## C. Dock capture rig (~$45)
 
