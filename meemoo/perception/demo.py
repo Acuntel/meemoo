@@ -67,7 +67,7 @@ async def run_live(video_file: str | None) -> int:
         print("OpenCV missing — run `uv sync --group perception`", file=sys.stderr)  # noqa: T201
         return 1
     from meemoo.perception.pipeline import PerceptionPipeline
-    from meemoo.perception.pose import MediaPipePose
+    from meemoo.perception.pose import MediaPipePose, ReacquiringPose
     from meemoo.perception.video import FileSource, WebcamSource
 
     settings = get_settings()
@@ -77,7 +77,10 @@ async def run_live(video_file: str | None) -> int:
     # frames are collected; the real install flow calibrates properly
     calibration.floor.a, calibration.floor.b, calibration.floor.fitted = 0.0, 0.92, True
     bus = EventBus()
-    pipeline = PerceptionPipeline(bus, settings, source, MediaPipePose(), calibration)
+    # low-confidence second pass, gated to unaccounted-for tracks: the fallen
+    # body at 0 lux is the miss class it exists for (pose.ReacquiringPose)
+    pose = ReacquiringPose(MediaPipePose(), MediaPipePose(confidence=0.15))
+    pipeline = PerceptionPipeline(bus, settings, source, pose, calibration)
 
     sub = bus.subscribe("*")
 

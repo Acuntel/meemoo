@@ -44,8 +44,14 @@ def run_clip(
     path: Path,
     thresholds: Thresholds | None = None,
     learning: bool = False,
+    answer_after_prompt: int | None = None,
 ) -> ClipRun:
-    """Replay one committed clip; calibration comes from the clip header."""
+    """Replay one committed clip; calibration comes from the clip header.
+
+    ``answer_after_prompt=n`` simulates the person saying "I'm fine" once n
+    voice prompts have been spoken — the response the verify ladder exists to
+    collect, which the landmark fixtures cannot carry on their own.
+    """
     clip = load_clip(path)
     a, b = clip.floor_line()
     floor = FloorCalibration.from_line(a, b)
@@ -61,8 +67,15 @@ def run_clip(
         learning=lambda: learning,
     )
     extractor = SignalExtractor(floor)
+    answered = False
     for frame in clip.frames:
-        machine.tick(extractor.update(frame))
+        sig = extractor.update(frame)
+        machine.tick(sig)
+        if answer_after_prompt is not None and not answered:
+            prompts = sum(1 for (name, _) in events if name == "verify.voice_prompt")
+            if prompts >= answer_after_prompt:
+                machine.notify_voice_ok(sig.t)
+                answered = True
     return ClipRun(clip=clip, machine=machine, events=events)
 
 

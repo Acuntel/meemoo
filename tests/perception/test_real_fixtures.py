@@ -7,15 +7,25 @@ annotated from dataset ground truth in tests/fixtures/labels/
 real_annotations.json. Fall clips carry a DISCLOSED tail-hold (the datasets
 stop recording seconds after impact; see bake_real.py).
 
-HONESTY NOTE (2026-07-27): expectations assert MEASURED behavior, which on
-real data diverges from the research 05 spec in three ways, all recorded per
-clip as `spec_gap` and aggregated in docs/TODO.md:
-  1. 11/19 real falls detect only via the 40 s CANDIDATE_SOFT path (the 3 s
-     ballistic-evidence window expires before the settle+1.5 s classify).
-  2. Soft-path escalation fires one tick after the soft person.down with
-     zero voice prompts (t_escalate == t_soft_confirm == 50 s grounded-rel).
-  3. 2/19 falls are perception recall misses (MediaPipe never re-detects the
-     fallen person: one 0-lux side fall, one distant artificial-light fall).
+HONESTY NOTE (updated 2026-07-28): expectations assert MEASURED behavior.
+Two of the three gaps found on 2026-07-27 are now CLOSED by algorithm fixes
+(not by threshold loosening — see the before/after table in docs/TODO.md):
+  1. FIXED — descent evidence is now LATCHED for the whole descent episode
+     instead of re-read from a decaying 3 s window at classify time, so a
+     fall's own descent still counts when classification finally runs.
+     11/19 falls were detecting only via the 40 s soft path; now 2/19 are.
+  2. FIXED — the verify ladder is anchored to person.down instead of to
+     grounding, so both voice asks and their response windows precede every
+     escalate.requested. Hard-path escalation timing is byte-identical.
+  3. OPEN — 2/19 falls are perception recall misses (MediaPipe never
+     re-detects the fallen person: one 0-lux side fall, one distant
+     artificial-light fall). pose.ReacquiringPose is the fix and is measured
+     to recover both, but the committed fixtures were extracted before it
+     existed, so this suite's recall record stays 17/19 until they are
+     re-extracted end to end. See docs/TODO.md.
+Residual gap: 5/19 falls reach candidate within the research 05 §B.5 6 s bar,
+15/19 within 10 s. The remainder is the persistence budget itself (t_settle
+1.5 s + t_candidate 5 s), not a classification error.
 Tuning thresholds to close these gaps is Brady's call, not this suite's job
 (NEVER loosen to pass — thresholds.py + Constitution Art. II §4).
 """
@@ -43,6 +53,11 @@ RECALL_FLOOR = 17 / 19
 
 def _ids(paths: list[Path]) -> list[str]:
     return [p.stem for p in paths]
+
+
+def _t(payload: dict[str, object]) -> float:
+    """Event timestamp as a float (bus payload values are typed `object`)."""
+    return float(payload["t"])  # type: ignore[arg-type]
 
 
 @pytest.fixture(scope="module")
@@ -80,8 +95,8 @@ def test_candidate_recall_on_real_falls(runs: dict[str, ClipRun]) -> None:
 
 
 def test_time_to_candidate_measured_bounds(runs: dict[str, ClipRun]) -> None:
-    """Per-clip committed bound: 6 s for the spec-passing hard falls, 9.5 s
-    for the one late hard fall, 55 s for the soft-path detections."""
+    """Per-clip committed bound: 6 s for the falls that clear the research bar,
+    10 s for the rest of the hard path, 45 s for the two soft-path falls."""
     checked = 0
     for run in runs.values():
         t_impact = run.clip.header.get("t_impact")
@@ -149,18 +164,46 @@ def test_person_down_timing_hard_falls(runs: dict[str, ClipRun]) -> None:
     assert checked >= 5
 
 
-def test_hard_falls_get_voice_prompts_before_escalate(runs: dict[str, ClipRun]) -> None:
-    """The verify ladder works end-to-end on real hard falls: two spoken asks,
-    then escalate. (Soft-path clips get zero prompts — spec gap #2, asserted
-    per clip via expect and recorded in docs/TODO.md.)"""
+def test_every_escalation_is_preceded_by_both_voice_asks(runs: dict[str, ClipRun]) -> None:
+    """Regression gate for the 2026-07-28 down-anchored ladder (finding 2).
+
+    The spec says CONCERN asks "are you okay?" twice BEFORE escalating. That
+    must hold on the SOFT path too, where a grounded-relative escalate clock
+    coincided with t_soft_confirm and fired escalate.requested on the same tick
+    as person.down with ZERO prompts. Hard and soft are both covered here.
+    """
     checked = 0
     for run in runs.values():
-        downs = run.named("person.down")
-        if not downs or bool(downs[0].get("soft")) or not run.named("escalate.requested"):
+        escalates = run.named("escalate.requested")
+        if not escalates:
             continue
-        assert len(run.named("verify.voice_prompt")) == 2, run.clip.name
+        prompts = run.named("verify.voice_prompt")
+        assert len(prompts) == 2, f"{run.clip.name}: {len(prompts)} prompts"
+        t_escalate = _t(escalates[0])
+        assert all(_t(p) < t_escalate for p in prompts), run.clip.name
+        # the second ask must leave a real response window, not one tick
+        assert t_escalate - _t(prompts[1]) >= 10.0, run.clip.name
         checked += 1
-    assert checked >= 5
+    assert checked >= 15
+
+
+def test_soft_path_down_runs_the_same_ladder_just_later(runs: dict[str, ClipRun]) -> None:
+    """The two evidence-free soft-path falls reach person.down and then run the
+    identical ask/ask/wait/escalate ladder a hard fall runs."""
+    th = load_thresholds()
+    for stem in ("gm_s3_fall_09", "gm_s3_fall_20"):
+        run = runs[stem]
+        downs = run.named("person.down")
+        assert downs and bool(downs[0]["soft"]), stem
+        prompts = run.named("verify.voice_prompt")
+        assert len(prompts) == 2, stem
+        t_down = _t(downs[0])
+        assert abs(_t(prompts[0]) - (t_down + th.t_voice_1)) < 0.5, stem
+        assert abs(_t(prompts[1]) - (t_down + th.t_voice_2)) < 0.5, stem
+        escalates = run.named("escalate.requested")
+        assert escalates, stem
+        delta = _t(escalates[0]) - t_down
+        assert abs(delta - th.t_escalate_after_down) < 0.5, f"{stem}: {delta:.1f}s"
 
 
 # --------------------------------------------- ADL false alarms on real minutes
@@ -187,11 +230,24 @@ def test_no_false_candidates_in_real_adl_minutes(runs: dict[str, ClipRun]) -> No
 
 
 def test_deliberate_floor_nap_soft_path(runs: dict[str, ClipRun]) -> None:
-    """Scenario 2 on real data: a deliberate lie-down on the FLOOR (S3/ADL/08,
-    held 60 s) gets the gentle soft path — never a hard candidate."""
+    """Scenario 2 on real data: a deliberate lie-down on the FLOOR (S3/ADL/08)
+    gets the gentle soft path — never a hard candidate — and is ASKED, twice,
+    before anything else happens."""
     run = runs["gm_s3_adl_08"]
     assert run.candidates and all(c["soft"] for c in run.candidates)
     assert run.candidates[0]["cause"] == "controlled_descent"
+    assert len(run.named("verify.voice_prompt")) == 2
+
+
+def test_floor_nap_that_answers_is_never_escalated() -> None:
+    """The soft path's whole promise (Art. IV §8): the deliberate floor-napper
+    who answers the first gentle "are you okay?" is downgraded, not escalated.
+    The cost of guessing wrong is one question — this proves it stays one."""
+    path = next(p for p in CLIPS if p.stem == "gm_s3_adl_08")
+    run = run_clip(path, answer_after_prompt=1)
+    assert len(run.named("verify.voice_prompt")) == 1, "asked once, then answered"
+    assert run.named("person.recovered"), "answering must downgrade"
+    assert not run.named("escalate.requested"), "answering must halt the ladder"
 
 
 def test_real_get_up_no_alarm(runs: dict[str, ClipRun]) -> None:

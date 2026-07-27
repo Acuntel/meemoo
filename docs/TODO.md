@@ -132,6 +132,38 @@
         installs mediapipe into the SHARED venv and its bundled protobuf
         segfaults the full suite (error 139). Run the webcam demo from a
         scratch venv, or plain `uv sync` before `make test`.
+        ❌ SECOND LEVER EVALUATED AND REJECTED (measured, not assumed):
+        "treat horizontal-after-fast-angle-change as fall evidence" does NOT
+        separate the classes on real data. Fastest upright(<25°)→horizontal
+        (>55°) transit per clip: real ADLs span 0.05-0.87 s, real falls span
+        0.13-0.70 s — the ADL range strictly CONTAINS the fall range, and the
+        single fastest transit in the whole suite is an ADL (cf_s1_pickup at
+        0.05 s, a bend-down). Any threshold catching the 2 remaining soft
+        falls (0.13 / 0.20 s) also catches that pickup, so it would buy recall
+        with precision — forbidden by the zero-false-alarm constraint. The
+        research's own 1 s-vs-3.2 s citation (PMC8321307) is silhouette-based
+        and does not reproduce on MediaPipe torso angle, which is far noisier.
+  - [x] 🔎 FINDING 3 (cheap slice) EVALUATED + DETECTOR SHIPPED 2026-07-28:
+        a lower-confidence re-detection pass DOES recover both misses.
+        Measured post-impact detected-frame counts, MediaPipe Full, same
+        videos: cf_s6_fall_left (0 lux) 0/169 frames at confidence 0.5 →
+        86/169 at 0.15; cf_s8_fall_right (distant) 0/139 → 84/139. Shipped as
+        `pose.ReacquiringPose`: primary detector plus a cheap second pass that
+        runs ONLY on a frame the primary already gave up on AND only while a
+        person we were tracking is unaccounted for (grace window = not seen
+        leaving; hard cap so a phantom is never carried forever). Precision is
+        protected by the GATE, not the threshold — the comparison is always
+        "noisy skeleton vs no skeleton", never "noisy vs clean". Gating is
+        pinned by tests/perception/test_pose_reacquire.py (6 tests: empty room
+        never wakes it, a person seen leaving is not chased, carry is capped).
+        Wired into the live demo path.
+        ⚠️ HONEST LIMIT: the committed fixtures were extracted at confidence
+        0.5 before this existed, so the SUITE's recall record stays 17/19 and
+        cf_s6/cf_s8 remain in KNOWN_MISSES. Claiming 19/19 needs a full
+        re-extraction of all 35 clips under the two-tier detector — which
+        re-rolls the landmark inputs for every other measurement in this
+        block, so it belongs in its own commit with its own before/after, not
+        bundled with the findings-1+2 numbers above.
   - [ ] 🚨 REMAINING REAL-DATA FINDINGS (unchanged, Brady's call):
   - [ ] (historical 07-27 record: original findings 1-2 now fixed above; 3-6 still open, thresholds NOT
         touched — Art. II §4; per-clip `spec_gap` headers carry the numbers):
@@ -159,6 +191,10 @@
            person vanishes above vanish_bottom_y. Mitigation ideas: IR-aware
            exposure at install, lower-confidence re-detection pass while a
            track is unaccounted for.
+           → 07-28: the re-detection idea was measured and shipped as
+           pose.ReacquiringPose (both clips recover); see the FINDING 3 entry
+           above. Fixture re-extraction still owed before the recall record
+           can move off 17/19.
         4. mediapipe >=0.10.30 removed the legacy `mp.solutions` API →
            perception group now pinned <0.10.22 (verified 0.10.21 good,
            0.10.30 broken); lifting the cap needs a pose.py port to the
