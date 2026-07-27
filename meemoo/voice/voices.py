@@ -38,7 +38,7 @@ VOICES: dict[str, VoiceSpec] = {
     "elder_male": VoiceSpec(
         key="elder_male",
         label="Warm older man",
-        description="Slow, warm, grandfatherly — the default companion voice.",
+        description="Slow, warm, grandfatherly. The default companion voice.",
         pocket_voice="alistair",  # candidate; confirm in the listening pass
         piper_model="en_GB-alan-medium",
         piper_length_scale=1.1,  # a touch slower = warmer, easier for presbycusis
@@ -47,7 +47,7 @@ VOICES: dict[str, VoiceSpec] = {
     "child": VoiceSpec(
         key="child",
         label="Child",
-        description="Bright, small, playful — the 'grandkid' character.",
+        description="Bright, small, playful. The 'grandkid' character.",
         pocket_voice="pip",  # candidate; confirm in the listening pass
         # Piper ships no true child voice; amy at a quicker cadence is the
         # committed floor approximation until the Pocket listening pass.
@@ -58,7 +58,7 @@ VOICES: dict[str, VoiceSpec] = {
     "female": VoiceSpec(
         key="female",
         label="Warm female",
-        description="Calm, kind, unhurried — the 'daughter/nurse' register.",
+        description="Calm, kind, unhurried. The 'daughter/nurse' register.",
         pocket_voice="marianne",  # candidate; confirm in the listening pass
         piper_model="en_US-lessac-medium",
         piper_length_scale=1.05,

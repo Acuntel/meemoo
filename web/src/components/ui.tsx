@@ -1,4 +1,4 @@
-/** Small shared UI primitives — one warm, rounded voice for every screen. */
+/** Small shared UI primitives: one warm, rounded voice for every screen. */
 
 import type { ReactNode } from "react";
 
@@ -139,11 +139,11 @@ export function EmptyNote({ children }: { children: ReactNode }) {
   );
 }
 
-/** Clearly-labeled synthetic-data banner (research 07 §F.15 — never silent). */
+/** Clearly-labeled synthetic-data banner (research 07 §F.15, never silent). */
 export function SyntheticBanner({ label }: { label?: string }) {
   return (
     <div className="rounded-2xl border border-peach bg-peach-soft px-4 py-2 text-sm font-medium text-ink-soft">
-      {label ?? "SYNTHETIC DEMO DATA — not a real resident"}
+      {label ?? "SYNTHETIC DEMO DATA, not a real resident"}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-/** Who Meemoo rings, in order — the escalation ladder's phone book. */
+/** Who Meemoo rings, in order: the escalation ladder's phone book. */
 
 import { useCallback, useEffect, useState } from "react";
 import { apiDelete, apiGet, apiPost } from "../../lib/api";
@@ -56,10 +56,10 @@ export default function ContactsCard({
   };
 
   return (
-    <Card title="Who to ring" hint="in this order — never 911 by itself">
+    <Card title="Who to ring" hint="in this order, never 911 by itself">
       {contacts.length === 0 ? (
         <EmptyNote>
-          Add at least one person — when Meemoo is worried, this is who it
+          Add at least one person. When Meemoo is worried, this is who it
           rings, in order.
         </EmptyNote>
       ) : (

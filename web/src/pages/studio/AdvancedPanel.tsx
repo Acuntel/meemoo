@@ -1,10 +1,12 @@
-/** Managed-vs-self-serve (Art. VII §2): managed is the default face; bring-
- * your-own keys and model tiers live behind "Advanced". Keys are write-only —
- * the server returns a masked tail, never the key. */
+/** Managed-vs-self-serve (Art. VII, Amendment A1): managed is the default
+ * face; bring-your-own keys, model tiers, and the cost meter all live behind
+ * "Advanced". Consumers see plans, not tokens. Keys are write-only; the
+ * server returns a masked tail, never the key. */
 
 import { useCallback, useEffect, useState } from "react";
 import { apiDelete, apiGet, apiPost, apiPut } from "../../lib/api";
 import type { ProviderInfo, TierConfig, UsageInfo } from "../../lib/types";
+import { Bars } from "../../components/Chart";
 import { Button, Card, Chip, EmptyNote } from "../../components/ui";
 
 type KeyRow = { provider: string; masked: string; created_at: string };
@@ -49,7 +51,7 @@ export default function AdvancedPanel() {
         key: keyDraft.trim(),
       });
       setKeyDraft("");
-      setNote(`Saved — ${provider} is ready.`);
+      setNote(`Saved. ${provider} is ready.`);
       refresh();
     } catch {
       setNote("Couldn't save that key.");
@@ -79,34 +81,53 @@ export default function AdvancedPanel() {
   };
 
   return (
-    <Card title="Plan & models">
+    <Card title="Under the hood">
       <div className="rounded-2xl bg-sage-soft p-4">
         <p className="font-semibold text-sage-deep">Managed by Meemoo</p>
         <p className="mt-1 text-sm text-ink-soft">
           The default: your subscription covers the models, the credits, and
-          the helium — nothing to configure here.
-          {usage && usage.estimated_monthly_usd > 0 && (
-            <>
-              {" "}
-              Current pace ≈ <b>${usage.estimated_monthly_usd.toFixed(2)}/month</b>{" "}
-              in model usage.
-            </>
-          )}
+          the helium. Nothing to configure here.
         </p>
       </div>
 
       <details className="mt-4">
         <summary className="cursor-pointer text-sm font-medium text-ink-soft">
-          Advanced — I&apos;ll run my own models and keys
+          Advanced: my own models, keys, and the cost meter
         </summary>
         <div className="mt-3 space-y-5">
+          <div className="rounded-2xl bg-cream p-4">
+            <p className="mb-1 text-sm font-medium">Cost meter</p>
+            {usage === null ? (
+              <EmptyNote>Usage unavailable.</EmptyNote>
+            ) : (
+              <>
+                <p className="text-2xl font-semibold">
+                  ${usage.today.cost_usd.toFixed(2)}
+                  <span className="ml-2 text-sm font-normal text-ink-faint">
+                    today
+                  </span>
+                </p>
+                <p className="mt-1 text-sm text-ink-soft">
+                  About ${usage.estimated_monthly_usd.toFixed(2)}/month at this
+                  pace · {usage.today.requests} requests today · pricing{" "}
+                  {usage.pricing_version}
+                </p>
+                {usage.series.length > 1 && (
+                  <div className="mt-3">
+                    <Bars values={usage.series.map((day) => day.cost_usd)} />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+
           <div>
             <p className="mb-2 text-sm text-ink-soft">Providers</p>
             <div className="flex flex-wrap gap-2">
               {providers.map((info) => (
                 <Chip key={info.name} tone={info.configured ? "sage" : "plain"}>
                   {info.name}
-                  {info.configured ? ` ✓ (${info.source})` : " — not set up"}
+                  {info.configured ? ` ✓ (${info.source})` : ": not set up"}
                 </Chip>
               ))}
             </div>
@@ -163,9 +184,7 @@ export default function AdvancedPanel() {
           )}
 
           <div>
-            <p className="mb-2 text-sm text-ink-soft">
-              Which model handles what
-            </p>
+            <p className="mb-2 text-sm text-ink-soft">Which model handles what</p>
             {tiers.length === 0 ? (
               <EmptyNote>Model routing unavailable.</EmptyNote>
             ) : (

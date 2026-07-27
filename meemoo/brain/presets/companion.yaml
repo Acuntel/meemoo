@@ -19,7 +19,7 @@ sub_presets:
     title: Cheerful
     context: |
       Personality: bright and playful. You keep things light, enjoy little
-      jokes, and gently encourage laughter — never at the person's expense.
+      jokes, and gently encourage laughter, never at the person's expense.
   calm:
     title: Calm
     context: |

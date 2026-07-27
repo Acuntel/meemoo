@@ -17,7 +17,7 @@ sub_presets:
     context: |
       Personality: drill-sergeant energy, affectionately. Short, punchy
       commands. "Two more! You've got this!" You celebrate effort loudly and
-      demand one more rep — while still honoring every request to rest.
+      demand one more rep, while still honoring every request to rest.
   encouraging:
     title: Encouraging
     context: |

@@ -406,20 +406,39 @@
 - [ ] Layout smoke per Brady's UI-push rule before any deploy
 
 ## Phase 7.5 — Product review round 1 (Brady, 2026-07-27)
-- [ ] Tab restructure: Today / Studio / Live / History; Live jumps first with
-      red pulse when a round or alert is live; DELETE Alerts + Insights pages
-      (fold alert cards into Live; metrics stay API+export only)
-- [ ] Today layout: sim flight view bigger in its own box; merge live updates
-      + "happening now" into the Right-now box; zero fake data when idle
-- [ ] Conversations: >1 min shows summary first (transcript kept underneath),
-      <1 min shows full text
-- [ ] Copy sweep: remove ALL em dashes from product copy; remove
-      "never kept/never written down" privacy claims (A2); warm plain language
-- [ ] Cost meter out of consumer UI (Advanced only); subscription plan picker
-      (needs/frequency questions -> plan tier) as the consumer face
-- [ ] Privacy: custom-duration pause next to the one-touch pause
-- [ ] Logo: animal mark (round beluga direction) + wordmark SVG, favicon,
-      header
+- [x] Tab restructure (07-27): Today / Studio / Live / History; Live jumps
+      first with a red pulsing dot when a round is flying or an alert is open
+      (verified in a real browser: fired a round, tab bar reordered);
+      AlertsPage + InsightsPage DELETED; active-alert cards + acknowledge
+      folded into Live (components/AlertCards.tsx), handled alerts listed in
+      History; active alerts also surface in Today's Right-now box; metrics
+      stay API + CSV export only
+- [x] Today layout (07-27): sim flight view in its own big box (left column);
+      live updates + happening-now merged into the Right-now box
+      (components/RightNow.tsx) with routine telemetry (flight.battery/state)
+      filtered out; idle shows the honest quiet state ("Meemoo is resting on
+      its dock. Next round at HH:MM"), sim-off shows sim-off, no fake data
+- [x] Conversations (07-27): chats over 1 minute show a summary first (brain
+      mood note when present, else a plain metadata template: trigger,
+      duration, turns) with the full transcript expandable underneath;
+      shorter or unclosed chats show the full text directly
+- [x] Copy sweep (07-27): zero em dashes left under web/src (grep-verified),
+      plus the API-served strings that render in the UI (voice descriptions,
+      no-STT error, preset contexts; no meaning change so preset versions
+      unbumped); privacy claims rewritten per A2
+- [x] Cost meter out of consumer UI (07-27): History card removed, meter now
+      lives inside Studio > Under the hood > Advanced (with keys + tiers);
+      consumer face = plan picker card (studio/PlanCard.tsx): two questions
+      (what do you need it to do / how often) suggest one of Check-ins /
+      Companion / Full care; choice saved to settings key plan.selection;
+      honest "no payment is taken here" line (payments = future work)
+- [x] Privacy (07-27): custom-duration pause input (1-480 min, matching the
+      API bounds) next to the 15-min/1-hour one-touch buttons; A2 copy: kept
+      on this base station + you choose who sees it, no "never kept" claims
+- [x] Logo (07-27): round beluga SVG mark (sphere head, stylized dot eyes +
+      smile, two-tone sky blues, tail flukes) in components/Logo.tsx; lowercase
+      "meemoo" wordmark in the header; favicon.svg in web/public/ wired via
+      index.html; call overlay uses the mark instead of the balloon emoji
 - [ ] Onboarding wizard: dwelling type -> space capture (~20 photos/room,
       re-capture flow) -> pin drop + name waypoints ("Ruth's chair") ->
       off-limit zones (bathrooms default-prompted) -> pairing code entry ->
@@ -428,8 +447,12 @@
       wired (A3)
 - [ ] Voice motion commands: stop/left/right/up/down/come here/go to <pin>/
       spin; capability model with graceful declines; 1.3 m/s cap in sim (A5)
-- [ ] Live tab: "through Meemoo's eyes" camera view (webcam stand-in now,
-      blimp MJPEG later) + talk-to-Meemoo widget verified end to end
+- [x] Live tab (07-27): "Through Meemoo's eyes" camera panel on the existing
+      /ws/video annotated feed (hint says plainly it is the room camera today,
+      blimp MJPEG later; honest no-camera empty state verified headless) +
+      talk-to-Meemoo widget present on Live (typed path verified against the
+      live server; /ws/voice end-to-end incl. distress was verified 07-26);
+      browser-mic leg still needs Brady's Mac (no mic/STT headless)
 - [ ] Pairing-code device flow (replacement-unit model, A1)
 
 ## Phase 9 — Hardware bench (parallel track, ~$200)

@@ -1,4 +1,4 @@
-/** Conversational config — "prompting your robot" as a product experience.
+/** Conversational config: "prompting your robot" as a product experience.
  * Owner writes plain language → extract → review/edit → save. The raw text
  * is always stored verbatim as custom context. */
 
@@ -37,7 +37,7 @@ export default function StudioChat({
       });
       setReview(result);
     } catch {
-      setNote("Couldn't reach Meemoo — is the app running?");
+      setNote("Couldn't reach Meemoo. Is the app running?");
     } finally {
       setBusy(false);
     }
@@ -61,7 +61,7 @@ export default function StudioChat({
       });
       onSaved(review.config.person_name);
     } catch {
-      setNote("Saving failed — try again in a moment.");
+      setNote("Saving failed. Try again in a moment.");
     } finally {
       setBusy(false);
     }
@@ -72,7 +72,7 @@ export default function StudioChat({
       <div className="space-y-3">
         <div className="flex justify-start">
           <p className="max-w-[90%] rounded-2xl bg-sage-soft px-4 py-3 text-sm text-sage-deep">
-            Hi! Tell me about the person I&apos;ll be looking after — their
+            Hi! Tell me about the person I&apos;ll be looking after: their
             name, their routine, what they love, and who to call if I get
             worried. Plain words are perfect.
           </p>
@@ -96,9 +96,9 @@ export default function StudioChat({
         ) : (
           <div className="rounded-2xl border border-line bg-cream p-4">
             <p className="mb-3 text-sm text-ink-faint">
-              Here&apos;s what I understood — fix anything before saving.
+              Here&apos;s what I understood. Fix anything before saving.
               {review.source === "deterministic" &&
-                " (No AI key yet, so I kept it simple — your full note is saved word-for-word either way.)"}
+                " (No AI key yet, so I kept it simple. Your full note is saved word-for-word either way.)"}
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="text-sm">
@@ -176,7 +176,7 @@ export default function StudioChat({
             )}
             <div className="mt-4 flex items-center gap-3">
               <Button onClick={() => void save()} disabled={busy}>
-                {busy ? "Saving…" : `Save — Meemoo will know ${review.config.person_name}`}
+                {busy ? "Saving…" : `Save, so Meemoo knows ${review.config.person_name}`}
               </Button>
               <Button kind="quiet" onClick={() => setReview(null)}>
                 Start over

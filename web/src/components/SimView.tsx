@@ -9,7 +9,7 @@ function phaseLabel(snapshot: SimSnapshot): string {
   if (snapshot.docked) return "Resting on the dock";
   const phase = snapshot.phase.toLowerCase().replace(/_/g, " ");
   if (snapshot.waypoint_label) return `Drifting to ${snapshot.waypoint_label}`;
-  return `In the air — ${phase}`;
+  return `In the air, ${phase}`;
 }
 
 function Whale({ x, y, heading }: { x: number; y: number; heading: number }) {
@@ -118,7 +118,7 @@ export default function SimView({
             )}
           </g>
         ))}
-        {/* the dock — its own little device (Art. II §3) */}
+        {/* the dock: its own little device (Art. II §3) */}
         <g>
           <rect
             x={px(plan.dock.x) - 16}

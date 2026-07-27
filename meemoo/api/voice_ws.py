@@ -151,7 +151,7 @@ async def ws_voice(ws: WebSocket) -> None:  # noqa: C901 — protocol dispatch
                     await ws.send_json({
                         "type": "error",
                         "reason": "no_stt",
-                        "detail": "no STT engine installed — type instead "
+                        "detail": "no STT engine installed; type instead "
                                   "(uv sync --group voice)",
                     })
                     continue

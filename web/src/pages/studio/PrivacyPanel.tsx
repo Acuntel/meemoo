@@ -1,6 +1,7 @@
-/** Privacy panel (Art. V): transcript toggle (default ON), one-touch privacy
- * pause, the per-recipient permission matrix (grant the nurse, deny the son —
- * the resident's choice), and the consent record view. */
+/** Privacy panel (Art. V + Amendment A2): transcript toggle (default ON),
+ * one-touch and custom-duration privacy pause, the per-recipient permission
+ * matrix (grant the nurse, deny the son: the resident's choice), and the
+ * consent record view. Copy never promises deletion we do not do. */
 
 import { useCallback, useEffect, useState } from "react";
 import { apiDelete, apiGet, apiPatch, apiPost, apiPut } from "../../lib/api";
@@ -29,6 +30,7 @@ const DEFAULT_GRANTS: Record<string, boolean> = {
 export default function PrivacyPanel({ contacts }: { contacts: Contact[] }) {
   const [device, setDevice] = useState<Device | null>(null);
   const [pausedUntil, setPausedUntil] = useState<string | null>(null);
+  const [customMinutes, setCustomMinutes] = useState("");
   const [matrix, setMatrix] = useState<PermissionMatrix>({});
   const [consent, setConsent] = useState<ConsentRecord[]>([]);
 
@@ -93,11 +95,15 @@ export default function PrivacyPanel({ contacts }: { contacts: Contact[] }) {
 
   return (
     <Card title="Privacy" hint="the resident's choice, always">
+      <p className="mb-2 text-sm text-ink-soft">
+        What Meemoo hears and sees is kept on this base station in your home.
+        You decide who may see any of it, below.
+      </p>
       <Toggle
         checked={device?.store_transcripts ?? true}
         onChange={(on) => void setTranscripts(on)}
         label="Keep conversation transcripts"
-        detail="On by default. Off means chats are never written down — raw audio is never kept either way."
+        detail="On by default. Transcripts stay on this base station and only the people you allow can see them. Turn this off and new chats are not written down."
       />
 
       <div className="mt-4 rounded-2xl bg-cream p-4">
@@ -115,22 +121,59 @@ export default function PrivacyPanel({ contacts }: { contacts: Contact[] }) {
               Resume now
             </Button>
           ) : (
-            <div className="flex gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Button kind="soft" onClick={() => void pause(15)}>
                 15 min
               </Button>
               <Button kind="soft" onClick={() => void pause(60)}>
                 1 hour
               </Button>
+              <form
+                className="flex items-center gap-1"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  const minutes = Number.parseInt(customMinutes, 10);
+                  if (Number.isFinite(minutes) && minutes >= 1 && minutes <= 480) {
+                    void pause(minutes);
+                    setCustomMinutes("");
+                  }
+                }}
+              >
+                <input
+                  type="number"
+                  min={1}
+                  max={480}
+                  value={customMinutes}
+                  onChange={(event) => setCustomMinutes(event.target.value)}
+                  placeholder="minutes"
+                  aria-label="Pause for a custom number of minutes"
+                  className="w-24 rounded-full border border-line bg-card px-3 py-2 text-sm outline-none focus:border-sage"
+                />
+                <Button
+                  type="submit"
+                  kind="soft"
+                  disabled={
+                    !/^\d+$/.test(customMinutes.trim()) ||
+                    Number.parseInt(customMinutes, 10) < 1 ||
+                    Number.parseInt(customMinutes, 10) > 480
+                  }
+                >
+                  Pause
+                </Button>
+              </form>
             </div>
           )}
         </div>
+        <p className="mt-2 text-xs text-ink-faint">
+          Up to 8 hours at a time. The mute switch on the base station cuts the
+          microphone at the hardware whenever you want.
+        </p>
       </div>
 
       <div className="mt-5">
         <p className="font-medium">Who may see what</p>
         <p className="text-sm text-ink-faint">
-          Grant the nurse, deny the son — each person you ring can see exactly
+          Grant the nurse, deny the son. Each person you ring can see exactly
           what the resident allows.
         </p>
         {contacts.length === 0 ? (
@@ -183,7 +226,7 @@ export default function PrivacyPanel({ contacts }: { contacts: Contact[] }) {
         <p className="font-medium">Consent on file</p>
         {consent.length === 0 ? (
           <EmptyNote>
-            No consent records yet — they&apos;re created during onboarding and
+            No consent records yet. They&apos;re created during onboarding and
             listed here for review.
           </EmptyNote>
         ) : (

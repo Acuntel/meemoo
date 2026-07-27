@@ -2,7 +2,7 @@
  *
  * Matches the /ws/voice contract (binary PCM16 chunks, then {"type":"end"}).
  * Raw audio goes straight over the socket and is discarded server-side after
- * transcription (Art. V §2) — nothing is buffered here beyond one chunk.
+ * transcription (Art. V §2); nothing is buffered here beyond one chunk.
  */
 
 export const MIC_SAMPLE_RATE = 16_000;

@@ -1,4 +1,4 @@
-/** When Meemoo does its rounds — the daily check-in times, editable in place. */
+/** When Meemoo does its rounds: the daily check-in times, editable in place. */
 
 import { useCallback, useEffect, useState } from "react";
 import { apiDelete, apiGet, apiPost, apiPut } from "../../lib/api";
@@ -45,7 +45,7 @@ export default function ScheduleCard() {
       setNote(null);
       refresh();
     } catch {
-      setNote("Couldn't save that time — is the server running?");
+      setNote("Couldn't save that time. Is the server running?");
     }
   };
 
@@ -82,7 +82,7 @@ export default function ScheduleCard() {
       {entries.length === 0 ? (
         <div className="mb-4">
           <EmptyNote>
-            No custom times yet — Meemoo is using its usual rhythm (9:00, 13:00,
+            No custom times yet. Meemoo is using its usual rhythm (9:00, 13:00,
             18:00, 21:00).
           </EmptyNote>
           <div className="mt-2">

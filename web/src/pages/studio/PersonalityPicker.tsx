@@ -155,7 +155,7 @@ export default function PersonalityPicker({
               </p>
             )}
             <p className="text-xs text-ink-faint">
-              preset v{active.version} <Chip tone="plain">read-only here — edit presets in brain/presets/</Chip>
+              preset v{active.version} <Chip tone="plain">read-only here; edit presets in brain/presets/</Chip>
             </p>
           </div>
         </details>

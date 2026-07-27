@@ -1,4 +1,4 @@
-/** Full-screen simulated incoming call — the credential-less escalation demo.
+/** Full-screen simulated incoming call: the credential-less escalation demo.
  *
  * Listens for `notify.sent` (simulated) and `escalation.l3` on the live event
  * stream and takes over the screen like an incoming call. Acknowledge halts
@@ -8,6 +8,7 @@ import { useCallback, useState } from "react";
 import { apiPost } from "../lib/api";
 import type { BusEvent } from "../lib/types";
 import { useEventStream } from "../lib/ws";
+import { MeemooMark } from "./Logo";
 
 type CallState = {
   alertId: number | null;
@@ -76,19 +77,19 @@ export default function CallOverlay() {
     >
       <p className="text-sm uppercase tracking-widest text-white/70">
         {call.fullScreenAlert
-          ? "Urgent — no one has responded"
+          ? "Urgent: no one has responded"
           : `Simulated ${call.channel} · escalation ${call.level}`}
       </p>
-      <div className="animate-ring flex h-32 w-32 items-center justify-center rounded-full bg-card text-6xl">
-        🎈
+      <div className="animate-ring flex h-32 w-32 items-center justify-center rounded-full bg-card">
+        <MeemooMark size={84} />
       </div>
       <div className="text-center text-white">
         <p className="text-2xl font-semibold">Meemoo is calling {call.contact}</p>
         <p className="mt-2 max-w-md text-white/80">{call.reason}</p>
         {call.fullScreenAlert && (
           <p className="mt-3 max-w-md text-sm text-white/70">
-            This is the highest alert level. Meemoo never dials 911 by itself —
-            a person always makes that call.
+            This is the highest alert level. Meemoo never dials 911 by itself.
+            A person always makes that call.
           </p>
         )}
       </div>
@@ -99,7 +100,7 @@ export default function CallOverlay() {
           disabled={acked}
           className="rounded-full bg-sage px-8 py-3 text-lg font-semibold text-white shadow-lg transition hover:bg-sage-deep disabled:opacity-60"
         >
-          I&apos;ve got it — acknowledge
+          I&apos;ve got it, acknowledge
         </button>
         <button
           type="button"

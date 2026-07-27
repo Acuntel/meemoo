@@ -1,37 +1,40 @@
-/** Today — the first screen a worried daughter sees at 11pm: is everything
- * okay, when is the next check-in, what did they talk about. */
+/** Today: the first screen a worried daughter sees at 11pm. The flight view
+ * gets the big box; everything happening right now lives in one Right-now
+ * box (components/RightNow.tsx). No fake data when idle (Amendment A7). */
 
 import { useCallback, useEffect, useState } from "react";
 import { Bars } from "../components/Chart";
+import RightNow from "../components/RightNow";
+import SimView from "../components/SimView";
 import { apiGet, apiPost, fmtTime } from "../lib/api";
 import type {
+  Alert,
   ApiEvent,
   Conversation,
+  FloorPlan,
   NextCheckin,
   SimSnapshot,
 } from "../lib/types";
-import { Button, Card, Chip, EmptyNote } from "../components/ui";
+import { Button, Card, EmptyNote } from "../components/ui";
 
 const MOOD_FALLBACK = "No note from this chat.";
 
-function statusLine(snapshot: SimSnapshot | null): string {
-  if (snapshot === null) return "Meemoo's whale is resting (sim offline).";
-  if (snapshot.docked && snapshot.charging) return "Home on the dock, charging.";
-  if (snapshot.docked) return "Home on the dock.";
-  return "Out and about in the apartment.";
-}
-
 export default function TodayPage({
+  plan,
   snapshot,
+  simReady,
+  activeAlerts,
   onGoLive,
 }: {
+  plan: FloorPlan | null;
   snapshot: SimSnapshot | null;
+  simReady: boolean;
+  activeAlerts: Alert[];
   onGoLive: () => void;
 }) {
   const [next, setNext] = useState<NextCheckin | null>(null);
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [events, setEvents] = useState<ApiEvent[]>([]);
-  const [roundNote, setRoundNote] = useState<string | null>(null);
   const [contactNote, setContactNote] = useState<string | null>(null);
 
   const refresh = useCallback(() => {
@@ -62,28 +65,11 @@ export default function TodayPage({
       (e.type.startsWith("checkin.") || e.type.startsWith("person.")),
   );
 
-  const runRound = async () => {
-    setRoundNote("Sending Meemoo on a round…");
-    try {
-      const result = await apiPost<{ started: boolean; reason?: string }>(
-        "/api/v1/devices/1/rounds/run",
-      );
-      setRoundNote(
-        result.started
-          ? "Meemoo is on the way — watch the Live view."
-          : `Couldn't start: ${result.reason ?? "unknown"}`,
-      );
-      if (result.started) onGoLive();
-    } catch {
-      setRoundNote("Couldn't reach Meemoo just now.");
-    }
-  };
-
   const logContact = async (kind: "call" | "visit") => {
     try {
       await apiPost(`/api/v1/devices/1/human-contact`, { kind });
       setContactNote(
-        kind === "call" ? "Lovely — call noted." : "Lovely — visit noted.",
+        kind === "call" ? "Lovely. Call noted." : "Lovely. Visit noted.",
       );
       window.setTimeout(() => setContactNote(null), 4000);
     } catch {
@@ -93,63 +79,68 @@ export default function TodayPage({
 
   return (
     <div className="grid gap-6 lg:grid-cols-3">
-      <Card className="lg:col-span-2" title="Today">
-        {todaysChats.length === 0 && todaysEvents.length === 0 ? (
-          <EmptyNote>
-            Nothing yet today. The next check-in
-            {next ? ` is at ${next.time}` : " is on the usual schedule"} — or
-            send Meemoo around right now.
-          </EmptyNote>
+      <div className="space-y-6 lg:col-span-2">
+        {plan !== null ? (
+          <SimView plan={plan} snapshot={snapshot} />
         ) : (
-          <ol className="space-y-3">
-            {todaysChats.map((chat) => (
-              <li key={`c${chat.id}`} className="flex gap-3">
-                <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-sage" />
-                <div>
-                  <p className="text-sm text-ink-faint">
-                    {fmtTime(chat.started_at)} ·{" "}
-                    {chat.trigger === "checkin"
-                      ? "Meemoo checked in"
-                      : "They started a chat"}{" "}
-                    · {chat.message_count} turns
-                  </p>
-                  <p className="mt-0.5">{chat.mood_note ?? MOOD_FALLBACK}</p>
-                </div>
-              </li>
-            ))}
-            {todaysEvents.map((event) => (
-              <li key={`e${event.id}`} className="flex gap-3">
-                <span
-                  className={`mt-1 h-2.5 w-2.5 shrink-0 rounded-full ${
-                    event.type.startsWith("person.") ? "bg-rose" : "bg-sky"
-                  }`}
-                />
-                <p className="text-sm text-ink-soft">
-                  {fmtTime(event.ts)} · {event.type.replace(/[._]/g, " ")}
-                </p>
-              </li>
-            ))}
-          </ol>
+          <Card title="Where Meemoo is">
+            <EmptyNote>
+              {simReady
+                ? "Waiting for the first position…"
+                : "The simulator isn't running, so there is no flight view. Start the app with the runtime on."}
+            </EmptyNote>
+          </Card>
         )}
-      </Card>
+
+        <Card title="Today">
+          {todaysChats.length === 0 && todaysEvents.length === 0 ? (
+            <EmptyNote>
+              Nothing yet today. The next check-in
+              {next ? ` is at ${next.time}` : " is on the usual schedule"}, or
+              send Meemoo around right now.
+            </EmptyNote>
+          ) : (
+            <ol className="space-y-3">
+              {todaysChats.map((chat) => (
+                <li key={`c${chat.id}`} className="flex gap-3">
+                  <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-sage" />
+                  <div>
+                    <p className="text-sm text-ink-faint">
+                      {fmtTime(chat.started_at)} ·{" "}
+                      {chat.trigger === "checkin"
+                        ? "Meemoo checked in"
+                        : "They started a chat"}{" "}
+                      · {chat.message_count} turns
+                    </p>
+                    <p className="mt-0.5">{chat.mood_note ?? MOOD_FALLBACK}</p>
+                  </div>
+                </li>
+              ))}
+              {todaysEvents.map((event) => (
+                <li key={`e${event.id}`} className="flex gap-3">
+                  <span
+                    className={`mt-1 h-2.5 w-2.5 shrink-0 rounded-full ${
+                      event.type.startsWith("person.") ? "bg-rose" : "bg-sky"
+                    }`}
+                  />
+                  <p className="text-sm text-ink-soft">
+                    {fmtTime(event.ts)} · {event.type.replace(/[._]/g, " ")}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          )}
+        </Card>
+      </div>
 
       <div className="space-y-6">
-        <Card title="Right now">
-          <p>{statusLine(snapshot)}</p>
-          {snapshot && (
-            <div className="mt-3 flex flex-wrap gap-2">
-              <Chip tone="sky">
-                Battery {Math.round(snapshot.battery_pct)}%
-                {snapshot.charging ? " ⚡" : ""}
-              </Chip>
-              <Chip tone="sage">{snapshot.docked ? "Docked" : "Flying"}</Chip>
-            </div>
-          )}
-          <div className="mt-4">
-            <Button onClick={() => void runRound()}>Send Meemoo around now</Button>
-          </div>
-          {roundNote && <p className="mt-2 text-sm text-ink-faint">{roundNote}</p>}
-        </Card>
+        <RightNow
+          snapshot={snapshot}
+          simReady={simReady}
+          next={next}
+          activeAlerts={activeAlerts}
+          onGoLive={onGoLive}
+        />
 
         <Card
           title="Next check-in"
@@ -167,12 +158,9 @@ export default function TodayPage({
           )}
         </Card>
 
-        <Card
-          title="Stayed in touch?"
-          hint="keeping real visits first"
-        >
+        <Card title="Stayed in touch?" hint="keeping real visits first">
           <p className="text-sm text-ink-soft">
-            Meemoo works best alongside real calls and visits — log them so the
+            Meemoo works best alongside real calls and visits. Log them so the
             family picture stays honest.
           </p>
           <div className="mt-3 flex gap-2">

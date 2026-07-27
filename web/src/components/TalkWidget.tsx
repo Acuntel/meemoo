@@ -1,8 +1,8 @@
-/** Talk to Meemoo from the browser — /ws/voice, both directions (step-07 §2).
+/** Talk to Meemoo from the browser: /ws/voice, both directions (step-07 §2).
  *
  * Typing always works; hold-to-talk appears when the browser has a mic. A
  * reply that came with real TTS audio plays automatically. Distress and
- * crisis flags surface honestly — the same safety-ordered pipeline as the
+ * crisis flags surface honestly; the same safety-ordered pipeline as the
  * room microphone is on the other end of this socket.
  */
 
@@ -110,7 +110,7 @@ export default function TalkWidget() {
     } catch {
       setBubbles((prev) => [
         ...prev,
-        { role: "note", text: "Microphone unavailable — typing still works." },
+        { role: "note", text: "Microphone unavailable. Typing still works." },
       ]);
     }
   };
@@ -134,7 +134,7 @@ export default function TalkWidget() {
       >
         {bubbles.length === 0 && (
           <EmptyNote>
-            Say hello — this goes through the very same ears and voice Meemoo
+            Say hello. This goes through the very same ears and voice Meemoo
             uses in the room.
           </EmptyNote>
         )}
@@ -157,7 +157,7 @@ export default function TalkWidget() {
                 <span className="mt-1 block text-xs font-semibold text-rose">
                   {bubble.flag === "crisis"
                     ? "Crisis support offered (988)"
-                    : "Heard as a call for help — Meemoo is escalating"}
+                    : "Heard as a call for help. Meemoo is escalating"}
                 </span>
               )}
             </span>
@@ -201,7 +201,7 @@ export default function TalkWidget() {
       </form>
       {ready !== null && !ready.stt && (
         <p className="mt-2 text-xs text-ink-faint">
-          No speech engine on this machine yet — typed chat works fully.
+          No speech engine on this machine yet. Typed chat works fully.
         </p>
       )}
     </div>

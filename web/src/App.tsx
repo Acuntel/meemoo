@@ -1,60 +1,93 @@
-/** Meemoo — one warm shell: Family Dashboard tabs + the Setup Studio.
- * The simulated incoming-call overlay is always mounted, so an escalation
- * takes over the screen no matter which tab is open. */
+/** Meemoo, one warm shell: Today / Studio / Live / History (Amendment A7).
+ * When something is live (round in progress or an alert is open) the Live tab
+ * jumps to first position with a red pulse. The simulated incoming-call
+ * overlay is always mounted, so an escalation takes over the screen no matter
+ * which tab is open. */
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CallOverlay from "./components/CallOverlay";
-import AlertsPage from "./pages/AlertsPage";
+import { MeemooLogo } from "./components/Logo";
 import HistoryPage from "./pages/HistoryPage";
-import InsightsPage from "./pages/InsightsPage";
 import LivePage from "./pages/LivePage";
 import StudioPage from "./pages/studio/StudioPage";
 import TodayPage from "./pages/TodayPage";
-import { useSimStream } from "./lib/ws";
+import { apiGet } from "./lib/api";
+import type { Alert, BusEvent } from "./lib/types";
+import { useEventStream, useSimStream } from "./lib/ws";
 
-const TABS = [
-  { key: "today", label: "Today" },
-  { key: "live", label: "Live" },
-  { key: "alerts", label: "Alerts" },
-  { key: "history", label: "History" },
-  { key: "insights", label: "Insights" },
-  { key: "studio", label: "Studio" },
-] as const;
+type TabKey = "today" | "studio" | "live" | "history";
 
-type TabKey = (typeof TABS)[number]["key"];
+const TAB_LABELS: Record<TabKey, string> = {
+  today: "Today",
+  studio: "Studio",
+  live: "Live",
+  history: "History",
+};
+
+const RESTING_ORDER: TabKey[] = ["today", "studio", "live", "history"];
+const LIVE_ORDER: TabKey[] = ["live", "today", "studio", "history"];
 
 export default function App() {
   const [tab, setTab] = useState<TabKey>("today");
+  const [activeAlerts, setActiveAlerts] = useState<Alert[]>([]);
   const sim = useSimStream();
+
+  const refreshAlerts = useCallback(() => {
+    apiGet<Alert[]>("/api/v1/alerts?device_id=1")
+      .then((rows) => setActiveAlerts(rows.filter((a) => a.acknowledged_at === null)))
+      .catch(() => setActiveAlerts([]));
+  }, []);
+
+  useEffect(() => {
+    refreshAlerts();
+    const timer = window.setInterval(refreshAlerts, 10_000);
+    return () => window.clearInterval(timer);
+  }, [refreshAlerts]);
+
+  const onEvent = useCallback(
+    (event: BusEvent) => {
+      if (
+        event.topic.startsWith("escalation.") ||
+        event.topic.startsWith("notify.")
+      ) {
+        refreshAlerts();
+      }
+    },
+    [refreshAlerts],
+  );
+  useEventStream(onEvent);
+
+  const roundActive = sim.snapshot !== null && !sim.snapshot.docked;
+  const isLive = roundActive || activeAlerts.length > 0;
+  const order = isLive ? LIVE_ORDER : RESTING_ORDER;
 
   return (
     <div className="min-h-screen">
       <CallOverlay />
       <header className="border-b border-line bg-card/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-4 px-6 py-4">
-          <button
-            type="button"
-            onClick={() => setTab("today")}
-            className="flex items-center gap-2 text-xl font-semibold tracking-tight"
-          >
-            <span className="animate-bob inline-block text-2xl" aria-hidden="true">
-              🎈
-            </span>
-            Meemoo
+          <button type="button" onClick={() => setTab(order[0] ?? "today")}>
+            <MeemooLogo />
           </button>
           <nav className="flex flex-1 flex-wrap items-center gap-1">
-            {TABS.map((entry) => (
+            {order.map((key) => (
               <button
-                key={entry.key}
+                key={key}
                 type="button"
-                onClick={() => setTab(entry.key)}
-                className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
-                  tab === entry.key
+                onClick={() => setTab(key)}
+                className={`flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition ${
+                  tab === key
                     ? "bg-sage text-white"
                     : "text-ink-soft hover:bg-sage-soft"
                 }`}
               >
-                {entry.label}
+                {TAB_LABELS[key]}
+                {key === "live" && isLive && (
+                  <span
+                    className="animate-dot h-2 w-2 rounded-full bg-alert"
+                    aria-label="Something is happening live"
+                  />
+                )}
               </button>
             ))}
           </nav>
@@ -75,21 +108,31 @@ export default function App() {
 
       <main className="mx-auto max-w-6xl px-6 py-8">
         {tab === "today" && (
-          <TodayPage snapshot={sim.snapshot} onGoLive={() => setTab("live")} />
+          <TodayPage
+            plan={sim.plan}
+            snapshot={sim.snapshot}
+            simReady={sim.ready}
+            activeAlerts={activeAlerts}
+            onGoLive={() => setTab("live")}
+          />
         )}
         {tab === "live" && (
-          <LivePage plan={sim.plan} snapshot={sim.snapshot} simReady={sim.ready} />
+          <LivePage
+            plan={sim.plan}
+            snapshot={sim.snapshot}
+            simReady={sim.ready}
+            activeAlerts={activeAlerts}
+            onAlertsChanged={refreshAlerts}
+          />
         )}
-        {tab === "alerts" && <AlertsPage />}
         {tab === "history" && <HistoryPage />}
-        {tab === "insights" && <InsightsPage />}
         {tab === "studio" && <StudioPage onDone={() => setTab("today")} />}
       </main>
 
       <footer className="mx-auto max-w-6xl px-6 pb-8 text-center text-xs text-ink-faint">
         Meemoo is an AI companion, not a person and not a medical device. It
-        reports what it observes and rings the people you chose — it never
-        diagnoses and never dials 911 by itself.
+        reports what it observes and rings the people you chose. It never
+        diagnoses, and it never dials 911 by itself.
       </footer>
     </div>
   );

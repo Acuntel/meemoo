@@ -1,4 +1,4 @@
-/** Setup Studio — chat-style config, presets, voices, privacy, plan.
+/** Setup Studio: chat-style config, presets, voices, privacy, plan.
  * The demo-script path: describe Ruth → review → save → (key or skip) →
  * the dashboard shows the whale on its dock and the next check-in. */
 
@@ -8,6 +8,7 @@ import type { Contact, Preset, StudioCurrent, Voice } from "../../lib/types";
 import { Button, Card } from "../../components/ui";
 import AdvancedPanel from "./AdvancedPanel";
 import ContactsCard from "./ContactsCard";
+import PlanCard from "./PlanCard";
 import ScheduleCard from "./ScheduleCard";
 import PersonalityPicker from "./PersonalityPicker";
 import PrivacyPanel from "./PrivacyPanel";
@@ -22,7 +23,7 @@ export default function StudioPage({ onDone }: { onDone: () => void }) {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [savedName, setSavedName] = useState<string | null>(null);
 
-  // The picker state also feeds StudioChat's save — read it via ref so the
+  // The picker state also feeds StudioChat's save; read it via ref so the
   // chat card never re-renders (and loses its draft) on a picker click.
   const pickerState = useRef({ role, sub, voiceKey });
   pickerState.current = { role, sub, voiceKey };
@@ -62,7 +63,7 @@ export default function StudioPage({ onDone }: { onDone: () => void }) {
         <Card className="border-sage bg-sage-soft/60">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-lg">
-              <span className="font-semibold">All set — Meemoo knows {savedName}.</span>{" "}
+              <span className="font-semibold">All set. Meemoo knows {savedName}.</span>{" "}
               <span className="text-ink-soft">
                 The whale is on its dock, ready for the next check-in.
               </span>
@@ -88,6 +89,8 @@ export default function StudioPage({ onDone }: { onDone: () => void }) {
       <ContactsCard onChanged={setContacts} />
 
       <ScheduleCard />
+
+      <PlanCard />
 
       <PrivacyPanel contacts={contacts} />
 

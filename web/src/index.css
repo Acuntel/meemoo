@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Meemoo — warm, calm, rounded. The worried-daughter-at-11pm bar:
+/* Meemoo: warm, calm, rounded. The worried-daughter-at-11pm bar:
    soft colors, generous whitespace, zero jargon (Constitution / step-07 §4). */
 
 @theme {
@@ -18,6 +18,7 @@
   --color-sky-soft: #e9f1f9;
   --color-rose: #dc9a8f;
   --color-rose-soft: #f9e8e4;
+  --color-alert: #dc6454;
   --color-line: #ece4d6;
   --font-sans: "Avenir Next", "Nunito", ui-rounded, system-ui, sans-serif;
 }
@@ -60,4 +61,21 @@ body {
 
 .animate-ring {
   animation: ring-pulse 1.6s ease-out infinite;
+}
+
+/* Small red pulse for the Live tab's attention dot. */
+@keyframes dot-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(220 100 84 / 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgb(220 100 84 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(220 100 84 / 0);
+  }
+}
+
+.animate-dot {
+  animation: dot-pulse 1.4s ease-out infinite;
 }
