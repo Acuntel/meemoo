@@ -39,7 +39,7 @@ class Thresholds:
     t_confirm: float
     t_voice_1: float
     t_voice_2: float
-    t_escalate: float
+    t_escalate_after_down: float  # measured from person.down, NOT from grounding
     t_longlie: float
     t_recovered: float
     # CANDIDATE_SOFT (deliberate floor-sitters get a gentler, later question)

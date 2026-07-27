@@ -94,14 +94,36 @@ def test_time_to_candidate_measured_bounds(runs: dict[str, ClipRun]) -> None:
     assert checked >= 15
 
 
+def test_gate_hard_path_candidates_within_10s(runs: dict[str, ClipRun]) -> None:
+    """Regression gate for the 2026-07-28 evidence-latch fix (finding 1).
+
+    Every fall that reaches the HARD path must produce its candidate within
+    10 s of impact, and at least 15 of the 19 real falls must be on the hard
+    path at all. Measured at fix time: 15 hard (4.5-9.1 s), 2 soft, 2 missed.
+    """
+    hard = 0
+    for run in runs.values():
+        if run.clip.label != "fall" or not run.candidates:
+            continue
+        first = run.candidates[0]
+        if first.get("soft"):
+            continue
+        hard += 1
+        t_impact = float(run.clip.header["t_impact"])
+        delta = float(first["t"]) - t_impact  # type: ignore[arg-type]
+        assert delta <= 10.0, f"{run.clip.name}: hard candidate at +{delta:.1f}s"
+    assert hard >= 15, f"only {hard} falls on the hard path (fix-time floor: 15)"
+
+
 @pytest.mark.skip(
     reason=(
         "GATE NOT MET on real data (honest, 2026-07-27): research 05 §B.5 wants "
-        "candidate.fall within 6 s of impact on every fall. Measured on the 19 "
-        "real GMDCSA-24/CaucaFall falls: 5/19 within 6 s, 1/19 at 8.8 s, 11/19 "
-        "only via the 40 s soft path (ballistic window expires before classify), "
-        "2/19 never (MediaPipe loses the fallen person). Threshold/classifier "
-        "changes are Brady's call — numbers + proposals in docs/TODO.md."
+        "candidate.fall within 6 s of impact on every fall. AFTER the 2026-07-28 "
+        "evidence-latch fix: 15/19 real falls on the HARD path at 4.5-9.1 s from "
+        "impact (was 5/19 within 6 s + 11/19 on the 40 s soft path), 2/19 soft, "
+        "2/19 never (perception misses at range/0-lux). A strict 6 s bar is "
+        "structurally unreachable with t_settle=1.5 + t_candidate=5.0 (floor "
+        "6.5 s); the enforced regression gate is the 10 s hard-path test below."
     )
 )
 def test_gate_time_to_candidate_6s_all_real_falls(runs: dict[str, ClipRun]) -> None:

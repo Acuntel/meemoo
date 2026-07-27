@@ -111,7 +111,29 @@
         tests/perception/test_real_fixtures.py = primary (45 tests);
         synthetic stays for fast fully-controlled CI
         (tests/fixtures/landmarks/README.md explains the split)
-  - [ ] 🚨 REAL-DATA FINDINGS FOR BRADY (measured 07-27, thresholds NOT
+  - [x] ✅ FINDINGS 1+2 FIXED 2026-07-28 (inline by main session after 3 agent
+        API deaths; agent's staged approach kept and finished):
+        AFTER numbers on the same 19 real falls: 15/19 HARD-path candidates at
+        4.5-9.1 s from impact (was 5/19 within 6 s + 11/19 on the 40 s soft
+        path), 2/19 soft-path (slow/occluded descents under the ballistic
+        bar), 2/19 never (the known range/0-lux perception misses). Zero ADL
+        false alarms PRESERVED, and the deliberate floor-nap clip now gets the
+        gentle ask with NO family escalation (was: escalated with zero voice
+        prompts). Mechanics: (1) ballistic evidence latched at DESCENDING
+        entry instead of a rolling 3 s window read at classify time;
+        (2) escalation re-anchored to person.down (t_escalate_after_down=35 —
+        hard-path total timing UNCHANGED at 15+35=50 s from grounding, but the
+        soft path now always gets t_voice_1 + t_voice_2 + response window
+        first). Regression gate added: test_gate_hard_path_candidates_within_10s
+        (>=15 hard-path falls, all within 10 s of impact). The aspirational
+        strict-6 s gate stays skipped: floor is structurally 6.5 s
+        (t_settle 1.5 + t_candidate 5.0).
+        ⚠️ VENV GOTCHA found while verifying: `uv sync --group perception`
+        installs mediapipe into the SHARED venv and its bundled protobuf
+        segfaults the full suite (error 139). Run the webcam demo from a
+        scratch venv, or plain `uv sync` before `make test`.
+  - [ ] 🚨 REMAINING REAL-DATA FINDINGS (unchanged, Brady's call):
+  - [ ] (historical 07-27 record: original findings 1-2 now fixed above; 3-6 still open, thresholds NOT
         touched — Art. II §4; per-clip `spec_gap` headers carry the numbers):
         1. **Soft-path latency swallows most real falls**: 11/19 real falls
            classify as `controlled_descent` (soft) because the 3 s

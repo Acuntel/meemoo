@@ -89,11 +89,6 @@ class FallStateMachine:
         if self.state in (FallState.GROUNDED_CANDIDATE, FallState.VERIFYING):
             self._escalate(t, "voice_help")
 
-    def reset(self) -> None:
-        self._to(FallState.UPRIGHT, self._last_present.t if self._last_present else 0.0)
-        self._candidate_emitted = False
-        self.flags = {}
-
     # ---------------------------------------------------------------------- tick
     def tick(self, sig: SignalFrame) -> FallState:
         if not sig.present:
@@ -103,7 +98,9 @@ class FallStateMachine:
         if self.state == FallState.ABSENT:
             self._to(FallState.UPRIGHT, sig.t)
         self._last_present = sig
-        self.trk.update(sig)
+        # Not-UPRIGHT == descent episode in progress; the trackers latch its
+        # descent evidence for the whole episode (trackers.py module docstring).
+        self.trk.update(sig, in_episode=self.state is not FallState.UPRIGHT)
 
         if self._check_recovery(sig):
             return self.state
@@ -170,8 +167,8 @@ class FallStateMachine:
             x=sig.x,
             support_y=sig.support_y,
             elevation=sig.elevation,
-            v_peak=self.trk.v_peak(sig.t),
-            hip_drop_0_8s=self.trk.hip_drop(sig.t),
+            v_peak=self.trk.episode_v_peak(sig.t),
+            hip_drop_0_8s=self.trk.episode_hip_drop(sig.t),
             motion_energy=sig.motion_energy,
             still_duration=self.trk.still_duration(sig.t),
             slid_toward_floor=slid,
@@ -199,10 +196,7 @@ class FallStateMachine:
             self._enter_grounded(sig.t, sig.t, soft=False, flag=flag)
 
     def _enter_grounded(self, now: float, grounded_at: float, soft: bool, flag: str) -> None:
-        ballistic = (
-            self.trk.v_peak(now) > self.th.ballistic_v
-            or self.trk.hip_drop(now) > self.th.ballistic_drop
-        )
+        ballistic = self.trk.is_ballistic(now)
         learning = self._learning()
         if learning and not ballistic:
             soft = True  # reduced sensitivity during the learning phase
@@ -236,11 +230,15 @@ class FallStateMachine:
             self._to(FallState.VERIFYING, now)
 
     def _advance_verify_timers(self, now: float) -> None:
+        """The whole ladder hangs off person.down, never off grounding: CONCERN
+        must ask twice and wait before escalating (research 05 §A.4). Anchored
+        to grounding, soft downs escalated on the same tick with zero asks."""
+        since_down = now - self._down_at
         for n, offset in ((1, self.th.t_voice_1), (2, self.th.t_voice_2)):
-            if self._prompts_sent < n and now - self._down_at >= offset:
+            if self._prompts_sent < n and since_down >= offset:
                 self._prompts_sent = n
                 self._emit("verify.voice_prompt", {"t": now, "n": n})
-        if now - self._grounded_at >= self.th.t_escalate:
+        if since_down >= self.th.t_escalate_after_down:
             self._escalate(now, "no_response")
 
     def _tick_snoozed(self, sig: SignalFrame) -> None:

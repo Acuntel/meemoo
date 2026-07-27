@@ -28,7 +28,7 @@ class PoseEstimator(Protocol):
 class MediaPipePose:
     """BlazePose GHUM Full via the classic mediapipe Pose solution API."""
 
-    def __init__(self, model_complexity: int = 1) -> None:
+    def __init__(self, model_complexity: int = 1, confidence: float = 0.5) -> None:
         try:
             import mediapipe as mp
         except ImportError as exc:
@@ -38,8 +38,8 @@ class MediaPipePose:
         self._mp = mp
         self._pose = mp.solutions.pose.Pose(
             model_complexity=model_complexity,  # 1 = Full (§F.1 recommended)
-            min_detection_confidence=0.5,
-            min_tracking_confidence=0.5,
+            min_detection_confidence=confidence,
+            min_tracking_confidence=confidence,
         )
 
     def infer(self, frame_bgr: Any, t: float) -> PoseFrame:
