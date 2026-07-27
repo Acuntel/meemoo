@@ -13,7 +13,8 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from meemoo import __version__
@@ -22,12 +23,14 @@ from meemoo.api.events_ws import router as events_ws_router
 from meemoo.api.fleet_routes import router as fleet_router
 from meemoo.api.guardian_routes import router as guardian_router
 from meemoo.api.metrics_routes import router as metrics_router
+from meemoo.api.onboarding_routes import router as onboarding_router
 from meemoo.api.perception_routes import router as perception_router
 from meemoo.api.provider_routes import router as provider_router
 from meemoo.api.sim_routes import router as sim_router
 from meemoo.api.studio_routes import router as studio_router
 from meemoo.api.video_ws import router as video_ws_router
 from meemoo.api.voice_ws import router as voice_ws_router
+from meemoo.api.zone_routes import router as zone_router
 from meemoo.core.config import get_settings
 from meemoo.core.logging import setup_logging
 
@@ -84,9 +87,19 @@ def create_app() -> FastAPI:
     app.include_router(studio_router)
     app.include_router(metrics_router)
     app.include_router(perception_router)
+    app.include_router(onboarding_router)
+    app.include_router(zone_router)
     app.include_router(events_ws_router)
     app.include_router(video_ws_router)
     app.include_router(voice_ws_router)
+
+    @app.get("/onboarding", include_in_schema=False)
+    def onboarding_page() -> FileResponse:
+        """SPA fallback: the wizard lives at /onboarding in the web bundle."""
+        index = WEB_DIST / "index.html"
+        if not index.exists():
+            raise HTTPException(status_code=404, detail="web bundle not built")
+        return FileResponse(index)
 
     if WEB_DIST.is_dir():
         app.mount("/", StaticFiles(directory=WEB_DIST, html=True), name="web")

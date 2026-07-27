@@ -40,8 +40,12 @@ class FlightController(ABC):
         """Descend gently and stop motors where the aircraft is."""
 
     @abstractmethod
-    def goto(self, x: float, y: float, *, label: str | None = None) -> None:
-        """Fly to a floor-plan point with floaty easing."""
+    def goto(self, x: float, y: float, *, label: str | None = None) -> bool:
+        """Fly to a floor-plan point with floaty easing.
+
+        Returns True if the flight was accepted; False when refused, e.g.
+        the point sits inside an off-limit zone (Amendment A3) — the
+        implementation emits a ``flight.refused`` event instead of flying."""
 
     @abstractmethod
     def patrol(self, waypoints: list[tuple[str, str, float, float]]) -> None:

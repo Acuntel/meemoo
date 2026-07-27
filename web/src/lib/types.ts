@@ -238,3 +238,32 @@ export type MetricsSummary = {
 
 /** Per-recipient permission matrix (Art. V §4): recipient → scope → allowed. */
 export type PermissionMatrix = Record<string, Record<string, boolean>>;
+
+/** Onboarding wizard (Amendments A1/A3/A6). */
+export type OnboardingStatus = {
+  exists: boolean;
+  completed: boolean;
+  dwelling_type: string | null;
+  step: string;
+  paired: boolean;
+};
+
+export type RoomSummary = {
+  room: string;
+  photo_count: number;
+  target: number;
+  last_captured_at: string | null;
+};
+
+export type RoomPhoto = { id: number; room: string; created_at: string };
+
+export type NoGoZone = {
+  id: number;
+  device_id: number;
+  name: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  reason: string;
+};

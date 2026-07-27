@@ -439,12 +439,26 @@
       smile, two-tone sky blues, tail flukes) in components/Logo.tsx; lowercase
       "meemoo" wordmark in the header; favicon.svg in web/public/ wired via
       index.html; call overlay uses the mark instead of the balloon emoji
-- [ ] Onboarding wizard: dwelling type -> space capture (~20 photos/room,
-      re-capture flow) -> pin drop + name waypoints ("Ruth's chair") ->
-      off-limit zones (bathrooms default-prompted) -> pairing code entry ->
-      plan picker
-- [ ] Off-limit zones enforced: excluded from all routes/goto, auto-purge rule
-      wired (A3)
+- [x] Onboarding wizard (07-27): /onboarding route, auto-shown when the
+      device has no completed onboarding record (record persisted server-side,
+      step resumes on refresh); dwelling type (house/apartment/senior room/
+      hospital room) -> space capture (~20 photos/room target, base64 upload
+      into device-scoped data/media dir + room_captures rows, retake flow,
+      bathrooms excluded from capture entirely) -> pin drop + name waypoints
+      (saved as a "My places" route in routes/waypoints; POST /goto makes
+      them real destinations) -> off-limit zones (bathrooms default-prompted
+      ON, drag-to-draw for the rest) -> pairing code -> plan picker (reuses
+      Studio PlanCard) + finish; Studio "Rooms Meemoo knows" card lists
+      captured rooms with view/retake/delete (photos stay local, A3/A6 copy);
+      migration 0004; live-server smoke of the whole API flow passed 07-27
+- [x] Off-limit zones enforced (07-27): sim carries the zone list (loaded at
+      runtime boot, pushed on every zone edit); goto into a zone returns
+      False + a flight.refused event (verified on the LIVE bus + flight
+      recorder); patrol/dispatch drop zone waypoints with a refusal each;
+      auto-purge wired: zone creation sweeps room photos (row+file deleted)
+      and event thumbnails (file deleted; events are append-only) with one
+      hash-chained audit row per item (action media.auto_purged); uploads
+      into a zone-covered room are refused 403; 16 new tests
 - [ ] Voice motion commands: stop/left/right/up/down/come here/go to <pin>/
       spin; capability model with graceful declines; 1.3 m/s cap in sim (A5)
 - [x] Live tab (07-27): "Through Meemoo's eyes" camera panel on the existing
@@ -453,7 +467,11 @@
       talk-to-Meemoo widget present on Live (typed path verified against the
       live server; /ws/voice end-to-end incl. distress was verified 07-26);
       browser-mic leg still needs Brady's Mac (no mic/STT headless)
-- [ ] Pairing-code device flow (replacement-unit model, A1)
+- [x] Pairing-code device flow foundation (07-27, A1): MEEMOO-XXXX-XXXX
+      validated + bound to the device row (devices.pairing_code) via
+      POST /devices/{id}/pair, audit-logged, surfaced in the wizard's
+      pairing step; v1 accepts any well-formed code (no unit registry yet;
+      real replacement swap logic = hardware phase)
 
 ## Phase 9 — Hardware bench (parallel track, ~$200)
 - [ ] Order docs/ORDER_LIST.md parts

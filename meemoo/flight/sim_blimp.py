@@ -37,6 +37,7 @@ from meemoo.flight.nav import WorldNav
 from meemoo.flight.physics import BlimpPhysics
 from meemoo.flight.sim_dock import SimulatedDock
 from meemoo.flight.types import BatteryStatus, DockPhase, Pose, SimSnapshot
+from meemoo.flight.zones import Zone, refusal_payload, split_route, zone_containing
 
 logger = logging.getLogger(__name__)
 
@@ -74,6 +75,8 @@ class SimulatedBlimp(MissionMixin, FlightController):
         self._pose_rng = random.Random(seed ^ 0xA11CE)
         self._pose_noise_m = pose_noise_m
         self.mode = FlightMode.HOLD
+        self.no_go_zones: list[Zone] = []
+        self._pending_emissions: list[Emission] = []
         self._route: list[tuple[str, str, float, float]] = []
         self._route_idx = 0
         self._hold_until = 0.0
@@ -103,15 +106,34 @@ class SimulatedBlimp(MissionMixin, FlightController):
         self._route = [("land", "land", self.phys.x, self.phys.y)]
         self._route_idx = 0
 
-    def goto(self, x: float, y: float, *, label: str | None = None) -> None:
+    def goto(self, x: float, y: float, *, label: str | None = None) -> bool:
+        """Fly to a point; refused (False + flight.refused event) in a zone."""
+        zone = zone_containing(self.no_go_zones, x, y)
+        if zone is not None:
+            logger.info("flight: goto refused — %s is off limits", zone.name)
+            self._pending_emissions.append((topics.FLIGHT_REFUSED, refusal_payload(
+                self.device_id, zone, label=label or "goto", x=x, y=y,
+            )))
+            return False
         self._route = [(label or "goto", "area", x, y)]
         self._route_idx = 0
         self._start_flying(FlightMode.GOTO)
+        return True
 
     def patrol(self, waypoints: list[tuple[str, str, float, float]]) -> None:
-        self._route = list(waypoints)
+        allowed, refusals = split_route(self.no_go_zones, self.device_id, waypoints)
+        for payload in refusals:
+            logger.info("flight: waypoint %r dropped — off-limit zone", payload["label"])
+            self._pending_emissions.append((topics.FLIGHT_REFUSED, payload))
+        if not allowed:
+            return
+        self._route = allowed
         self._route_idx = 0
         self._start_flying(FlightMode.ROUND)
+
+    def set_no_go_zones(self, zones: list[Zone]) -> None:
+        """Replace the active off-limit zone list (Amendment A3)."""
+        self.no_go_zones = list(zones)
 
     def hold(self) -> None:
         self._hold_target = (self.phys.x, self.phys.y, self.phys.z)
@@ -165,7 +187,8 @@ class SimulatedBlimp(MissionMixin, FlightController):
 
     # ------------------------------------------------------------------ tick
     def tick(self, dt: float) -> list[Emission]:
-        out: list[Emission] = []
+        out: list[Emission] = self._pending_emissions
+        self._pending_emissions = []
         pose = self.position()
         relpose = self.dock.observe(self.phys)
         capture = self.dock.capture()

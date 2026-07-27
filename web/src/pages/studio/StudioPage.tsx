@@ -9,6 +9,7 @@ import { Button, Card } from "../../components/ui";
 import AdvancedPanel from "./AdvancedPanel";
 import ContactsCard from "./ContactsCard";
 import PlanCard from "./PlanCard";
+import RoomsCard from "./RoomsCard";
 import ScheduleCard from "./ScheduleCard";
 import PersonalityPicker from "./PersonalityPicker";
 import PrivacyPanel from "./PrivacyPanel";
@@ -89,6 +90,8 @@ export default function StudioPage({ onDone }: { onDone: () => void }) {
       <ContactsCard onChanged={setContacts} />
 
       <ScheduleCard />
+
+      <RoomsCard />
 
       <PlanCard />
 

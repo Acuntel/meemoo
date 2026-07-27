@@ -100,7 +100,7 @@ class MqttBlimp(FlightController):
     def land(self) -> None:
         raise NotImplementedError(_SPEC)
 
-    def goto(self, x: float, y: float, *, label: str | None = None) -> None:
+    def goto(self, x: float, y: float, *, label: str | None = None) -> bool:
         raise NotImplementedError(_SPEC)
 
     def patrol(self, waypoints: list[tuple[str, str, float, float]]) -> None:

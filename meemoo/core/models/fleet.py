@@ -28,6 +28,10 @@ class Device(Base, CreatedAtMixin):
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     # Per-device privacy toggle: transcript storage default ON (Art. V §2).
     store_transcripts: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    # The code printed on the aircraft (MEEMOO-XXXX-XXXX). Binding it here is
+    # the replacement-unit flow's foundation (Amendment A1): unbox the new
+    # aircraft, type its code, it connects to this same base station.
+    pairing_code: Mapped[str | None] = mapped_column(String(20))
 
     persons: Mapped[list[Person]] = relationship(back_populates="device")
 

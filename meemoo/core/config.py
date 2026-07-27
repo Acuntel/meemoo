@@ -49,6 +49,9 @@ class Settings(BaseSettings):
 
     # --- Storage ---
     meemoo_db_path: str = "data/meemoo.db"
+    # Device-scoped media (onboarding room photos, event evidence). Local only:
+    # nothing here leaves the base station.
+    meemoo_media_dir: str = "data/media"
     # Fernet key for encrypting provider keys at rest. Never logged. If unset,
     # a key is generated to meemoo_fernet_key_file on first use (never crashes).
     meemoo_fernet_key: str | None = None

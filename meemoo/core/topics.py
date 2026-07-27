@@ -47,6 +47,7 @@ FLIGHT_WAYPOINT_REACHED: Final = "flight.waypoint_reached"
 FLIGHT_BATTERY: Final = "flight.battery"
 FLIGHT_LANDED: Final = "flight.landed"
 FLIGHT_STATE: Final = "flight.state"  # docking-phase changes {"phase": ..., "retries": ...}
+FLIGHT_REFUSED: Final = "flight.refused"  # goto/waypoint into an off-limit zone (A3)
 
 # --- Dock (its own device — Constitution Art. II §3) ------------------------
 DOCK_REQUESTED: Final = "dock.requested"

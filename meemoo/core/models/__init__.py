@@ -31,10 +31,17 @@ from meemoo.core.models.care import (
 )
 from meemoo.core.models.fleet import Contact, Device, Person, Setting
 from meemoo.core.models.flight import DockTelemetry, Route, Waypoint
+from meemoo.core.models.onboarding import (
+    ROOM_PHOTO_TARGET,
+    NoGoZoneRow,
+    OnboardingRecord,
+    RoomCapture,
+)
 from meemoo.core.models.providers import TIERS, ModelConfig, ProviderKey, Usage
 
 __all__ = [
     "APPEND_ONLY_TABLES",
+    "ROOM_PHOTO_TARGET",
     "TIERS",
     "Alert",
     "AuditLog",
@@ -49,8 +56,11 @@ __all__ = [
     "MemoryFact",
     "Message",
     "ModelConfig",
+    "NoGoZoneRow",
+    "OnboardingRecord",
     "Person",
     "ProviderKey",
+    "RoomCapture",
     "Route",
     "Setting",
     "Usage",

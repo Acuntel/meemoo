@@ -9,10 +9,11 @@ import CallOverlay from "./components/CallOverlay";
 import { MeemooLogo } from "./components/Logo";
 import HistoryPage from "./pages/HistoryPage";
 import LivePage from "./pages/LivePage";
+import OnboardingWizard from "./pages/onboarding/OnboardingWizard";
 import StudioPage from "./pages/studio/StudioPage";
 import TodayPage from "./pages/TodayPage";
 import { apiGet } from "./lib/api";
-import type { Alert, BusEvent } from "./lib/types";
+import type { Alert, BusEvent, OnboardingStatus } from "./lib/types";
 import { useEventStream, useSimStream } from "./lib/ws";
 
 type TabKey = "today" | "studio" | "live" | "history";
@@ -30,7 +31,19 @@ const LIVE_ORDER: TabKey[] = ["live", "today", "studio", "history"];
 export default function App() {
   const [tab, setTab] = useState<TabKey>("today");
   const [activeAlerts, setActiveAlerts] = useState<Alert[]>([]);
+  // null = still checking; the wizard shows when setup was never completed
+  // or when the page is opened at /onboarding directly (Amendment A6).
+  const [needsOnboarding, setNeedsOnboarding] = useState<boolean | null>(null);
+  const [forceWizard, setForceWizard] = useState(
+    window.location.pathname === "/onboarding",
+  );
   const sim = useSimStream();
+
+  useEffect(() => {
+    apiGet<OnboardingStatus>("/api/v1/devices/1/onboarding")
+      .then((status) => setNeedsOnboarding(!status.completed))
+      .catch(() => setNeedsOnboarding(false));
+  }, []);
 
   const refreshAlerts = useCallback(() => {
     apiGet<Alert[]>("/api/v1/alerts?device_id=1")
@@ -60,6 +73,26 @@ export default function App() {
   const roundActive = sim.snapshot !== null && !sim.snapshot.docked;
   const isLive = roundActive || activeAlerts.length > 0;
   const order = isLive ? LIVE_ORDER : RESTING_ORDER;
+
+  if (forceWizard || needsOnboarding === true) {
+    return (
+      <OnboardingWizard
+        onDone={() => {
+          setNeedsOnboarding(false);
+          setForceWizard(false);
+          window.history.replaceState(null, "", "/");
+        }}
+      />
+    );
+  }
+
+  if (needsOnboarding === null) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <MeemooLogo />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">

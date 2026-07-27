@@ -106,6 +106,7 @@ class AppRuntime:
 
         # --- flight sim (real-time loop publishing to the bus) --------------
         self.sim = SimulatedBlimp(self._settings.meemoo_plan, device_id=self.device_id)
+        self._load_no_go_zones(db_factory)
         set_active_sim(self.sim)
         self._tasks.append(asyncio.create_task(self.sim.run(self.bus)))
 
@@ -201,6 +202,25 @@ class AppRuntime:
         return self._started
 
     # ---------------------------------------------------------------- pieces
+    def _load_no_go_zones(self, db_factory: DbFactory) -> None:
+        """Push stored off-limit zones into the sim at boot (Amendment A3)."""
+        from meemoo.core.models import NoGoZoneRow
+        from meemoo.flight.zones import Zone
+
+        if self.sim is None:
+            return
+        with db_factory() as db:
+            rows = (
+                db.query(NoGoZoneRow)
+                .filter(NoGoZoneRow.device_id == self.device_id)
+                .all()
+            )
+            self.sim.set_no_go_zones([Zone(z.name, z.x, z.y, z.w, z.h) for z in rows])
+        if rows:
+            logger.info(
+                "off-limit zones loaded", extra={"fields": {"count": len(rows)}}
+            )
+
     def _seed_device(self, db_factory: DbFactory) -> None:
         """Ensure the device row exists so every FK has a home."""
         from meemoo.core.models import Device
