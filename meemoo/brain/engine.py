@@ -26,6 +26,7 @@ from meemoo.brain.paraphrase import ParaphraseBank
 from meemoo.brain.personality import (
     DeviceContext,
     assemble_system_prompt,
+    plain_dashes,
     register_prompt_version,
 )
 from meemoo.brain.presets import Preset, load_presets
@@ -140,6 +141,7 @@ class ConversationBrain:
             input_tokens=response.input_tokens, output_tokens=response.output_tokens,
         )
         reply = REFUSAL_LINE if response.refused or not response.text else response.text
+        reply = plain_dashes(reply)  # A7: no em dashes in product copy, ever
         self.context.append({"role": "assistant", "content": reply})
         del self.context[:-ROLLING_CONTEXT_MAX]
         return reply

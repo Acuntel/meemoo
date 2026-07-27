@@ -75,6 +75,9 @@ class PhysicsConfig:
     # --- world ---
     ceiling_m: float = 2.4
     command_latency_s: float = 0.10  # base-station → aircraft radio latency
+    # Amendment A5: max speed ~1.3 m/s (3 mph). Firmware governor — the motors
+    # never thrust past this; drafts stay honest and are not clamped.
+    max_speed_mps: float = 1.3
 
     @property
     def effective_mass_kg(self) -> float:

@@ -113,7 +113,7 @@ async def test_ducking_wraps_playback(
     assert first.payload == {"on": True}
 
 
-async def test_stop_phrase_halts_playback_only(
+async def test_stop_phrase_halts_playback_and_the_aircraft(
     bus: EventBus, clock: FakeClock, brain: CountingBrain
 ) -> None:
     pipeline, _source, sink, _stt, _tts = make_pipeline(
@@ -127,6 +127,9 @@ async def test_stop_phrase_halts_playback_only(
     event = await sub.get()
     assert event.topic == topics.STOP_HEARD
     assert brain.calls == []  # "stop" is handled by the always-on detector
+    # A5: being mid-sentence must never delay a stop — the blimp halts too
+    flight = bus.last(topics.FLIGHT_COMMAND)
+    assert flight is not None and flight.payload["command"] == "stop"
 
 
 async def test_no_stt_engine_never_crashes(

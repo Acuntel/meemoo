@@ -26,6 +26,7 @@ import random
 
 from meemoo.core import topics
 from meemoo.core.bus import EventBus
+from meemoo.flight.commands import MotionCommandsMixin
 from meemoo.flight.constants import DockConfig, PhysicsConfig
 from meemoo.flight.controller import FlightController
 from meemoo.flight.docking import DockingController
@@ -42,7 +43,7 @@ from meemoo.flight.zones import Zone, refusal_payload, split_route, zone_contain
 logger = logging.getLogger(__name__)
 
 
-class SimulatedBlimp(MissionMixin, FlightController):
+class SimulatedBlimp(MotionCommandsMixin, MissionMixin, FlightController):
     """One simulated aircraft + its dock on one floor plan."""
 
     def __init__(
@@ -81,6 +82,8 @@ class SimulatedBlimp(MissionMixin, FlightController):
         self._route_idx = 0
         self._hold_until = 0.0
         self._hold_target: tuple[float, float, float] = (self.phys.x, self.phys.y, self.phys.z)
+        self._spin_until = 0.0
+        self._spin_anchor: tuple[float, float, float] = (self.phys.x, self.phys.y, self.phys.z)
         self._pending_round: list[tuple[str, str, float, float]] | None = None
         self._last_battery_emit = -1e9
         self._low_battery_fired = False
@@ -273,12 +276,15 @@ class SimulatedBlimp(MissionMixin, FlightController):
     async def run(
         self, bus: EventBus, *, dt: float = 0.02, time_scale: float = 1.0
     ) -> None:
-        """Real-time loop: step, publish emissions, consume flight.dispatch."""
-        sub = bus.subscribe(topics.FLIGHT_DISPATCH, replay_last=False)
+        """Real-time loop: step, publish emissions, consume dispatch+commands."""
+        sub = bus.subscribe(topics.FLIGHT_DISPATCH, topics.FLIGHT_COMMAND, replay_last=False)
 
         async def _consume() -> None:
             async for event in sub:
-                self.dispatch(str(event.payload.get("reason", "checkin")))
+                if event.topic == topics.FLIGHT_COMMAND:
+                    self.on_command(event.payload)
+                else:
+                    self.dispatch(str(event.payload.get("reason", "checkin")))
 
         consumer = asyncio.create_task(_consume())
         try:

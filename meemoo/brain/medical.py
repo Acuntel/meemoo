@@ -38,7 +38,7 @@ _COMPILED = tuple(re.compile(p, re.IGNORECASE) for p in _MEDICAL_PATTERNS)
 
 #: Deterministic handoff — never a model, never advice, always a person.
 MEDICAL_HANDOFF = (
-    "That's a really important question, and it's one for a person, not for me — "
+    "That's a really important question, and it's one for a person, not for me. "
     "I can't give medical advice. Your doctor or nurse can answer it properly, "
     "or we could ask your family to help. Would you like me to remind you to "
     "call them?"

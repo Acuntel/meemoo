@@ -44,7 +44,7 @@ CRISIS_PHRASES: tuple[str, ...] = (
 CRISIS_RESPONSE = (
     "I'm really glad you told me, and I'm taking it seriously. "
     "You matter, and you don't have to carry this alone. "
-    "You can call or text 9 8 8 — the Suicide and Crisis Lifeline — any time, "
+    "You can call or text 9 8 8, the Suicide and Crisis Lifeline, any time, "
     "day or night, and talk with a real person who wants to help. "
     "Would you like me to let one of your people know you could use some company?"
 )

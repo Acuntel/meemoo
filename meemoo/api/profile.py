@@ -16,6 +16,7 @@ by the Studio (all optional — everything has a warm default, Art. IX §3):
 from __future__ import annotations
 
 import logging
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 
@@ -24,7 +25,9 @@ from sqlalchemy.orm import sessionmaker
 
 from meemoo.brain.engine import ConversationBrain
 from meemoo.brain.personality import DeviceContext
-from meemoo.core.models import Device, Person, Setting
+from meemoo.core.models import Device, Person, Route, Setting, Waypoint
+from meemoo.flight.registry import get_active_sim
+from meemoo.voice.motion import PinBook
 
 logger = logging.getLogger(__name__)
 
@@ -149,6 +152,44 @@ def db_factory_or_none() -> DbFactory | None:
     except Exception:
         logger.warning("process DB unavailable — degrading to memory-only")
         return None
+
+
+def load_pins(db_factory: DbFactory | None, device_id: int = 1) -> dict[str, tuple[float, float]]:
+    """Named destinations for voice "go to <pin>" (Amendments A5/A6).
+
+    The floor plan's own labelled waypoints, then onboarding's "My places"
+    pins on top (a pin the owner dropped wins a name collision). The voice
+    layer never reads the DB itself; it is handed this mapping (Art. II §2).
+    A missing schema or an empty install just means fewer pins, never a crash.
+    """
+    pins: dict[str, tuple[float, float]] = {}
+    sim = get_active_sim()
+    if sim is not None:
+        for wp in sim.plan.waypoints:
+            pins[wp.label] = (wp.x, wp.y)
+    if db_factory is None:
+        return pins
+    try:
+        with db_factory() as db:
+            rows = (
+                db.query(Waypoint)
+                .join(Route, Waypoint.route_id == Route.id)
+                .filter(Route.device_id == device_id)
+                .order_by(Waypoint.id.asc())
+                .all()
+            )
+    except Exception:
+        logger.warning("named pins unavailable — voice goto falls back to the plan")
+        return pins
+    for row in rows:
+        if row.label:
+            pins[row.label] = (row.x, row.y)
+    return pins
+
+
+def pin_provider(db_factory: DbFactory | None, device_id: int = 1) -> Callable[[], PinBook]:
+    """A late-binding pin lookup for the voice pipeline (pins change in setup)."""
+    return lambda: load_pins(db_factory, device_id)
 
 
 def build_brain(db_factory: DbFactory | None, device_id: int = 1) -> ConversationBrain:

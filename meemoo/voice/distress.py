@@ -66,7 +66,7 @@ STOP_PHRASES: tuple[str, ...] = (
 
 # Deterministic spoken acknowledgment — a template, never generated.
 DISTRESS_ACK = (
-    "I hear you. I'm getting help right now — I'm contacting your people. "
+    "I hear you. I'm getting help right now. I'm contacting your people. "
     "Stay where you are, I'm staying with you."
 )
 

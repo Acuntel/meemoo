@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 FALSE_ALARM_EVENT = "guardian.false_alarm"
 
 SMS_TEMPLATE = (
-    "MEEMOO ALERT ({level}): possible emergency — {reason}. "
+    "MEEMOO ALERT ({level}): possible emergency: {reason}. "
     "Reply ACK to acknowledge and halt escalation."
 )
 CALL_TEMPLATE = (

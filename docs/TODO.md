@@ -459,8 +459,40 @@
       and event thumbnails (file deleted; events are append-only) with one
       hash-chained audit row per item (action media.auto_purged); uploads
       into a zone-covered room are refused 403; 16 new tests
-- [ ] Voice motion commands: stop/left/right/up/down/come here/go to <pin>/
-      spin; capability model with graceful declines; 1.3 m/s cap in sim (A5)
+- [x] Voice motion commands (07-27, A5): local intent grammar in
+      voice/motion.py (same discipline as distress.py: stdlib phrase
+      matching, no LLM, no network, verified with the network mocked dead)
+      for stop / left / right / up / down / come here / go to <pin> / spin /
+      go home; hits publish a typed flight.command on the bus (topics
+      FLIGHT_COMMAND, payload from flight/capabilities.py) and the sim
+      executes them in flight/commands.py. Priority ladder: distress still
+      outranks everything, then motion "stop", then 988, then the rest of
+      the grammar, then the brain; a barge-in "stop" mid-sentence halts the
+      aircraft in the same breath ("be quiet" only stops the mouth).
+      Named pins = the plan's waypoints plus onboarding's "My places" route,
+      read late so a pin dropped after boot works without a restart.
+      Capability model: CAN_DO/CANNOT_DO registry, and an impossible or
+      unknown request ("do a roll", "go to the garage") speaks a decline
+      naming what it CAN do and publishes NO flight event. Speed cap 1.3 m/s
+      is a governor inside physics.step (uncapped the airframe would run to
+      ~1.42 m/s, so the cap really binds); drafts stay honest and unclamped.
+      Stop clears the mission in one control cycle and brakes toward a short
+      coast-ahead point rather than flying backwards, never into a zone, and
+      never cancelling a capture in progress. Off-limit zones still refuse a
+      voice goto and a voice drift. Verified on the live server end to end
+      (pin dropped via API -> spoken -> undock -> flew to it -> "stop
+      moving" -> HOLD; every command in the flight recorder, both declines
+      absent). 71 new tests
+- [x] A7 copy sweep, second pass (07-27): the first sweep covered web/src and
+      API-served strings but missed the copy Meemoo SPEAKS. Em dashes removed
+      from the distress ack, 988 crisis response, AI disclosure/re-disclosure/
+      realness answers, medical handoff, scripted check-in replies, paraphrase
+      bank, check-in greeting, escalation SMS, and the synthetic-data label.
+      The LLM writes most of the copy, so the base prompt now forbids clause
+      dashes (PROMPT_VERSION brain-base-v2) AND generated replies are run
+      through personality.plain_dashes: enforcement, not a promise.
+      tests/test_copy_no_em_dashes.py locks it, including an AST scan of the
+      user-facing modules that skips logs and docstrings on purpose
 - [x] Live tab (07-27): "Through Meemoo's eyes" camera panel on the existing
       /ws/video annotated feed (hint says plainly it is the room camera today,
       blimp MJPEG later; honest no-camera empty state verified headless) +
@@ -472,6 +504,22 @@
       POST /devices/{id}/pair, audit-logged, surfaced in the wizard's
       pairing step; v1 accepts any well-formed code (no unit registry yet;
       real replacement swap logic = hardware phase)
+- Gate: ✅ Phase 7.5 gate PASSED 07-27 — `make check` ALL GREEN (580 pytest
+  passed + the 1 documented Phase-6 docking-gate skip + web typecheck +
+  build), every file back under the Art. IX 300-line limit (mission.py was
+  split, motion commands now live in flight/commands.py). Exercised against
+  a LIVE uvicorn on a fresh DB: onboarding happy path (dwelling type → room
+  photo → "My places" pins → bathroom zone → pairing code → plan → complete),
+  zone enforcement after it (goto into the bathroom refused with the honest
+  reason, goto to a real pin started), manual round trigger from Today
+  (ROUND, waypoint "Ruth's chair"), distress → L1 alert → acknowledge
+  (machine back to IDLE, 3.0 s latency), conversation summaries (>1 min
+  takes the summary branch with only real metadata, full transcript kept
+  underneath; short chats show the whole thing), and the whole voice motion
+  grammar over /ws/voice. Zero tracebacks in the server log.
+  - [ ] STILL NEEDS BRADY'S MAC: the browser-mic + real-STT leg of voice
+        motion. Every typed path is verified; nobody has said "stop" out
+        loud to a microphone yet
 
 ## Phase 9 — Hardware bench (parallel track, ~$200)
 - [ ] Order docs/ORDER_LIST.md parts

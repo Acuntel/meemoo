@@ -20,15 +20,15 @@ from meemoo.voice.phrases import PhraseMatcher
 logger = logging.getLogger(__name__)
 
 DISCLOSURE_LINE = (
-    "Just so you always know: I'm Meemoo, an artificial intelligence — "
+    "Just so you always know: I'm Meemoo, an artificial intelligence, "
     "a computer program, not a person. I'm here to keep you company."
 )
 
-REDISCLOSURE_LINE = "A gentle reminder — I'm Meemoo, your A. I. companion, not a person."
+REDISCLOSURE_LINE = "A gentle reminder: I'm Meemoo, your A. I. companion, not a person."
 
 # The identical, honest answer to "are you real / alive / a robot" (Art. V §5).
 REALNESS_ANSWER = (
-    "I'm real in the sense that I'm really here talking with you — but I'm a "
+    "I'm real in the sense that I'm really here talking with you, but I'm a "
     "computer program, an artificial intelligence. I don't have a body or "
     "feelings the way you do. And I really do enjoy our talks."
 )

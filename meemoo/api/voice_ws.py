@@ -24,7 +24,7 @@ import wave
 
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
-from meemoo.api.profile import build_brain, db_factory_or_none, load_profile
+from meemoo.api.profile import build_brain, db_factory_or_none, load_profile, pin_provider
 from meemoo.core.bus import EventBus
 from meemoo.core.bus_registry import get_active_bus
 from meemoo.voice.audio_io import BufferSource, CollectSink
@@ -89,6 +89,7 @@ async def ws_voice(ws: WebSocket) -> None:  # noqa: C901 — protocol dispatch
         brain=build_brain(factory, 1),
         voice_key=profile.voice,
         device_id=1,
+        pins=pin_provider(factory, 1),
     )
     distress = DistressDetector()
     crisis = CrisisDetector()

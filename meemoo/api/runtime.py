@@ -21,7 +21,7 @@ import logging
 from sqlalchemy.orm import Session as DbSession
 from sqlalchemy.orm import sessionmaker
 
-from meemoo.api.profile import build_brain, load_profile
+from meemoo.api.profile import build_brain, load_profile, pin_provider
 from meemoo.core.bus import EventBus
 from meemoo.core.bus_registry import set_active_bus, set_active_scheduler
 from meemoo.core.config import Settings
@@ -97,6 +97,7 @@ class AppRuntime:
             brain=build_brain(db_factory, self.device_id),
             voice_key=profile.voice,
             device_id=self.device_id,
+            pins=pin_provider(db_factory, self.device_id),
         )
         self._tasks.append(asyncio.create_task(self.pipeline.run()))
         self._tasks.append(asyncio.create_task(self._session_ticker(sessions)))

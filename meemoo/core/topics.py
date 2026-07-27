@@ -42,6 +42,7 @@ NOTIFY_SENT: Final = "notify.sent"  # payload {"simulated": bool, ...} — drive
 
 # --- Flight -----------------------------------------------------------------
 FLIGHT_DISPATCH: Final = "flight.dispatch"  # guardian requests a flight (Phase 6 subscribes)
+FLIGHT_COMMAND: Final = "flight.command"  # voice motion command (A5) — typed FlightCommand payload
 FLIGHT_TAKEOFF: Final = "flight.takeoff"
 FLIGHT_WAYPOINT_REACHED: Final = "flight.waypoint_reached"
 FLIGHT_BATTERY: Final = "flight.battery"

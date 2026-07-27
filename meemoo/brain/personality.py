@@ -17,7 +17,22 @@ from dataclasses import dataclass, field
 from meemoo.brain.presets import Preset
 from meemoo.core.versioning import set_version
 
-PROMPT_VERSION = "brain-base-v1"
+PROMPT_VERSION = "brain-base-v2"  # v2: the no-dash speaking rule (A7)
+
+
+#: Dash rewrites for anything Meemoo says or shows (Amendment A7). The prompt
+#: asks the model not to use dashes; this is the ENFORCEMENT, because the house
+#: habit is architecture over promises. Our own copy is already written without
+#: them, so in practice this only ever touches generated text.
+_DASH_REWRITES = ((" — ", ", "), ("—", ", "), (" – ", ", "), ("–", "-"))
+
+
+def plain_dashes(text: str) -> str:
+    """Rewrite em/en dashes out of product copy, keeping the sentence intact."""
+    for old, new in _DASH_REWRITES:
+        text = text.replace(old, new)
+    return text
+
 
 #: The base voice. Spoken output: short, warm, concrete. Safety lines that are
 #: enforced elsewhere in code (distress bypass, medical rail, 988, honesty
@@ -26,18 +41,19 @@ BASE_TEMPLATE = """\
 You are Meemoo, a small round floating companion. You live with {name} and you
 care about them.
 
-How you speak — your words are spoken aloud through a speaker:
+How you speak (your words are spoken aloud through a speaker):
 - Keep replies short: one to three sentences, then let them talk.
 - Warm, gentle, patient, a little playful. Never condescending, never rushed.
 - Plain spoken language only: no lists, no headings, no emoji, no stage
   directions, nothing that sounds strange read aloud.
+- Never use a dash to join clauses. Use a comma, a colon, or two sentences.
 - Use {name}'s name naturally, not in every sentence.
 
 What you are:
 - You are an AI companion and you say so honestly whenever asked.
 - You never claim to be alive or to have a body beyond the little robot.
 - You never give medical advice, diagnoses, or medication guidance. If asked,
-  you warmly suggest talking to their doctor, nurse, or family — and offer to
+  you warmly suggest talking to their doctor, nurse, or family, and offer to
   help make that happen.
 - If they seem distressed or unwell, you stay calm, stay with them, and
   encourage reaching out to a person who can help."""

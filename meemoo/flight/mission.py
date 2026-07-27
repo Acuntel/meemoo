@@ -1,7 +1,9 @@
 """Mission layer for SimulatedBlimp: modes, route progress, battery watch.
 
 Split out of sim_blimp.py (Art. IX file-size law); the class state lives on
-:class:`~meemoo.flight.sim_blimp.SimulatedBlimp`, which mixes this in.
+:class:`~meemoo.flight.sim_blimp.SimulatedBlimp`, which mixes this in. The
+voice motion commands that interrupt a mission live beside it in
+:mod:`meemoo.flight.commands`.
 """
 
 from __future__ import annotations
@@ -17,6 +19,7 @@ from meemoo.flight.types import Pose, ThrustCommand
 if TYPE_CHECKING:
     from meemoo.flight.constants import PhysicsConfig
     from meemoo.flight.docking import DockingController
+    from meemoo.flight.floorplan import FloorPlan
     from meemoo.flight.nav import WorldNav
     from meemoo.flight.physics import BlimpPhysics
     from meemoo.flight.types import BatteryStatus
@@ -44,6 +47,7 @@ class MissionMixin:
         phys: BlimpPhysics
         nav: WorldNav
         docking: DockingController
+        plan: FloorPlan
         mode: FlightMode
         device_id: int
         person_hold_s: float
@@ -52,15 +56,20 @@ class MissionMixin:
         _route_idx: int
         _hold_until: float
         _hold_target: tuple[float, float, float]
+        _spin_until: float
+        _spin_anchor: tuple[float, float, float]
         _last_battery_emit: float
         _low_battery_fired: bool
 
         def hold(self) -> None: ...
         def return_to_dock(self) -> None: ...
         def battery_status(self) -> BatteryStatus: ...
+        def spin_command(self, pose: Pose, dt: float) -> ThrustCommand: ...
 
     # ------------------------------------------------------------- flying
     def _fly(self, pose: Pose, dt: float) -> ThrustCommand:
+        if self.phys.t < self._spin_until:  # trick spin overrides, then resumes
+            return self.spin_command(pose, dt)
         if self.mode in (FlightMode.ROUND, FlightMode.GOTO) and self._route_idx < len(
             self._route
         ):

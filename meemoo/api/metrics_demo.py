@@ -11,7 +11,7 @@ from __future__ import annotations
 import random
 from datetime import UTC, datetime, timedelta
 
-SYNTHETIC_LABEL = "SYNTHETIC DEMO DATA — not a real resident"
+SYNTHETIC_LABEL = "SYNTHETIC DEMO DATA, not a real resident"
 
 
 def _dates(days: int) -> list[str]:

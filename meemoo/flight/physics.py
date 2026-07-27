@@ -155,6 +155,15 @@ class BlimpPhysics:
         fy = ap.forward_n * tilt * math.sin(self.heading)
         fz = ap.vertical_n + ap.forward_n * math.sin(self.swing)
 
+        # A5 governor (firmware): no thrust along velocity at/above the cap.
+        sp = math.sqrt(self.vx * self.vx + self.vy * self.vy + self.vz * self.vz)
+        if sp >= cfg.max_speed_mps:
+            along = (fx * self.vx + fy * self.vy + fz * self.vz) / sp
+            if along > 0.0:
+                fx -= along * self.vx / sp
+                fy -= along * self.vy / sp
+                fz -= along * self.vz / sp
+
         # buoyancy (positive = light = up) and drafts
         fz += (self.buoyancy_gf + self._buoyancy_extra_gf) * GF_TO_N
         fx += self._draft[0] * GF_TO_N

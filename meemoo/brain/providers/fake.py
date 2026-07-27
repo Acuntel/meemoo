@@ -54,7 +54,7 @@ class FakeProvider(Provider):
         lowered = last_user.lower()
         reply = next(
             (line for needle, line in _CANNED if needle in lowered),
-            f"I hear you — you said: {last_user}",
+            f"I hear you, you said: {last_user}",
         )
         return CompletionResponse(
             text=reply, provider=self.name, model=model,

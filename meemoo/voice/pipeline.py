@@ -6,9 +6,13 @@ Processing order for EVERY final transcript is safety-first and fixed
 1. STOP detector (while speaking) — barge-in, independent of AEC;
 2. DISTRESS bypass — publishes ``utterance.distress``; the brain is never
    consulted; a deterministic acknowledgment template is spoken;
-3. 988 crisis protocol — deterministic template response, logged;
-4. "are you real?" — the identical honest answer (Art. V §5);
-5. only then the brain — ``meemoo.brain.engine.ConversationBrain`` in the
+3. MOTION "stop" — the A5 hard requirement: halting the aircraft outranks
+   everything except distress, and never waits on a model;
+4. 988 crisis protocol — deterministic template response, logged;
+5. the rest of the motion grammar (drift, come here, go to a pin, spin) and
+   its capability declines — local intent matching, no brain;
+6. "are you real?" — the identical honest answer (Art. V §5);
+7. only then the brain — ``meemoo.brain.engine.ConversationBrain`` in the
    real wiring; ``templated_brain`` stays as the dependency-free default so
    the pipeline is testable in isolation.
 
@@ -33,6 +37,7 @@ from meemoo.voice.distress import (
     StopDetector,
     publish_distress,
 )
+from meemoo.voice.motion import MotionMatcher, MotionResult, PinProvider
 from meemoo.voice.session import SessionManager
 from meemoo.voice.types import STT, TTS, VAD, AudioSink, AudioSource
 from meemoo.voice.vad import SilenceEndpointer
@@ -72,6 +77,7 @@ class VoicePipeline:
         device_id: int = 1,
         endpointer: SilenceEndpointer | None = None,
         clock: Callable[[], float] | None = None,
+        pins: PinProvider | None = None,
     ) -> None:
         self._bus = bus
         self._source = source
@@ -87,6 +93,7 @@ class VoicePipeline:
         self._clock = clock or time.monotonic
         self._distress = DistressDetector()
         self._stop = StopDetector()
+        self._motion = MotionMatcher(device_id=device_id, pins=pins)
         self._crisis = CrisisDetector()
         self._realness = RealnessDetector()
         self._speaking = False
@@ -131,11 +138,15 @@ class VoicePipeline:
         """Safety-ordered processing of one final transcript (also demo entry)."""
         heard_at = self._clock()
 
-        # 1. barge-in: while speaking, "stop" halts playback and nothing else.
+        # 1. barge-in: while speaking, "stop" halts playback immediately. When
+        #    the word was a motion "stop" it halts the aircraft in the same
+        #    breath (A5) — being mid-sentence must never delay a stop.
         if self._speaking and self._stop.check(text) is not None:
             self._stop_speaking = True
             self._sink.stop()
             await self._bus.publish(topics.STOP_HEARD, {"transcript": text})
+            if self._motion.is_stop(text):
+                await self._publish_motion(self._motion.check(text))
             logger.info("stop heard — playback halted", extra={"fields": {"text": text}})
             return
 
@@ -157,7 +168,14 @@ class VoicePipeline:
             await self._speak(DISTRESS_ACK, heard_at)
             return
 
-        # 3. 988 crisis protocol — deterministic template, no LLM.
+        # 3. motion "stop" — the aircraft halts before anything else is
+        #    considered (A5); only distress outranks it.
+        motion = self._motion.check(text)
+        if motion is not None and motion.is_stop:
+            await self._handle_motion(motion, heard_at)
+            return
+
+        # 4. 988 crisis protocol — deterministic template, no LLM.
         crisis = self._crisis.check(text)
         if crisis is not None:
             await publish_crisis(
@@ -174,16 +192,40 @@ class VoicePipeline:
              "conversation_id": conversation_id},
         )
 
-        # 4. "are you real?" — identical honest answer every time (Art. V §5).
+        # 5. the rest of the motion grammar, and the declines for what Meemoo
+        #    cannot do. Local matching either way — the brain never flies it.
+        if motion is not None:
+            await self._handle_motion(motion, heard_at)
+            return
+
+        # 6. "are you real?" — identical honest answer every time (Art. V §5).
         if self._realness.check(text):
             self._sessions.add_assistant(REALNESS_ANSWER)
             await self._speak(REALNESS_ANSWER, heard_at)
             return
 
-        # 5. the brain (ConversationBrain when wired; templated default).
+        # 7. the brain (ConversationBrain when wired; templated default).
         reply = self._brain(text)
         self._sessions.add_assistant(reply)
         await self._speak(reply, heard_at)
+
+    # ------------------------------------------------------------ motion (A5)
+    async def _handle_motion(self, motion: MotionResult, heard_at: float) -> None:
+        """Publish the flight command (unless declined), then speak the line."""
+        await self._publish_motion(motion)
+        self._sessions.add_assistant(motion.speech)
+        await self._speak(motion.speech, heard_at)
+
+    async def _publish_motion(self, motion: MotionResult | None) -> None:
+        if motion is None or motion.command is None:
+            return  # a decline is spoken only: no flight event ever leaves here
+        await self._bus.publish(topics.FLIGHT_COMMAND, motion.command.payload())
+        logger.info(
+            "motion command heard",
+            extra={"fields": {"command": motion.command.command,
+                              "direction": motion.command.direction,
+                              "label": motion.command.label}},
+        )
 
     # ---------------------------------------------------------------- speaking
     @property

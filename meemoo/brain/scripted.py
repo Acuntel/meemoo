@@ -30,7 +30,7 @@ _CLOSING_WORDS = frozenset(["bye", "goodbye", "goodnight", "later", "done", "fin
 
 CONCERN_REPLY = (
     "I'm sorry to hear that, {name}. I'm right here with you. "
-    "It might help to talk to someone — would you like to call your family, "
+    "It might help to talk to someone. Would you like to call your family, "
     "or should I remind you a bit later?"
 )
 OK_REPLY = "I'm so glad to hear that, {name}."
@@ -72,7 +72,7 @@ class ScriptedCheckin:
         """The line Meemoo speaks to START a check-in (greeting + question)."""
         self.state.stage = "asked_feeling"
         greeting = greeting_line(self._bank, self._name, self._last_note)
-        return f"{greeting} Just checking in — are you feeling alright today?"
+        return f"{greeting} Just checking in. Are you feeling alright today?"
 
     def reply(self, text: str) -> str:
         """Advance the tree one user turn. Always returns something warm."""
@@ -98,8 +98,8 @@ class ScriptedCheckin:
         if self.state.reminders:
             return self._reminder_only()
         return (
-            f"I hear you, {self._name}. I'm happy just keeping you company — "
-            "tell me more if you'd like."
+            f"I hear you, {self._name}. I'm happy just keeping you company. "
+            "Tell me more if you'd like."
         )
 
     # ---------------------------------------------------------------- helpers

@@ -41,7 +41,7 @@ logger = logging.getLogger(__name__)
 
 Speak = Callable[[str], Awaitable[None]]
 
-CHECKIN_GREETING = "Hi, it's Meemoo — just checking in. How are you feeling right now?"
+CHECKIN_GREETING = "Hi, it's Meemoo, just checking in. How are you feeling right now?"
 VERIFY_PROMPT = "Are you okay? Please say something if you can hear me."
 
 _TOPIC_TRIGGERS: dict[str, Trigger] = {
