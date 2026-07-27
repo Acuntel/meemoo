@@ -59,3 +59,28 @@ async def test_fire_publishes_checkin_due(bus: EventBus) -> None:
     await scheduler.fire("09:00", "morning round")
     event = await sub.get()
     assert event.payload == {"device_id": 4, "time": "09:00", "label": "morning round"}
+
+
+async def test_reschedule_retunes_running_jobs_after_db_edit(
+    bus: EventBus, db_factory: sessionmaker[Session], seeded: dict[str, int]
+) -> None:
+    """Schedule edits through the API must retune cron jobs without a restart."""
+    device_id = seeded["device_id"]
+    scheduler = CheckinScheduler(bus, db_factory, device_id=device_id)
+    aps = scheduler.start(paused=True)
+    try:
+        assert len(aps.get_jobs()) == len(DEFAULT_CHECKIN_TIMES)  # defaults first
+        with db_factory() as db:
+            db.add(CheckinSchedule(device_id=device_id, time_of_day="15:45", label="tea"))
+            db.commit()
+        times = scheduler.reschedule()
+        assert times == ["15:45"]  # DB rows replace the defaults entirely
+        jobs = aps.get_jobs()
+        assert [job.id for job in jobs] == [f"checkin-{device_id}-15:45"]
+    finally:
+        scheduler.stop()
+
+
+async def test_reschedule_without_running_scheduler_is_safe(bus: EventBus) -> None:
+    scheduler = CheckinScheduler(bus, None)
+    assert scheduler.reschedule() == list(DEFAULT_CHECKIN_TIMES)

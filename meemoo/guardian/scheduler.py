@@ -84,6 +84,33 @@ class CheckinScheduler:
             self._scheduler.shutdown(wait=False)
             self._scheduler = None
 
+    def reschedule(self) -> list[str]:
+        """Re-read the DB and retune cron jobs — called on schedule edits.
+
+        Returns the active times so the API can echo them. No-op (returns the
+        would-be times) when the scheduler isn't running.
+        """
+        times = self.load_times()
+        if self._scheduler is not None:
+            for job in self._scheduler.get_jobs():
+                if job.id.startswith(f"checkin-{self.device_id}-"):
+                    job.remove()
+            for time_of_day, label in times:
+                hour, _, minute = time_of_day.partition(":")
+                self._scheduler.add_job(
+                    self.fire,
+                    CronTrigger(hour=int(hour), minute=int(minute or 0)),
+                    args=[time_of_day, label],
+                    id=f"checkin-{self.device_id}-{time_of_day}",
+                    replace_existing=True,
+                )
+            logger.info(
+                "check-in scheduler retuned",
+                extra={"fields": {"device_id": self.device_id,
+                                  "times": [t for t, _ in times]}},
+            )
+        return [t for t, _ in times]
+
     async def fire(self, time_of_day: str = "manual", label: str | None = None) -> None:
         """Publish ``checkin.due`` now (cron target + deterministic test/demo entry)."""
         logger.info(

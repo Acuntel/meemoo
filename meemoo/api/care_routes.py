@@ -18,7 +18,7 @@ from sqlalchemy.orm import Session
 
 from meemoo.api.deps import get_db
 from meemoo.core import topics
-from meemoo.core.bus_registry import get_active_bus
+from meemoo.core.bus_registry import get_active_bus, get_active_scheduler
 from meemoo.core.models import (
     CheckinSchedule,
     Conversation,
@@ -37,6 +37,15 @@ Db = Annotated[Session, Depends(get_db)]
 
 
 # ------------------------------------------------------------------ schedule
+
+def _retune_scheduler() -> None:
+    """Push schedule edits into the running cron jobs (no-op in API-only mode)."""
+    scheduler = get_active_scheduler()
+    reschedule = getattr(scheduler, "reschedule", None)
+    if callable(reschedule):
+        reschedule()
+
+
 class ScheduleBody(BaseModel):
     time_of_day: str = Field(pattern=r"^([01]?\d|2[0-3]):[0-5]\d$")
     label: str | None = None
@@ -64,6 +73,7 @@ def create_schedule(device_id: int, body: ScheduleBody, db: Db) -> ScheduleOut:
     row = CheckinSchedule(device_id=device_id, **body.model_dump())
     db.add(row)
     db.commit()
+    _retune_scheduler()
     return ScheduleOut.model_validate(row, from_attributes=True)
 
 
@@ -75,6 +85,7 @@ def update_schedule(schedule_id: int, body: ScheduleBody, db: Db) -> ScheduleOut
     for key, value in body.model_dump().items():
         setattr(row, key, value)
     db.commit()
+    _retune_scheduler()
     return ScheduleOut.model_validate(row, from_attributes=True)
 
 
@@ -85,6 +96,7 @@ def delete_schedule(schedule_id: int, db: Db) -> None:
         raise HTTPException(status_code=404, detail="schedule entry not found")
     db.delete(row)
     db.commit()
+    _retune_scheduler()
 
 
 @router.get("/devices/{device_id}/next-checkin")

@@ -23,7 +23,7 @@ from sqlalchemy.orm import sessionmaker
 
 from meemoo.api.profile import build_brain, load_profile
 from meemoo.core.bus import EventBus
-from meemoo.core.bus_registry import set_active_bus
+from meemoo.core.bus_registry import set_active_bus, set_active_scheduler
 from meemoo.core.config import Settings
 from meemoo.core.db import get_engine, get_session_factory
 from meemoo.core.migrate import upgrade
@@ -121,6 +121,7 @@ class AppRuntime:
         set_active_service(self.guardian)
         self.scheduler = CheckinScheduler(self.bus, db_factory, device_id=self.device_id)
         self.scheduler.start()
+        set_active_scheduler(self.scheduler)
 
         # --- flight recorder: every bus event → append-only events table ----
         self._tasks.append(asyncio.create_task(self._record_events(db_factory)))
@@ -191,6 +192,7 @@ class AppRuntime:
         set_active_service(None)
         set_active_sim(None)
         set_active_bus(None)
+        set_active_scheduler(None)
         self._started = False
         logger.info("runtime stopped")
 

@@ -8,6 +8,7 @@ import type { Contact, Preset, StudioCurrent, Voice } from "../../lib/types";
 import { Button, Card } from "../../components/ui";
 import AdvancedPanel from "./AdvancedPanel";
 import ContactsCard from "./ContactsCard";
+import ScheduleCard from "./ScheduleCard";
 import PersonalityPicker from "./PersonalityPicker";
 import PrivacyPanel from "./PrivacyPanel";
 import StudioChat from "./StudioChat";
@@ -85,6 +86,8 @@ export default function StudioPage({ onDone }: { onDone: () => void }) {
       />
 
       <ContactsCard onChanged={setContacts} />
+
+      <ScheduleCard />
 
       <PrivacyPanel contacts={contacts} />
 

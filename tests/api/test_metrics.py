@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime, time, timedelta
 
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session, sessionmaker
@@ -11,10 +11,12 @@ from meemoo.core.models import Conversation, Message
 
 
 def _seed_conversations(factory: sessionmaker[Session]) -> None:
-    now = datetime.now(UTC).replace(tzinfo=None)
+    # Anchor at noon UTC per day: the series buckets by UTC date, and a
+    # relative "now - 2h" seed crossed midnight for 2h every night (flaky).
+    today = datetime.now(UTC).date()
     with factory() as db:
         for days_ago, trigger in ((2, "ptt"), (1, "checkin"), (0, "ptt")):
-            started = now - timedelta(days=days_ago, hours=2)
+            started = datetime.combine(today - timedelta(days=days_ago), time(hour=12))
             conversation = Conversation(
                 device_id=1, trigger=trigger, started_at=started,
                 ended_at=started + timedelta(minutes=4),
