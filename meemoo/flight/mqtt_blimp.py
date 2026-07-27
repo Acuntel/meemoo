@@ -21,6 +21,15 @@ The base station runs the broker (Mosquitto on the base station host).
 QoS 0 for streams, QoS 1 for commands/events. Rates are ceilings — the
 aircraft may thin streams under RSSI pressure, never commands.
 
+BENCH TRANSPORT (v1 hardware, firmware/ in this repo): the bench firmware
+carries ``cmd/thrust`` + ``cmd/mode`` and the telemetry streams as tiny
+binary UDP packets instead of MQTT — protocol "MUP/1", byte layout pinned
+in :mod:`meemoo.flight.mup` (canonical, unit-tested) and documented in
+firmware/README.md. Field SEMANTICS are identical to the topics below
+(same gf units, same ttl stale-command guard, same 3 s link-loss
+failsafe); MQTT remains the production target and the video/audio
+announce handoff is unchanged (MJPEG on :81 either way).
+
 Aircraft → base (telemetry)
 ---------------------------
 - ``tele/imu``      20 Hz, QoS 0: ``{"t": ms, "pitch": rad, "roll": rad,

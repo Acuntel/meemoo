@@ -103,9 +103,10 @@ FIGURE 1: the first circuit (one motor)
 ```
 
 Solder wires XIAO D0/D1/3V3/GND to the DRV8833 as drawn; motor wires to
-OUT1/OUT2. When parts arrive, Claude writes `firmware/bench` in this repo and
-you run ONE command (`make flash-bench`): it spins the motor slow-medium-fast
-in a loop. Hold the decibel app 1 m away and write down the number at the slow
+OUT1/OUT2. The firmware is ALREADY in this repo (`firmware/`, built
+2026-07-27): run ONE command (`make flash-bench`) and it spins the motor
+slow-medium-fast (20/30/50 percent) in a loop, printing the numbers over
+serial. Hold the decibel app 1 m away and write down the number at the slow
 setting: that is Meemoo's real in-flight voice level, personally measured.
 
 ### Stage 4: build the gondola (2 hours)
@@ -127,9 +128,10 @@ FIGURE 2: gondola layout, top view (~9 cm x 5 cm)
    [speaker glued face-down at the front]
 ```
 
-Wire each part to the XIAO with the same Stage-2 solder move (exact pin table
-lands in firmware/ with the bench code). Foam-tape the boards down. Weigh the
-finished gondola: target under 55 grams. Write it down.
+Wire each part to the XIAO with the same Stage-2 solder move. The exact
+pin-by-pin table is in `firmware/README.md` (it is the wiring truth; the
+code reads the same table). Foam-tape the boards down. Weigh the finished
+gondola: target under 55 grams. Write it down.
 
 ### Stage 5: fill and trim the balloon (30 min, the magic one)
 1. Fill one 36-inch balloon SLOWLY from the cylinder until round and just
@@ -143,9 +145,13 @@ finished gondola: target under 55 grams. Write it down.
 
 ### Stage 6: first flight in your room
 Windows closed, AC off (drafts are the only predator). Fishing-line leash to
-a chair. The app ships a Flight Test page with four sliders (up/down, forward,
-turn) driving the motors live over WiFi. Push up gently. It rises. You are
-flying a robot you built. Practice, then drop the leash.
+a chair. Flash the flight firmware (`make flash-flight`, WiFi name goes in
+`firmware/include/meemoo_config.h` first) and open the app's Flight Test page:
+Studio > Under the hood > Flight Test bench, or just /flight-test. Four
+sliders (up/down, forward/back, turn, power) and a STOP button; today they
+fly the simulator whale, over WiFi they drive these same motors. Push up
+gently. It rises. You are flying a robot you built. Practice, then drop the
+leash.
 
 ### Stage 7: the dock cone (2 hours, cardboard first)
 

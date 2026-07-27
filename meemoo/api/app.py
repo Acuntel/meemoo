@@ -21,6 +21,7 @@ from meemoo import __version__
 from meemoo.api.care_routes import router as care_router
 from meemoo.api.events_ws import router as events_ws_router
 from meemoo.api.fleet_routes import router as fleet_router
+from meemoo.api.flighttest_routes import router as flighttest_router
 from meemoo.api.guardian_routes import router as guardian_router
 from meemoo.api.metrics_routes import router as metrics_router
 from meemoo.api.onboarding_routes import router as onboarding_router
@@ -81,6 +82,7 @@ def create_app() -> FastAPI:
 
     app.include_router(guardian_router)
     app.include_router(sim_router)
+    app.include_router(flighttest_router)
     app.include_router(fleet_router)
     app.include_router(care_router)
     app.include_router(provider_router)
@@ -96,6 +98,14 @@ def create_app() -> FastAPI:
     @app.get("/onboarding", include_in_schema=False)
     def onboarding_page() -> FileResponse:
         """SPA fallback: the wizard lives at /onboarding in the web bundle."""
+        index = WEB_DIST / "index.html"
+        if not index.exists():
+            raise HTTPException(status_code=404, detail="web bundle not built")
+        return FileResponse(index)
+
+    @app.get("/flight-test", include_in_schema=False)
+    def flight_test_page() -> FileResponse:
+        """SPA fallback: the Flight Test bench lives at /flight-test."""
         index = WEB_DIST / "index.html"
         if not index.exists():
             raise HTTPException(status_code=404, detail="web bundle not built")

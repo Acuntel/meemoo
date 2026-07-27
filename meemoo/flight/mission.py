@@ -35,6 +35,7 @@ class FlightMode(StrEnum):
     ROUND = "ROUND"
     GOTO = "GOTO"
     HOLD = "HOLD"
+    MANUAL = "MANUAL"  # Flight Test sliders (flight/manual.py)
     RETURNING = "RETURNING"
     LANDED = "LANDED"
 
@@ -65,11 +66,14 @@ class MissionMixin:
         def return_to_dock(self) -> None: ...
         def battery_status(self) -> BatteryStatus: ...
         def spin_command(self, pose: Pose, dt: float) -> ThrustCommand: ...
+        def manual_command(self, pose: Pose, dt: float) -> ThrustCommand: ...
 
     # ------------------------------------------------------------- flying
     def _fly(self, pose: Pose, dt: float) -> ThrustCommand:
         if self.phys.t < self._spin_until:  # trick spin overrides, then resumes
             return self.spin_command(pose, dt)
+        if self.mode is FlightMode.MANUAL:
+            return self.manual_command(pose, dt)
         if self.mode in (FlightMode.ROUND, FlightMode.GOTO) and self._route_idx < len(
             self._route
         ):
@@ -141,7 +145,9 @@ class MissionMixin:
         if (
             pct < self.cfg.auto_return_pct
             and not self._low_battery_fired
-            and self.mode in (FlightMode.ROUND, FlightMode.GOTO, FlightMode.HOLD)
+            and self.mode in (
+                FlightMode.ROUND, FlightMode.GOTO, FlightMode.HOLD, FlightMode.MANUAL,
+            )
         ):
             self._low_battery_fired = True
             logger.warning("flight: battery %.1f%% < %.0f%% — auto-return",

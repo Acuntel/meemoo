@@ -1,7 +1,11 @@
 # Meemoo — single-laptop dev workflow (Constitution Art. IX §4).
 # Requires: uv (https://docs.astral.sh/uv/), node 20+.
+# Firmware targets need PlatformIO (`pio`); override with PIO=/path/to/pio.
 
-.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain demo-guardian demo-flight
+PIO ?= pio
+PIO_HINT = PlatformIO is not installed. Fix: python3 -m venv ~/.pio && ~/.pio/bin/pip install platformio, then rerun with PIO=~/.pio/bin/pio (or add it to PATH). See firmware/README.md.
+
+.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain demo-guardian demo-flight flash-bench flash-flight firmware-check
 
 # ------------------------------------------------------------------ install
 install:
@@ -48,6 +52,28 @@ demo-guardian:
 demo-flight:
 	uv run python -m meemoo.flight.demo --fast
 
+# ----------------------------------------------------------------- firmware
+# Stage 3 (docs/BUY_AND_BUILD.md): flash the bench target, watch the serial
+# numbers while the decibel app listens at 1 m.
+flash-bench:
+	@command -v $(PIO) >/dev/null 2>&1 || { echo "$(PIO_HINT)"; exit 1; }
+	cd firmware && $(PIO) run -e bench -t upload && $(PIO) device monitor -b 115200
+
+# Stage 6: flash the flight target (copy firmware/include/meemoo_config.sample.h
+# to meemoo_config.h with your WiFi first).
+flash-flight:
+	@command -v $(PIO) >/dev/null 2>&1 || { echo "$(PIO_HINT)"; exit 1; }
+	cd firmware && $(PIO) run -e flight -t upload && $(PIO) device monitor -b 115200
+
+# Compile both firmware targets when pio exists; skip honestly when it
+# doesn't (a missing toolchain must never break CI).
+firmware-check:
+	@if command -v $(PIO) >/dev/null 2>&1; then \
+		cd firmware && $(PIO) run -e bench -e flight; \
+	else \
+		echo "firmware-check: skipped ($(PIO) not on PATH - see firmware/README.md)"; \
+	fi
+
 # --------------------------------------------------------------------- test
 test:
 	uv run pytest
@@ -64,6 +90,6 @@ web-typecheck:
 web-build:
 	cd web && npm run build
 
-# ruff + mypy + pytest + web typecheck (build proves the bundle compiles)
-check: lint type test web-typecheck web-build
+# ruff + mypy + pytest + web typecheck + firmware compile (when pio present)
+check: lint type test web-typecheck web-build firmware-check
 	@echo "make check: ALL GREEN"

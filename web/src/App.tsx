@@ -7,6 +7,7 @@
 import { useCallback, useEffect, useState } from "react";
 import CallOverlay from "./components/CallOverlay";
 import { MeemooLogo } from "./components/Logo";
+import FlightTestPage from "./pages/FlightTestPage";
 import HistoryPage from "./pages/HistoryPage";
 import LivePage from "./pages/LivePage";
 import OnboardingWizard from "./pages/onboarding/OnboardingWizard";
@@ -29,6 +30,13 @@ const RESTING_ORDER: TabKey[] = ["today", "studio", "live", "history"];
 const LIVE_ORDER: TabKey[] = ["live", "today", "studio", "history"];
 
 export default function App() {
+  // The Flight Test bench is its own page (also linked from Studio > Under
+  // the hood); it skips the onboarding gate on purpose - it is a bench tool.
+  if (window.location.pathname === "/flight-test") return <FlightTestPage />;
+  return <MainApp />;
+}
+
+function MainApp() {
   const [tab, setTab] = useState<TabKey>("today");
   const [activeAlerts, setActiveAlerts] = useState<Alert[]>([]);
   // null = still checking; the wizard shows when setup was never completed

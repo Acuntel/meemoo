@@ -257,6 +257,24 @@ export type RoomSummary = {
 
 export type RoomPhoto = { id: number; room: string; created_at: string };
 
+/** Flight Test bench (GET /api/v1/flight-test/state). */
+export type FlightTestState =
+  | { ready: false }
+  | {
+      ready: true;
+      mode: string;
+      manual_active: boolean;
+      docked: boolean;
+      speed_mps: number;
+      speed_cap_mps: number;
+      cap_engaged: boolean;
+      altitude_m: number;
+      heading_deg: number;
+      battery_pct: number;
+      charging: boolean;
+      net_buoyancy_gf: number;
+    };
+
 export type NoGoZone = {
   id: number;
   device_id: number;

@@ -12,9 +12,8 @@ Bus contract (Art. II §2): consumes ``flight.dispatch``; emits
 the Guardian runs the REAL voice check-in (the sim is fake; the check-in is
 real).
 
-``tick()`` is synchronous and returns the emissions it would publish, so
-tests and the Monte-Carlo gate run faster than real time; ``run()`` is the
-real-time async loop that actually publishes them.
+``tick()`` is synchronous and returns the emissions it would publish (tests
+run faster than real time); ``run()`` is the async loop that publishes them.
 """
 
 from __future__ import annotations
@@ -31,6 +30,7 @@ from meemoo.flight.constants import DockConfig, PhysicsConfig
 from meemoo.flight.controller import FlightController
 from meemoo.flight.docking import DockingController
 from meemoo.flight.floorplan import FloorPlan, load_plan
+from meemoo.flight.manual import ManualControlMixin
 from meemoo.flight.mission import Emission as Emission  # re-export
 from meemoo.flight.mission import FlightMode as FlightMode  # re-export
 from meemoo.flight.mission import MissionMixin
@@ -43,7 +43,7 @@ from meemoo.flight.zones import Zone, refusal_payload, split_route, zone_contain
 logger = logging.getLogger(__name__)
 
 
-class SimulatedBlimp(MotionCommandsMixin, MissionMixin, FlightController):
+class SimulatedBlimp(ManualControlMixin, MotionCommandsMixin, MissionMixin, FlightController):
     """One simulated aircraft + its dock on one floor plan."""
 
     def __init__(
@@ -84,6 +84,7 @@ class SimulatedBlimp(MotionCommandsMixin, MissionMixin, FlightController):
         self._hold_target: tuple[float, float, float] = (self.phys.x, self.phys.y, self.phys.z)
         self._spin_until = 0.0
         self._spin_anchor: tuple[float, float, float] = (self.phys.x, self.phys.y, self.phys.z)
+        self.init_manual_state()  # Flight Test sliders (flight/manual.py)
         self._pending_round: list[tuple[str, str, float, float]] | None = None
         self._last_battery_emit = -1e9
         self._low_battery_fired = False

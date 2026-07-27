@@ -67,6 +67,7 @@ class MotionCommandsMixin:
         _hold_target: tuple[float, float, float]
         _spin_until: float
         _spin_anchor: tuple[float, float, float]
+        _manual_until: float
 
         def hold(self) -> None: ...
         def return_to_dock(self) -> None: ...
@@ -112,6 +113,7 @@ class MotionCommandsMixin:
         self._hold_until = 0.0
         self._pending_round = None
         self._spin_until = 0.0
+        self._manual_until = 0.0  # manual sliders released too (Flight Test STOP)
         if self.mode in (FlightMode.DOCKED, FlightMode.LANDED):
             return  # already still
         if self.mode in (FlightMode.UNDOCKING, FlightMode.RETURNING):

@@ -522,6 +522,44 @@
         loud to a microphone yet
 
 ## Phase 9 — Hardware bench (parallel track, ~$200)
+### Pre-hardware deliverables (built 2026-07-27, ahead of the parts)
+- [x] `firmware/` PlatformIO project for the XIAO ESP32S3 Sense (Box A BOM),
+      TWO targets, both COMPILE-VERIFIED headless (pio run -e bench -e flight,
+      SUCCESS both; toolchain espressif32@6.12 / arduino core 2.0.17):
+      **bench** = Stage 3 noise test (M1 on D0/D1 at 20/30/50% PWM loop,
+      duty + est-RPM over serial — RPM labeled estimate, no tach in BOM);
+      **flight** = Stage 6 (WiFi STA via gitignored include/meemoo_config.h
+      w/ committed sample, MJPEG :81/stream 800x600 matching video/announce,
+      MUP/1 UDP commands :4210, 4 motors via 2 DRV8833 with the sim's exact
+      mixer, VL53L1X+MPU6050 telemetry with absent-sensor honesty, link-loss/
+      ttl failsafe = motors zero, NOTHING else decided on board)
+- [x] Pin table = firmware/README.md + firmware/include/pins.h (the Stage 3/4
+      wiring reference the manual promises); LEDC budget solved: 1 channel per
+      motor w/ dynamic pin attach so the camera XCLK keeps channel 4
+- [x] MUP/1 packet protocol: canonical codec meemoo/flight/mup.py (unit
+      tests pin the byte layout) mirrored in firmware/include/mup1.h with
+      static_asserts; semantics identical to the MqttBlimp MQTT spec (docstring
+      updated to say so — MQTT stays the production target)
+- [x] Flight Test page: /flight-test + Studio > Under the hood card. Four
+      sliders (up/down, forward/back, turn, power scale) + STOP + telemetry
+      strip (speed vs 1.3 cap w/ honest "at the cap" badge, altitude, heading,
+      battery, trim, mode). Drives the sim TODAY through
+      /api/v1/flight-test/* (control/stop/takeoff/dock/state) → new MANUAL
+      mode in flight/manual.py; same API is the UDP-bridge seam for hardware
+- [x] Manual-mode safety, test-enforced (43 new tests, 623 total green):
+      slider→motion mapping, STOP halts, input expiry (1 s, the HTTP twin of
+      the packet ttl) brakes to hover, A5 cap enforced by the physics governor
+      (never exceeded at full stick), off-limit zones brake + emit honest
+      flight.refused (never enters, refusals rate-limited), docked/landed
+      control refused with plain reasons
+- [x] make flash-bench / flash-flight (helpful error when pio missing);
+      firmware compile wired into `make check` ONLY when pio is on PATH
+      (missing toolchain never breaks CI)
+- [ ] ⚠️ NOT verified on silicon (no parts yet): camera init, sensor drivers,
+      motor PWM polarity, and the MUP/1 link have compiled but never run on a
+      real XIAO — first bench session should start with `make flash-bench`
+- [ ] UDP bridge process (FlightController → MUP/1 packets) — the Stage 8
+      handoff; API + codec are ready for it
 - [ ] Order docs/ORDER_LIST.md parts
 - [ ] Noise: motor+prop on the bench → SPL @ 1 m (validate the 35–45 dB estimate)
 - [ ] Leak: 36" balloon lift vs days on the 0.1 g scale (validate 0.3–0.6 g/day)

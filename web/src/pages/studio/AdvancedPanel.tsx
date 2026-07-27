@@ -90,6 +90,22 @@ export default function AdvancedPanel() {
         </p>
       </div>
 
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-sky-soft p-4">
+        <div>
+          <p className="text-sm font-medium">Flight Test bench</p>
+          <p className="text-sm text-ink-soft">
+            Fly Meemoo by hand with sliders. Drives the simulator today, the
+            real aircraft later.
+          </p>
+        </div>
+        <a
+          href="/flight-test"
+          className="rounded-full bg-sage px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-sage-deep"
+        >
+          Open
+        </a>
+      </div>
+
       <details className="mt-4">
         <summary className="cursor-pointer text-sm font-medium text-ink-soft">
           Advanced: my own models, keys, and the cost meter
