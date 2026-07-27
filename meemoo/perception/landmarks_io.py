@@ -6,6 +6,13 @@ Schema (one JSON object per line):
            "label": "fall|adl|recovery", ...}
   rest:   {"t": <sec>, "lm": [[x, y, z, vis] * 33]}  — or {"t": ..., "lm": null}
           for frames where no person was found.
+  last (optional): {"type": "hold", "until": <sec>, "absent": bool} — a
+          disclosed TAIL-HOLD: the loader repeats the last landmark-bearing
+          frame (or absence, when "absent") at header-fps cadence up to
+          `until`. Real fall datasets stop recording seconds after impact
+          while the subject is still on the floor; the hold line represents
+          "nothing changed after the camera stopped" without committing
+          thousands of duplicate frames (see tests/fixtures/bake_real.py).
 
 Coordinates are image-normalized, y DOWN (MediaPipe convention). Committing
 landmark sequences rather than video keeps CI fast and hermetic and is
@@ -65,9 +72,31 @@ def load_clip(path: Path) -> LandmarkClip:
             if obj.get("type") == "header":
                 clip.header = obj
                 continue
+            if obj.get("type") == "hold":
+                _expand_hold(clip, obj)
+                continue
             lm = obj.get("lm")
             clip.frames.append(PoseFrame(t=float(obj["t"]), landmarks=lm))
     return clip
+
+
+def _expand_hold(clip: LandmarkClip, obj: dict[str, Any]) -> None:
+    """Expand a tail-hold line into repeated frames at header-fps cadence."""
+    if not clip.frames:
+        return
+    fps = float(clip.header.get("fps", 15.0))
+    until = float(obj["until"])
+    source: list[list[float]] | None = None
+    if not obj.get("absent", False):
+        for frame in reversed(clip.frames):
+            if frame.landmarks is not None:
+                source = frame.landmarks
+                break
+    t = clip.frames[-1].t
+    step = 1.0 / max(fps, 1e-3)
+    while t + step <= until + 1e-9:
+        t += step
+        clip.frames.append(PoseFrame(t=t, landmarks=source))
 
 
 def _round_lm(lm: list[list[float]]) -> list[list[float]]:

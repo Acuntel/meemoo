@@ -100,15 +100,61 @@
       at candidate stage on bundled fall clips, false-candidate rate per
       ADL-minute, time-to-candidate ≤ 6 s, person.down at 15±1 s, learning-phase
       + voice-ok/help/snooze units (121 tests green)
-  - [ ] ⚠️ Bundled landmark JSONL is SYNTHETIC (20 clips, procedural stick-figure
-        w/ honest §A.3 kinematics, expectations embedded in headers) — real
-        GMDCSA-24 + CaucaFall extraction pending: run
-        tests/fixtures/clips/fetch.py (~0.5 GB, gitignored) then
-        tests/fixtures/extract_landmarks.py on a machine with
-        `uv sync --group perception`; annotate floor_line/rest_zones/expect per
-        clip before they join the assertion suite
+  - [x] REAL GMDCSA-24 + CaucaFall fixtures LANDED 07-27 (35 clips: 19 falls,
+        16 ADLs; day/night/0-lux-IR; 4.1 MB landmark JSONL committed under
+        tests/fixtures/landmarks/real/ + ATTRIBUTION.md per license, raw
+        videos gitignored). Pipeline: clips/fetch.py (rewritten — old URLs
+        dead: GitHub branch is `master` not `main`, Mendeley bulk endpoint
+        retired → per-file public API) → extract_landmarks.py (MediaPipe in a
+        scratch venv, 15 fps decimation) → bake_real.py (annotation merge +
+        DISCLOSED tail-hold line, expanded by landmarks_io at load). Suite:
+        tests/perception/test_real_fixtures.py = primary (45 tests);
+        synthetic stays for fast fully-controlled CI
+        (tests/fixtures/landmarks/README.md explains the split)
+  - [ ] 🚨 REAL-DATA FINDINGS FOR BRADY (measured 07-27, thresholds NOT
+        touched — Art. II §4; per-clip `spec_gap` headers carry the numbers):
+        1. **Soft-path latency swallows most real falls**: 11/19 real falls
+           classify as `controlled_descent` (soft) because the 3 s
+           ballistic-evidence window (trackers.WINDOW_S) expires before the
+           settle+1.5 s classify tick → candidate at ~40 s (t_soft_candidate)
+           instead of ≤6 s. Measured time-to-candidate: 5/19 within 6 s,
+           1/19 at 8.8 s, 11/19 at 40-50 s, 2/19 never. Candidate-stage
+           recall at the 60 s horizon = 17/19 (89%). Possible levers to
+           evaluate (NOT applied): latch ballistic evidence at DESCENDING
+           entry instead of re-reading a rolling 3 s window at classify
+           time; or widen WINDOW_S past t_settle+1.5; or treat
+           horizontal-after-fast-angle-change as fall evidence.
+        2. **Soft-path ladder escalates with ZERO voice prompts**:
+           t_escalate (50 s, grounded-relative) == t_soft_confirm (50 s), so
+           every soft person.down is followed by escalate.requested one tick
+           later — no spoken ask first. Bites deliberate floor-naps too
+           (gm_s3_adl_08). Fix candidates (NOT applied): make the verify
+           ladder run down-relative, or raise t_escalate for soft episodes.
+        3. **Perception misses at range/0-lux**: MediaPipe never re-detects
+           the fallen person in cf_s6_fall_left (0 lux side fall) and
+           cf_s8_fall_right (distant fall) — recall misses no state machine
+           can fix; the VANISHED_DOWN net does not catch them because the
+           person vanishes above vanish_bottom_y. Mitigation ideas: IR-aware
+           exposure at install, lower-confidence re-detection pass while a
+           track is unaccounted for.
+        4. mediapipe >=0.10.30 removed the legacy `mp.solutions` API →
+           perception group now pinned <0.10.22 (verified 0.10.21 good,
+           0.10.30 broken); lifting the cap needs a pose.py port to the
+           Tasks API.
+        5. Real ADL false-alarm rate: ZERO candidates in ~2.5 min of real
+           unheld ADL footage (incl. floor-sitting, push-ups, kneeling,
+           0-lux walking). Gate test for the 6 s bar exists and is SKIPPED
+           with the honest numbers (same convention as the Phase-6 docking
+           gate): test_gate_time_to_candidate_6s_all_real_falls.
+        6. Scenario 3 (fall-then-recovery after a confirmed down) has NO
+           real-data representative — both datasets stop recording while
+           the subject is on the floor; synthetic keeps sole coverage of
+           person.recovered after person.down (real get-ups without alarms
+           ARE covered: gm_s3_adl_09, gm_s1_adl_04).
 - Gate: all perception tests green ✅ 2026-07-25 (`make check` ALL GREEN, 121
-  pytest); fall/ADL/recovery replay verified headless via
+  pytest); ✅ 07-27 re-run against the REAL fixtures — 668 pytest passed, 2
+  documented skips (Phase-6 docking gate + the real 6 s time-to-candidate
+  gate above); fall/ADL/recovery replay verified headless via
   `python -m meemoo.perception.demo --landmarks <clip.jsonl>` (candidate.fall →
   person.down → person.recovered fire as specced)
   - [ ] live webcam annotated window on Brady's Mac: `uv sync --group

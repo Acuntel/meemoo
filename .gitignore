@@ -7,5 +7,7 @@ dist/
 .venv/
 data/
 *.db
+tests/fixtures/clips/raw/
+tests/fixtures/clips/raw_landmarks/
 .DS_Store
 docs/research/papers/

@@ -14,10 +14,16 @@ from meemoo.perception.types import SignalFrame
 
 FIXTURES = Path(__file__).parents[1] / "fixtures"
 SYNTHETIC_DIR = FIXTURES / "landmarks" / "synthetic"
+REAL_DIR = FIXTURES / "landmarks" / "real"
 
 
 def synthetic_clips() -> list[Path]:
     return sorted(SYNTHETIC_DIR.glob("*.jsonl"))
+
+
+def real_clips() -> list[Path]:
+    """Committed GMDCSA-24 + CaucaFall landmark fixtures (the primary suite)."""
+    return sorted(REAL_DIR.rglob("*.jsonl"))
 
 
 @dataclass(slots=True)

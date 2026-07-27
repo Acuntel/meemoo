@@ -27,7 +27,11 @@ dev = [
 # `uv sync --group perception` for the webcam demo / real installs.
 perception = [
     "opencv-python>=4.10",
-    "mediapipe>=0.10.14",
+    # mediapipe >=0.10.30 removed the legacy `mp.solutions` API that
+    # MediaPipePose uses (verified 2026-07-27: 0.10.21 works, 0.10.30 does
+    # not; no macOS wheels in between). Lift the cap only after porting
+    # pose.py to the Tasks API (PoseLandmarker + .task model download).
+    "mediapipe>=0.10.14,<0.10.22",
     "numpy>=1.26",
 ]
 # Live-audio extras: NOT needed for tests (fakes cover every stage).

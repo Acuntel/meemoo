@@ -1,0 +1,790 @@
+{
+ "cf_s1_fall_backwards": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   -1.811,
+   1.41
+  ],
+  "label": "fall",
+  "lighting": "day",
+  "note": "backward fall, overhead cam (CAUCAFall S1)",
+  "rest_zones": [],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 3.6,
+  "tail_hold_s": 60.0
+ },
+ "cf_s1_fall_forward": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "t_candidate_max_s": 9.5
+  },
+  "floor_line": [
+   -1.811,
+   1.41
+  ],
+  "label": "fall",
+  "lighting": "day",
+  "note": "forward fall (CAUCAFall S1)",
+  "rest_zones": [],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): hard-path candidate at 8.8 s after impact, above the 6 s research bound (pose detection only locked on mid-fall).",
+  "t_impact": 6.3,
+  "tail_hold_s": 60.0
+ },
+ "cf_s1_fall_sitting": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   -1.811,
+   1.41
+  ],
+  "label": "fall",
+  "lighting": "day",
+  "note": "fall from chair (CAUCAFall S1)",
+  "rest_zones": [],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 5.8,
+  "tail_hold_s": 60.0
+ },
+ "cf_s1_pickup": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -1.811,
+   1.41
+  ],
+  "label": "adl",
+  "lighting": "day",
+  "note": "pick up object (CAUCAFall S1)",
+  "rest_zones": []
+ },
+ "cf_s1_sit_down": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -1.811,
+   1.41
+  ],
+  "label": "adl",
+  "lighting": "day",
+  "note": "sit down on chair (CAUCAFall S1)",
+  "rest_zones": []
+ },
+ "cf_s1_walk": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -1.811,
+   1.41
+  ],
+  "label": "adl",
+  "lighting": "day",
+  "note": "walking (CAUCAFall S1)",
+  "rest_zones": []
+ },
+ "cf_s6_fall_backwards": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   -0.558,
+   0.899
+  ],
+  "label": "fall",
+  "lighting": "night_ir",
+  "note": "0 lux IR: backward fall (CAUCAFall S6)",
+  "rest_zones": [],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 6.0,
+  "tail_hold_s": 60.0
+ },
+ "cf_s6_fall_forward": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   -0.558,
+   0.899
+  ],
+  "label": "fall",
+  "lighting": "night_ir",
+  "note": "0 lux IR: forward fall (CAUCAFall S6)",
+  "rest_zones": [],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 5.0,
+  "tail_hold_s": 60.0
+ },
+ "cf_s6_fall_left": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "known_miss": true,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.558,
+   0.899
+  ],
+  "label": "fall",
+  "lighting": "night_ir",
+  "note": "0 lux IR: left fall; MediaPipe loses person after landing (18% frames present)",
+  "rest_zones": [],
+  "spec_gap": "RECALL MISS (measured 2026-07-27): MediaPipe never re-detected the fallen person after impact, so the machine saw absence, not a grounded body. Perception failure, not a state-machine failure.",
+  "t_impact": 3.0,
+  "tail_absent": true,
+  "tail_hold_s": 60.0
+ },
+ "cf_s6_kneel": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.558,
+   0.899
+  ],
+  "label": "adl",
+  "lighting": "night_ir",
+  "note": "0 lux IR: kneeling (CAUCAFall S6)",
+  "rest_zones": []
+ },
+ "cf_s6_walk": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.558,
+   0.899
+  ],
+  "label": "adl",
+  "lighting": "night_ir",
+  "note": "0 lux IR: walking (CAUCAFall S6)",
+  "rest_zones": []
+ },
+ "cf_s8_fall_right": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "known_miss": true,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.138,
+   0.689
+  ],
+  "label": "fall",
+  "lighting": "artificial",
+  "note": "artificial light: right fall; person mostly undetected (17% present)",
+  "rest_zones": [],
+  "spec_gap": "RECALL MISS (measured 2026-07-27): MediaPipe never re-detected the fallen person after impact, so the machine saw absence, not a grounded body. Perception failure, not a state-machine failure.",
+  "t_impact": 4.5,
+  "tail_absent": true,
+  "tail_hold_s": 60.0
+ },
+ "cf_s8_hop": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.138,
+   0.689
+  ],
+  "label": "adl",
+  "lighting": "artificial",
+  "note": "artificial light: hopping (CAUCAFall S8)",
+  "rest_zones": []
+ },
+ "gm_s1_adl_01": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.248,
+   0.983
+  ],
+  "label": "adl",
+  "lighting": "day",
+  "note": "sit on bed then sleep (S1/ADL/01) - intentional lie-down on furniture",
+  "rest_zones": [
+   [
+    0.393,
+    0.544,
+    0.455,
+    0.657
+   ]
+  ]
+ },
+ "gm_s1_adl_04": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.248,
+   0.983
+  ],
+  "label": "adl",
+  "lighting": "day",
+  "note": "sleeping to sitting on bed (S1/ADL/04)",
+  "rest_zones": [
+   [
+    0.393,
+    0.544,
+    0.455,
+    0.657
+   ]
+  ]
+ },
+ "gm_s1_fall_05": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   -0.248,
+   0.983
+  ],
+  "label": "fall",
+  "lighting": "day",
+  "note": "walk then right-side fall (CSV S1/Fall/05)",
+  "rest_zones": [
+   [
+    0.393,
+    0.544,
+    0.455,
+    0.657
+   ]
+  ],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 2.7,
+  "tail_hold_s": 60.0
+ },
+ "gm_s1_fall_11": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   -0.248,
+   0.983
+  ],
+  "label": "fall",
+  "lighting": "day",
+  "note": "standing to backward fall (S1/Fall/11)",
+  "rest_zones": [
+   [
+    0.393,
+    0.544,
+    0.455,
+    0.657
+   ]
+  ],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 2.6,
+  "tail_hold_s": 60.0
+ },
+ "gm_s2_adl_16": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.122,
+   0.848
+  ],
+  "label": "adl",
+  "lighting": "night",
+  "note": "night: reading then sleeping on bed (S2/ADL/16)",
+  "rest_zones": [
+   [
+    0.471,
+    0.664,
+    0.481,
+    0.622
+   ]
+  ]
+ },
+ "gm_s2_adl_19": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.122,
+   0.848
+  ],
+  "label": "adl",
+  "lighting": "night",
+  "note": "night: sitting on floor writing (S2/ADL/19)",
+  "rest_zones": [
+   [
+    0.471,
+    0.664,
+    0.481,
+    0.622
+   ]
+  ]
+ },
+ "gm_s2_adl_22": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.122,
+   0.848
+  ],
+  "label": "adl",
+  "lighting": "night",
+  "note": "night: push-ups then sit (S2/ADL/22) - floor exercise",
+  "rest_zones": [
+   [
+    0.471,
+    0.664,
+    0.481,
+    0.622
+   ]
+  ]
+ },
+ "gm_s2_fall_01": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "t_candidate_max_s": 6.0
+  },
+  "floor_line": [
+   -0.122,
+   0.848
+  ],
+  "label": "fall",
+  "lighting": "day",
+  "note": "right-side fall (S2/Fall/01) (t_impact refined from replay: mid-fall at 3.0, fully down by 4.0)",
+  "rest_zones": [
+   [
+    0.471,
+    0.664,
+    0.481,
+    0.622
+   ]
+  ],
+  "t_impact": 3.7,
+  "tail_hold_s": 60.0
+ },
+ "gm_s2_fall_10": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "t_candidate_max_s": 6.0
+  },
+  "floor_line": [
+   -0.122,
+   0.848
+  ],
+  "label": "fall",
+  "lighting": "night",
+  "note": "night: side then backward fall; pose lost after landing (S2/Fall/10)",
+  "rest_zones": [
+   [
+    0.471,
+    0.664,
+    0.481,
+    0.622
+   ]
+  ],
+  "t_impact": 3.3,
+  "tail_absent": true,
+  "tail_hold_s": 60.0
+ },
+ "gm_s2_fall_13": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   -0.122,
+   0.848
+  ],
+  "label": "fall",
+  "lighting": "night",
+  "note": "night: backward fall side view (S2/Fall/13)",
+  "rest_zones": [
+   [
+    0.471,
+    0.664,
+    0.481,
+    0.622
+   ]
+  ],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 4.5,
+  "tail_hold_s": 60.0
+ },
+ "gm_s3_adl_08": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true
+  },
+  "floor_line": [
+   0.029,
+   0.84
+  ],
+  "label": "adl",
+  "lighting": "day",
+  "note": "deliberate lie-down to sleep ON FLOOR (S3/ADL/08); held: person keeps napping",
+  "rest_zones": [],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): deliberate floor nap held 60 s escalated one tick after the soft person.down with no voice ask first (same soft-ladder gap as above).",
+  "tail_hold_s": 60.0
+ },
+ "gm_s3_adl_09": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   0.029,
+   0.84
+  ],
+  "label": "adl",
+  "lighting": "day",
+  "note": "sleeping on floor to sitting to standing (S3/ADL/09) - real get-up",
+  "rest_zones": []
+ },
+ "gm_s3_fall_05": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "t_candidate_max_s": 6.0
+  },
+  "floor_line": [
+   0.029,
+   0.84
+  ],
+  "label": "fall",
+  "lighting": "day",
+  "note": "slow collapse standing to floor (S3/Fall/05)",
+  "rest_zones": [],
+  "t_impact": 4.5,
+  "tail_hold_s": 60.0
+ },
+ "gm_s3_fall_07": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   0.029,
+   0.84
+  ],
+  "label": "fall",
+  "lighting": "day",
+  "note": "backward fall to floor (S3/Fall/07)",
+  "rest_zones": [],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 2.8,
+  "tail_hold_s": 60.0
+ },
+ "gm_s3_fall_09": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   0.029,
+   0.84
+  ],
+  "label": "fall",
+  "lighting": "day",
+  "note": "fall backward from sitting on floor (S3/Fall/09)",
+  "rest_zones": [],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 4.0,
+  "tail_hold_s": 60.0
+ },
+ "gm_s3_fall_16": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "t_candidate_max_s": 6.0
+  },
+  "floor_line": [
+   0.029,
+   0.84
+  ],
+  "label": "fall",
+  "lighting": "night",
+  "note": "night: walk then left-side fall (S3/Fall/16)",
+  "rest_zones": [],
+  "t_impact": 2.6,
+  "tail_hold_s": 60.0
+ },
+ "gm_s3_fall_20": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   0.029,
+   0.84
+  ],
+  "label": "fall",
+  "lighting": "night",
+  "note": "night: walk then forward fall (S3/Fall/20)",
+  "rest_zones": [],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 3.7,
+  "tail_hold_s": 60.0
+ },
+ "gm_s4_adl_02": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.119,
+   0.816
+  ],
+  "label": "adl",
+  "lighting": "dim",
+  "note": "lights off: walking on the phone (S4/ADL/02)",
+  "rest_zones": [
+   [
+    0.217,
+    0.384,
+    0.464,
+    0.634
+   ]
+  ]
+ },
+ "gm_s4_adl_10": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.119,
+   0.816
+  ],
+  "label": "adl",
+  "lighting": "dim",
+  "note": "lights off: walk then sleep on bed (S4/ADL/10)",
+  "rest_zones": [
+   [
+    0.217,
+    0.384,
+    0.464,
+    0.634
+   ]
+  ]
+ },
+ "gm_s4_adl_15": {
+  "expect": {
+   "candidate": false,
+   "escalate": false,
+   "max_candidates": 0,
+   "person_down": false,
+   "recovered": false
+  },
+  "floor_line": [
+   -0.119,
+   0.816
+  ],
+  "label": "adl",
+  "lighting": "day",
+  "note": "sit then sleep on bed (S4/ADL/15)",
+  "rest_zones": [
+   [
+    0.217,
+    0.384,
+    0.464,
+    0.634
+   ]
+  ]
+ },
+ "gm_s4_fall_03": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "t_candidate_max_s": 6.0
+  },
+  "floor_line": [
+   -0.119,
+   0.816
+  ],
+  "label": "fall",
+  "lighting": "dim",
+  "note": "lights off: walk then forward fall (S4/Fall/03)",
+  "rest_zones": [
+   [
+    0.217,
+    0.384,
+    0.464,
+    0.634
+   ]
+  ],
+  "t_impact": 2.5,
+  "tail_hold_s": 60.0
+ },
+ "gm_s4_fall_07": {
+  "expect": {
+   "candidate": true,
+   "escalate": true,
+   "max_candidates": 1,
+   "person_down": true,
+   "recovered": false,
+   "soft_only": true,
+   "t_candidate_max_s": 55.0
+  },
+  "floor_line": [
+   -0.119,
+   0.816
+  ],
+  "label": "fall",
+  "lighting": "dim",
+  "note": "lights off: walk then left-side fall (S4/Fall/07)",
+  "rest_zones": [
+   [
+    0.217,
+    0.384,
+    0.464,
+    0.634
+   ]
+  ],
+  "spec_gap": "SPEC GAP (measured 2026-07-27): genuine hard fall classified controlled_descent because the 3 s ballistic-evidence window expired before the settle+1.5 s classify tick; candidate fired only via the 40 s soft path, and escalate.requested fired one tick after the soft person.down with ZERO voice prompts (t_escalate 50 s is grounded-relative, equal to t_soft_confirm). Numbers in docs/TODO.md.",
+  "t_impact": 3.2,
+  "tail_hold_s": 60.0
+ }
+}
