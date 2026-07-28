@@ -7,13 +7,12 @@ drafts as an OU-wandering WIND vector through the engine's fluid drag; the
 electromagnet (weld equality, engages under 15 mm with retention commanded,
 0.5 s remanence on release); the A5 speed governor; passive fin damping
 (the one hand rotational constant — documented); and the linear ADDED-MASS
-reaction. That last one is a verified engine gap (2026-07-28, MuJoCo 3.10,
-all integrators): the engine computes the ellipsoid virtual-mass
-coefficient (geom_fluid[6:9]*density = 0.5*rho*V for a sphere) but never
-applies -m_A*dv/dt — a sphere in density-1000 fluid accelerates at F/m.
-"The blimp coasts" is an Art. II SectionG must-have, so we apply the force
-here using the ENGINE'S OWN coefficient, lagged one substep.
-"""
+reaction. That last one is a verified engine gap (MuJoCo 3.10, all
+integrators, re-verified independently 2026-07-28): the engine computes the
+ellipsoid virtual-mass coefficient (geom_fluid[6:9]*density = 0.5*rho*V for
+a sphere) but never applies -m_A*dv/dt, so we apply the force here using
+the ENGINE'S OWN coefficient, lagged one substep ("the blimp coasts" is an
+Art. II SectionG must-have)."""
 
 from __future__ import annotations
 
@@ -63,9 +62,7 @@ class MjWorld:
         self._eq_capture = int(
             mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_EQUALITY, "capture")
         )
-        self.buoyancy_gf = (
-            buoyancy_gf if buoyancy_gf is not None else -3.0  # 2D default trim
-        )
+        self.buoyancy_gf = buoyancy_gf if buoyancy_gf is not None else -3.0  # 2D trim
         self._drafts = drafts_enabled
         self._wind = [0.0, 0.0, 0.0]
         b = self.cfg.wind_bias_max
@@ -98,9 +95,7 @@ class MjWorld:
         return int(mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_SITE, name))
 
     # ------------------------------------------------------------------ state
-    def reset_pose(
-        self, x: float, y: float, z: float, heading: float
-    ) -> None:
+    def reset_pose(self, x: float, y: float, z: float, heading: float) -> None:
         """Teleport the vehicle (episode start); zeroes velocity + weld."""
         d = self.data
         d.qpos[:] = 0.0
