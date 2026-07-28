@@ -166,12 +166,21 @@ FIGURE 3: the dock, side view
   webcam on top, looking out along the approach path
 ```
 
-Foam-board cone: 40 cm mouth narrowing to 12 cm over 35 cm. Electromagnet at
-the throat wired through the MOSFET to USB power. Steel washer on a bottle
-cap taped to the balloon's nose. Hand-fly it in nose-first: if the cone walls
-guide the nose to the magnet, you have personally answered the one hardware
-question nobody on Earth has published. If it stalls on the wall, tell Claude:
-the plan-B winch (one extra $12 motor) gets designed that night.
+Foam-board cone, UPDATED per the 3D physics validation (2026-07-28,
+docs/PHYSICS_VALIDATION.md): make it SHALLOW - 40 cm mouth, only ~15 cm
+deep. The physics rig proved two things about the original deep cone: a
+3-foot balloon seats on the rim of a 40 cm mouth with its nose well short
+of a deep throat, and a wide throat cannot hand the nose to a small magnet
+(it stalls up to 5 cm off-axis). So: put the electromagnet where the nose
+NATURALLY rests when the balloon leans into the mouth (test by hand first,
+mark the spot), and hot-glue a small paper cup with the bottom cut out
+around the magnet as a second-stage centering funnel (cup mouth ~10 cm
+narrowing to the magnet face). Wire the magnet through the MOSFET to USB
+power. Steel washer on a bottle cap taped to the balloon's nose. Hand-fly
+it in nose-first: if the cone + cup guide the nose to the magnet, you have
+personally answered the one hardware question nobody on Earth has
+published. If it stalls, tell Claude: the plan-B winch (one extra $12
+motor) gets designed that night.
 
 ### Stage 8: hand it to the software
 One session together: point the app's video source at the balloon's camera
