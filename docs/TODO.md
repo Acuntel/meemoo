@@ -676,10 +676,35 @@
 - [ ] Speaker intelligibility check at 1–2 m with an older listener if available
 
 ## Phase 10 — 3D sim investigation (Brady-requested)
+- [x] **MuJoCo cross-validation rig SHIPPED 2026-07-28** (`sim3d/` package,
+      optional `physics3d` dep group, `make physics3d`, CPU-only on the Mac —
+      no GPU needed): 0.61 m sphere with ENGINE-computed drag + added mass
+      (ellipsoid fluid model), emergent gondola pendulum, per-motor ctrlrange
+      thrust caps, the assigned 40 cm→12 cm×35 cm cone from geoms, weld-
+      equality electromagnet (15 mm engage + remanence), ±5 gf both-sign
+      buoyancy drift, OU wind drafts; adapter reproduces the 2D telemetry
+      contract so the UNMODIFIED DockingController flies it. 18 rig tests
+      (skip cleanly without mujoco), 695 green total.
+- [x] Experiment run (200 episodes × {50, 10} Hz + 50 paired bumps, honest,
+      2026-07-28): **7% first-attempt / 28% within six in MuJoCo vs 16% /
+      63.5% re-measured same-day in 2D** — same failure signature (lateral
+      authority vs drafts) plus new in-funnel slide-gate aborts; 35 failures
+      died within 5 cm of the magnet. Bump: shove transient dies in ~3-5 s
+      but hover sustains 3-7° rocking; damper effect marginal in 3D (roll is
+      undamped; 1.4 s true pendulum vs 2.2 s assumed). Full numbers + 4
+      physical findings (28 cm boom forced by the cone; centering cup
+      REQUIRED at the throat; 2D added mass ~2× first-principles; faster
+      pendulum) in **docs/PHYSICS_VALIDATION.md**; plots in docs/assets/.
+- [ ] Feed findings back: Phase-9 bench items now include probe-length vs
+      cone-depth, throat centering cup, gondola-pendulum period measurement;
+      revisit `swing_period_s` + `added_mass_kg` against bench data only
+      (never tune constants to pass a sim — Art. II §4)
 - [ ] Evaluate NVIDIA Isaac Sim for blimp+dock physics (needs RTX GPU — cloud
-      path: AWS g6/g5 instance or NVIDIA Brev; Brady has NVIDIA API relationships)
-- [ ] If viable: model the sphere w/ added mass + drafts, train/tune the docking
-      controller in 3D, keep the 2D sim as product UI
+      path: AWS g6/g5 instance or NVIDIA Brev; Brady has NVIDIA API
+      relationships) — MuJoCo rig covers the physics cross-check; Isaac now
+      only pays off for photoreal camera sim / RL training
+- [ ] Trajectory planner + draft estimator for the docking controller, to be
+      proven in BOTH engines (the >95% gate lever; unchanged by this work)
 - [ ] Decision memo: is Isaac worth it vs. upgrading our own sim to 2.5D
 
 ## Phase 11 — Go-live gates (BLOCKING before any real user)

@@ -53,6 +53,11 @@ brain = [
     "openai>=1.40",
     "google-genai>=1.0",
 ]
+physics3d = [
+    "matplotlib>=3.11.1",
+    "mujoco>=3.10.0",
+    "numpy>=1.26.4",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -77,7 +82,7 @@ select = ["E", "F", "W", "I", "UP", "B", "SIM", "T20"]
 python_version = "3.11"
 strict = true
 warn_unreachable = true
-files = ["meemoo", "tests"]
+files = ["meemoo", "tests", "sim3d"]
 
 [[tool.mypy.overrides]]
 module = [
@@ -97,6 +102,8 @@ module = [
     "openai.*",
     "google.*",
     "yaml.*",
+    "mujoco.*",
+    "matplotlib.*",
 ]
 ignore_missing_imports = true
 

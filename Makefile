@@ -5,7 +5,7 @@
 PIO ?= pio
 PIO_HINT = PlatformIO is not installed. Fix: python3 -m venv ~/.pio && ~/.pio/bin/pip install platformio, then rerun with PIO=~/.pio/bin/pio (or add it to PATH). See firmware/README.md.
 
-.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain demo-guardian demo-flight flash-bench flash-flight firmware-check
+.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain demo-guardian demo-flight flash-bench flash-flight firmware-check physics3d
 
 # ------------------------------------------------------------------ install
 install:
@@ -74,12 +74,19 @@ firmware-check:
 		echo "firmware-check: skipped ($(PIO) not on PATH - see firmware/README.md)"; \
 	fi
 
+# ----------------------------------------------------------------- physics3d
+# Phase-10 cross-validation: the UNMODIFIED docking controller flown in
+# MuJoCo (sim3d/README.md). mujoco lives in the optional physics3d group —
+# uv run --group installs it on demand; make check never needs it.
+physics3d:
+	uv run --group physics3d python -m sim3d.experiment --episodes 200 --bumps 50 --plots
+
 # --------------------------------------------------------------------- test
 test:
 	uv run pytest
 
 lint:
-	uv run ruff check meemoo tests
+	uv run ruff check meemoo tests sim3d
 
 type:
 	uv run mypy

@@ -1,0 +1,5791 @@
+{
+  "docking": {
+    "hz50": {
+      "rates": {
+        "episodes": 200.0,
+        "first_attempt": 0.07,
+        "within_one_retry": 0.105,
+        "within_max_attempts": 0.28
+      },
+      "failure_modes": {
+        "max_attempts": 144,
+        "captured": 56
+      },
+      "time_to_dock_s": {
+        "median": 81.58,
+        "p90": 129.3
+      },
+      "contact_speed_mps": {
+        "median": 0.214,
+        "max": 0.392
+      },
+      "episodes": [
+        {
+          "seed": 0,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 156.56000000000628,
+          "buoyancy_gf": 3.4442185152504816,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.16806742816283365,
+          "min_tip_throat_m": 0.01784773977989086,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 1,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 188.42000000002258,
+          "buoyancy_gf": -3.656357558875988,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.560988230070086,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 2,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 195.6600000000263,
+          "buoyancy_gf": 4.560342718892494,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.10365004170791597,
+          "min_tip_throat_m": 0.07617158708043906,
+          "aborts_from": {
+            "FINAL_APPROACH": 2,
+            "CAPTURE_PENDING": 4
+          }
+        },
+        {
+          "seed": 3,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 199.68000000002834,
+          "buoyancy_gf": -2.6203537290810863,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5755372872880049,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 4,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 16.459999999999738,
+          "buoyancy_gf": -2.6395191026256546,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.09086561320046743,
+          "min_tip_throat_m": 0.001149508781688582,
+          "aborts_from": {}
+        },
+        {
+          "seed": 5,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 121.77999999999291,
+          "buoyancy_gf": 1.2290169488970193,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.15937531255359827,
+          "min_tip_throat_m": 0.00041431229897673623,
+          "aborts_from": {
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 6,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 178.14000000001732,
+          "buoyancy_gf": 2.93340083761663,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5843708654230924,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 7,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 23.91999999999958,
+          "buoyancy_gf": -1.761672351668376,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1456414067402009,
+          "min_tip_throat_m": 0.0010040051997434088,
+          "aborts_from": {}
+        },
+        {
+          "seed": 8,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 173.52000000001496,
+          "buoyancy_gf": -2.7329414061895116,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6333372714386901,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 9,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 146.4400000000011,
+          "buoyancy_gf": -0.36992642184978575,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3217804352674464,
+          "min_tip_throat_m": 0.11198849763940587,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 10,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 166.1600000000112,
+          "buoyancy_gf": 0.7140259468991346,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2564102204746034,
+          "min_tip_throat_m": 0.09555382800014772,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 11,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 163.52000000000984,
+          "buoyancy_gf": -0.476204464901814,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.30291246302142055,
+          "min_tip_throat_m": 0.11152182850469056,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 12,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 162.58000000000936,
+          "buoyancy_gf": -0.25429321311451947,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.2431588970549351,
+          "min_tip_throat_m": 0.03040107186263218,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 13,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 146.4400000000011,
+          "buoyancy_gf": -2.4099150828452642,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.594206557404655,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 14,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 167.3200000000118,
+          "buoyancy_gf": -3.931714622983443,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.15155789112135154,
+          "min_tip_throat_m": 0.2055295477254427,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 15,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 91.139999999999,
+          "buoyancy_gf": 4.65242141552123,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.21893537893846893,
+          "min_tip_throat_m": 0.0003652984188835931,
+          "aborts_from": {
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 16,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 140.1999999999979,
+          "buoyancy_gf": -1.3847722508592488,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.15371544569972032,
+          "min_tip_throat_m": 0.07307643715976712,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 17,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 165.6000000000109,
+          "buoyancy_gf": 0.21983909712493244,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4482389807769469,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 18,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 167.26000000001176,
+          "buoyancy_gf": -3.1873513666677864,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6588681802196188,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 19,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 146.54000000000116,
+          "buoyancy_gf": 1.7712582680027031,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.47717326263824594,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 20,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 161.4800000000088,
+          "buoyancy_gf": 4.056396761745207,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.09177611916092471,
+          "min_tip_throat_m": 0.028894254524768934,
+          "aborts_from": {
+            "FINAL_APPROACH": 3,
+            "CAPTURE_PENDING": 3
+          }
+        },
+        {
+          "seed": 21,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 121.93999999999288,
+          "buoyancy_gf": -3.35050520166802,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5156971801861208,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 22,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 151.28000000000358,
+          "buoyancy_gf": 4.582093798172728,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.20220016906320137,
+          "min_tip_throat_m": 0.044892011307170736,
+          "aborts_from": {
+            "CAPTURE_PENDING": 2,
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 23,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 170.52000000001343,
+          "buoyancy_gf": 4.248652516259453,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.04496645274119827,
+          "min_tip_throat_m": 0.17712531952399818,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 24,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 181.0400000000188,
+          "buoyancy_gf": 2.123429878269185,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.8850030427825722,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 25,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 164.46000000001033,
+          "buoyancy_gf": -1.2303769760961405,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.31263733170506114,
+          "min_tip_throat_m": 0.15598601626426714,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 26,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 103.87999999999647,
+          "buoyancy_gf": 2.4729126622328357,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3370466360331689,
+          "min_tip_throat_m": 0.0009224938939136978,
+          "aborts_from": {
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 27,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 173.580000000015,
+          "buoyancy_gf": 1.4849721997888308,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6678395146587508,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 28,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 91.11999999999901,
+          "buoyancy_gf": -3.8704282982383695,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.205897857412006,
+          "min_tip_throat_m": 0.0007551085394573793,
+          "aborts_from": {
+            "FINAL_APPROACH": 2,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 29,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 161.62000000000887,
+          "buoyancy_gf": 0.48119053811699075,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.28266629357010986,
+          "min_tip_throat_m": 0.030895313082537953,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 30,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 145.98000000000087,
+          "buoyancy_gf": 0.3908156460581056,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.266541255435014,
+          "min_tip_throat_m": 0.01794864616071201,
+          "aborts_from": {
+            "FINAL_APPROACH": 3,
+            "CAPTURE_PENDING": 3
+          }
+        },
+        {
+          "seed": 31,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 21.239999999999636,
+          "buoyancy_gf": -4.877217526020246,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2142468161053752,
+          "min_tip_throat_m": 0.00025087952767635185,
+          "aborts_from": {}
+        },
+        {
+          "seed": 32,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 135.63999999999558,
+          "buoyancy_gf": -4.225782161466959,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.16528895691165285,
+          "min_tip_throat_m": 0.09265623568316467,
+          "aborts_from": {
+            "CAPTURE_PENDING": 2,
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 33,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 147.12000000000145,
+          "buoyancy_gf": 0.7032842313687313,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5289791649919279,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 34,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 179.50000000001802,
+          "buoyancy_gf": 0.28935382940412335,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.051143137705426306,
+          "min_tip_throat_m": 0.041090065168067964,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 35,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 180.74000000001865,
+          "buoyancy_gf": 0.48694605643822264,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.3093345089910838,
+          "min_tip_throat_m": 0.12020696927866238,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 36,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 213.74000000003554,
+          "buoyancy_gf": -1.7129947946690205,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.70692823437881,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 37,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 145.22000000000048,
+          "buoyancy_gf": 1.8200456058797787,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.09795249543033654,
+          "min_tip_throat_m": 0.17687461121605438,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 38,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 124.3399999999924,
+          "buoyancy_gf": 1.394736947203203,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.34175160735350457,
+          "min_tip_throat_m": 0.0002680014860558032,
+          "aborts_from": {
+            "FINAL_APPROACH": 2,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 39,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 154.18000000000507,
+          "buoyancy_gf": -2.9014875546348273,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.025997194240477074,
+          "min_tip_throat_m": 0.11957492895361571,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 40,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 52.00000000000253,
+          "buoyancy_gf": -0.4139329061293857,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.24869449202402344,
+          "min_tip_throat_m": 0.0004131876427181964,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 41,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 113.49999999999456,
+          "buoyancy_gf": -1.1897931000422854,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.21874191065023552,
+          "min_tip_throat_m": 0.0005805255470665499,
+          "aborts_from": {
+            "FINAL_APPROACH": 2,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 42,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 159.36000000000772,
+          "buoyancy_gf": 1.3942679845788373,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.47870423009277274,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 43,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 189.32000000002304,
+          "buoyancy_gf": -4.6144816066261996,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.14800895516264603,
+          "min_tip_throat_m": 0.07377744401989367,
+          "aborts_from": {
+            "CAPTURE_PENDING": 4,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 44,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 165.2200000000107,
+          "buoyancy_gf": -0.9146412074550625,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4138303561658922,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 45,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 132.45999999999395,
+          "buoyancy_gf": -2.2812458561590923,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.29428710262555535,
+          "min_tip_throat_m": 0.0009471869093704295,
+          "aborts_from": {
+            "FINAL_APPROACH": 3,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 46,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 73.64000000000249,
+          "buoyancy_gf": 3.8826807645248813,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.08290118639711518,
+          "min_tip_throat_m": 0.0006213375830578926,
+          "aborts_from": {
+            "FINAL_APPROACH": 1,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 47,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 148.14000000000198,
+          "buoyancy_gf": -1.4815374417211737,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.22714799723051737,
+          "min_tip_throat_m": 0.016518488643633783,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 48,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 40.520000000000735,
+          "buoyancy_gf": 0.4815782841632963,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1810687866260932,
+          "min_tip_throat_m": 0.0007239955106622089,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 49,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 157.72000000000688,
+          "buoyancy_gf": -4.331160236572483,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 4,
+          "contact_speed_mps": 0.16588284923414054,
+          "min_tip_throat_m": 0.0244767711008325,
+          "aborts_from": {
+            "CAPTURE_PENDING": 4,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 50,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 25.179999999999552,
+          "buoyancy_gf": -0.024634312413977177,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.39079453297988564,
+          "min_tip_throat_m": 0.001020098534643085,
+          "aborts_from": {}
+        },
+        {
+          "seed": 51,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 152.7000000000043,
+          "buoyancy_gf": -2.56482237290663,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.21054944086897093,
+          "min_tip_throat_m": 0.1386202905977424,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 52,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 137.55999999999656,
+          "buoyancy_gf": 4.783548583709967,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5035929728292555,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 53,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 196.00000000002646,
+          "buoyancy_gf": 1.171414766699522,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.257448957265036,
+          "min_tip_throat_m": 0.09946203560928292,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 54,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 129.25999999999232,
+          "buoyancy_gf": 4.136429725548911,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.2121285687134898,
+          "min_tip_throat_m": 0.0002914738554460326,
+          "aborts_from": {
+            "CAPTURE_PENDING": 2,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 55,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 200.08000000002855,
+          "buoyancy_gf": -4.096601457306504,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5558876617699898,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 56,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 122.57999999999275,
+          "buoyancy_gf": 4.659191880249441,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.05949682331493612,
+          "min_tip_throat_m": 0.015766561046765385,
+          "aborts_from": {
+            "FINAL_APPROACH": 3,
+            "CAPTURE_PENDING": 3
+          }
+        },
+        {
+          "seed": 57,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 125.8199999999921,
+          "buoyancy_gf": -4.574342864174231,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5709321241331763,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 58,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 81.58000000000091,
+          "buoyancy_gf": 0.8075716493395664,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.29237252606075553,
+          "min_tip_throat_m": 0.00019583563064432455,
+          "aborts_from": {
+            "FINAL_APPROACH": 2,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 59,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 185.64000000002116,
+          "buoyancy_gf": -2.7581452515267357,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.591006850247993,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 60,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 137.0399999999963,
+          "buoyancy_gf": -1.921932452662226,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.28282099723311077,
+          "min_tip_throat_m": 0.11352074597921011,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 61,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 169.58000000001294,
+          "buoyancy_gf": -0.05512564020565325,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.3431235410058491,
+          "min_tip_throat_m": 0.04534379121110913,
+          "aborts_from": {
+            "CAPTURE_PENDING": 2,
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 62,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 170.94000000001364,
+          "buoyancy_gf": 4.279915658776742,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.10792306928613095,
+          "min_tip_throat_m": 0.021836960545383054,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 63,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 166.28000000001126,
+          "buoyancy_gf": -0.5486077484317722,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5299265807536251,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 64,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 141.1399999999984,
+          "buoyancy_gf": -0.23841737770654348,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.30471798766406466,
+          "min_tip_throat_m": 0.04760579653444165,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 65,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 22.079999999999618,
+          "buoyancy_gf": -0.85256000691321,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.20318805124099662,
+          "min_tip_throat_m": 0.00011791609380754578,
+          "aborts_from": {}
+        },
+        {
+          "seed": 66,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 141.19999999999843,
+          "buoyancy_gf": -4.291910729409274,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 5,
+          "contact_speed_mps": 0.19353481801867958,
+          "min_tip_throat_m": 0.0004593574570419004,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 67,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 151.76000000000383,
+          "buoyancy_gf": -4.252062431268893,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5552034214933398,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 68,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 159.7000000000079,
+          "buoyancy_gf": 2.4166893561457323,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.024421839416288,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 69,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 117.35999999999379,
+          "buoyancy_gf": 1.8424095241207326,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.32216101101402816,
+          "min_tip_throat_m": 0.024351567940102438,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 70,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 48.72000000000202,
+          "buoyancy_gf": 4.097692379238719,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.09827983106238582,
+          "min_tip_throat_m": 0.00022563533113138454,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 71,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 187.62000000002217,
+          "buoyancy_gf": -1.7624665417923433,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6130661711162071,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 72,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 136.15999999999585,
+          "buoyancy_gf": -4.2657334519766845,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.09947018533373193,
+          "min_tip_throat_m": 0.23825171240601245,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 73,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 160.24000000000817,
+          "buoyancy_gf": -2.2018452642701214,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.14292368360467406,
+          "min_tip_throat_m": 0.14743665024787328,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 74,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 146.76000000000127,
+          "buoyancy_gf": 3.5972844519186538,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.15946802179377362,
+          "min_tip_throat_m": 0.19369392764649823,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 75,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 159.44000000000776,
+          "buoyancy_gf": -0.4915486585499096,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.31498742961431103,
+          "min_tip_throat_m": 0.0005179006481684198,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 76,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 85.00000000000023,
+          "buoyancy_gf": -1.2944335890369296,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.39224402021449134,
+          "min_tip_throat_m": 0.0005214603401224184,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 77,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 158.04000000000704,
+          "buoyancy_gf": 2.99115369116727,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.26859202767115675,
+          "min_tip_throat_m": 0.21370466364442264,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 78,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 15.559999999999757,
+          "buoyancy_gf": 3.144781454478103,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.17997934958610656,
+          "min_tip_throat_m": 0.0004638840221002653,
+          "aborts_from": {}
+        },
+        {
+          "seed": 79,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 141.7199999999987,
+          "buoyancy_gf": -3.546638381667193,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.10063138484119313,
+          "min_tip_throat_m": 0.16012041498938445,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 80,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 175.64000000001604,
+          "buoyancy_gf": -2.2850888674005443,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5576507409207893,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 81,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 24.479999999999567,
+          "buoyancy_gf": 0.05940413770247677,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3252083922818358,
+          "min_tip_throat_m": 0.0006960842116579335,
+          "aborts_from": {}
+        },
+        {
+          "seed": 82,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 149.20000000000252,
+          "buoyancy_gf": -3.5527944736633152,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.14730309986220302,
+          "min_tip_throat_m": 0.07242232986544345,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 83,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 177.36000000001692,
+          "buoyancy_gf": -0.03843830199587295,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.36491564370668617,
+          "min_tip_throat_m": 0.0006423788744700824,
+          "aborts_from": {
+            "FINAL_APPROACH": 3,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 84,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 165.90000000001106,
+          "buoyancy_gf": 2.31531130400211,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6310193947559306,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 85,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 170.02000000001317,
+          "buoyancy_gf": -3.0041129364589994,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1719999297543256,
+          "min_tip_throat_m": 0.17895215234143624,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 86,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 49.62000000000216,
+          "buoyancy_gf": 2.9152593596146588,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2915437689515237,
+          "min_tip_throat_m": 0.0010999407961161886,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 87,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 22.699999999999605,
+          "buoyancy_gf": -3.5404519932035305,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.11156314448148193,
+          "min_tip_throat_m": 0.0009282135901596951,
+          "aborts_from": {}
+        },
+        {
+          "seed": 88,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 31.91999999999941,
+          "buoyancy_gf": -1.0251112301854248,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1698006445469134,
+          "min_tip_throat_m": 0.0006437462766404211,
+          "aborts_from": {}
+        },
+        {
+          "seed": 89,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 150.50000000000318,
+          "buoyancy_gf": -4.189093353761155,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.11687725131380766,
+          "min_tip_throat_m": 0.2942941001116974,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 90,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 25.379999999999548,
+          "buoyancy_gf": -2.9632955257894844,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.16767467393569563,
+          "min_tip_throat_m": 0.0005419730983163615,
+          "aborts_from": {}
+        },
+        {
+          "seed": 91,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 156.44000000000622,
+          "buoyancy_gf": -4.164794788464143,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.16134519826984972,
+          "min_tip_throat_m": 0.07949795484406605,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 92,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 160.22000000000816,
+          "buoyancy_gf": -0.7895538571335372,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.21161317305929678,
+          "min_tip_throat_m": 0.10697526002555278,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 93,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 81.96000000000083,
+          "buoyancy_gf": 4.1234335935974915,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.10124539527804854,
+          "min_tip_throat_m": 0.0005401184925952287,
+          "aborts_from": {
+            "FINAL_APPROACH": 1,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 94,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 143.8799999999998,
+          "buoyancy_gf": 0.4680155353663302,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.13607627545985268,
+          "min_tip_throat_m": 0.1344787084404223,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 95,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 190.0200000000234,
+          "buoyancy_gf": 2.6016147830977445,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.21458205279657178,
+          "min_tip_throat_m": 0.07692708082638738,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 96,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 171.54000000001395,
+          "buoyancy_gf": -1.2940568987531353,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.45694717040388066,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 97,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 141.17999999999842,
+          "buoyancy_gf": -3.0546275206681894,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.608268317111218,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 98,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 204.22000000003067,
+          "buoyancy_gf": -1.4360179323727786,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.5214895323239029,
+          "min_tip_throat_m": 0.18978744854778595,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 99,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 144.90000000000032,
+          "buoyancy_gf": -0.9602192505633367,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.20558003338277228,
+          "min_tip_throat_m": 0.12291010197497776,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 100,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 141.29999999999848,
+          "buoyancy_gf": -3.543307448958697,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.06996465412113853,
+          "min_tip_throat_m": 0.031825504591172685,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 101,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 146.240000000001,
+          "buoyancy_gf": 0.8115213250456463,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.22759673078563977,
+          "min_tip_throat_m": 0.00020891948513747805,
+          "aborts_from": {
+            "CAPTURE_PENDING": 2,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 102,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 153.50000000000472,
+          "buoyancy_gf": -3.5182879361291644,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.3636225803926603,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 103,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 27.6399999999995,
+          "buoyancy_gf": 4.790501200727743,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1784191194917317,
+          "min_tip_throat_m": 0.00017365692923748037,
+          "aborts_from": {}
+        },
+        {
+          "seed": 104,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 230.4800000000441,
+          "buoyancy_gf": 4.599609301949554,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 4,
+          "contact_speed_mps": 0.11439570184435993,
+          "min_tip_throat_m": 0.040144206378570586,
+          "aborts_from": {
+            "CAPTURE_PENDING": 5,
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 105,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 91.95999999999884,
+          "buoyancy_gf": 3.7809934907649243,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.1223132806121546,
+          "min_tip_throat_m": 0.0003728347965326537,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 106,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 194.40000000002564,
+          "buoyancy_gf": 2.106837330624928,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.144513755060418,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 107,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 161.5000000000088,
+          "buoyancy_gf": -2.5351804033064185,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5852989521700508,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 108,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 184.26000000002045,
+          "buoyancy_gf": -3.6947977009932975,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.20287780108125228,
+          "min_tip_throat_m": 0.1277525730866331,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 109,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 126.319999999992,
+          "buoyancy_gf": -2.204169613941321,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4908443892614215,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 110,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 54.58000000000293,
+          "buoyancy_gf": 4.3426196270397295,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.24969605707424533,
+          "min_tip_throat_m": 0.00048445304737736693,
+          "aborts_from": {
+            "FINAL_APPROACH": 1,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 111,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 37.260000000000225,
+          "buoyancy_gf": 3.2717056534231403,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1469372360242685,
+          "min_tip_throat_m": 0.0009192974061119945,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 112,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 94.47999999999834,
+          "buoyancy_gf": -0.18753365926691679,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.19815728244856054,
+          "min_tip_throat_m": 0.0005048695693893407,
+          "aborts_from": {
+            "FINAL_APPROACH": 1,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 113,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 174.1600000000153,
+          "buoyancy_gf": -4.694446798126259,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.48327260020613194,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 114,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 146.14000000000095,
+          "buoyancy_gf": -2.590644988215054,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.19146684560699184,
+          "min_tip_throat_m": 0.1235531665358833,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 115,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 141.65999999999866,
+          "buoyancy_gf": 3.959023750070166,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.20854936815929365,
+          "min_tip_throat_m": 0.00021848297525837676,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 116,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 169.16000000001273,
+          "buoyancy_gf": 3.213575314395893,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5302631571806091,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 117,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 16.279999999999742,
+          "buoyancy_gf": -2.598969699337438,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2541212046591184,
+          "min_tip_throat_m": 0.00048034061931838585,
+          "aborts_from": {}
+        },
+        {
+          "seed": 118,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 166.08000000001115,
+          "buoyancy_gf": 2.1098226779628444,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.25796343600996746,
+          "min_tip_throat_m": 0.025319259152829378,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 119,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 134.07999999999478,
+          "buoyancy_gf": 4.26312858507014,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2320666715668846,
+          "min_tip_throat_m": 0.09888419711581244,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 120,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 18.439999999999696,
+          "buoyancy_gf": 0.14937954007749088,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.17915746492208764,
+          "min_tip_throat_m": 0.000777222623173151,
+          "aborts_from": {}
+        },
+        {
+          "seed": 121,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 193.08000000002497,
+          "buoyancy_gf": -4.126985131341834,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.2713483724505721,
+          "min_tip_throat_m": 0.04335216163439431,
+          "aborts_from": {
+            "FINAL_APPROACH": 3,
+            "CAPTURE_PENDING": 3
+          }
+        },
+        {
+          "seed": 122,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 171.2400000000138,
+          "buoyancy_gf": 0.10018506743479527,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.37595427499550266,
+          "min_tip_throat_m": 0.09661039106109562,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 123,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 136.73999999999614,
+          "buoyancy_gf": -4.476364011490556,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.12341231754161006,
+          "min_tip_throat_m": 0.04982202205160384,
+          "aborts_from": {
+            "FINAL_APPROACH": 3,
+            "CAPTURE_PENDING": 3
+          }
+        },
+        {
+          "seed": 124,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 158.38000000000721,
+          "buoyancy_gf": 4.607807567552326,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 4,
+          "contact_speed_mps": 0.11450611539825424,
+          "min_tip_throat_m": 0.02773054166340934,
+          "aborts_from": {
+            "CAPTURE_PENDING": 5,
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 125,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 155.66000000000582,
+          "buoyancy_gf": 4.0005821915565445,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 4,
+          "contact_speed_mps": 0.07941391738330854,
+          "min_tip_throat_m": 0.00038669286541697436,
+          "aborts_from": {
+            "CAPTURE_PENDING": 4,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 126,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 50.98000000000237,
+          "buoyancy_gf": 0.7257673934264153,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.33134349657282264,
+          "min_tip_throat_m": 0.00038910344680362965,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 127,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 126.97999999999188,
+          "buoyancy_gf": -4.554242051216595,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1971058222161455,
+          "min_tip_throat_m": 0.15730253092599314,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 128,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 108.61999999999553,
+          "buoyancy_gf": 4.400340903508457,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.21360004524209916,
+          "min_tip_throat_m": 8.797383099929248e-05,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 129,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 159.98000000000803,
+          "buoyancy_gf": 0.8609776845595754,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4443759164897728,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 130,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 95.75999999999809,
+          "buoyancy_gf": 0.19777941893520357,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.16430261429920762,
+          "min_tip_throat_m": 0.0003756908288354769,
+          "aborts_from": {
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 131,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 164.06000000001012,
+          "buoyancy_gf": -1.8456481119655486,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6862147853236694,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 132,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 91.27999999999898,
+          "buoyancy_gf": -0.8757117274572099,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.3647020023114201,
+          "min_tip_throat_m": 0.0009656291611521256,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 133,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 28.219999999999487,
+          "buoyancy_gf": -0.06167349558428015,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.23381942051736304,
+          "min_tip_throat_m": 0.0010168944992913383,
+          "aborts_from": {}
+        },
+        {
+          "seed": 134,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 108.05999999999564,
+          "buoyancy_gf": -0.15881243920857813,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.27677971768906096,
+          "min_tip_throat_m": 0.0007516962049021669,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 135,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 176.50000000001648,
+          "buoyancy_gf": 1.6953503618824026,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.26429321650755877,
+          "min_tip_throat_m": 0.06066001857990024,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 136,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 84.54000000000032,
+          "buoyancy_gf": 0.7571620813643056,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.2820790778338824,
+          "min_tip_throat_m": 0.0007615000149888571,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 137,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 142.97999999999934,
+          "buoyancy_gf": -4.276334257305292,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.14823907418818447,
+          "min_tip_throat_m": 0.09038827732816546,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 138,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 185.18000000002093,
+          "buoyancy_gf": -3.0656366510761677,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5795101156824713,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 139,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 172.66000000001452,
+          "buoyancy_gf": -4.984898272198292,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.047274002582726425,
+          "min_tip_throat_m": 0.043840701500521384,
+          "aborts_from": {
+            "CAPTURE_PENDING": 4,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 140,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 118.71999999999352,
+          "buoyancy_gf": 2.7159093969833057,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1979290272404793,
+          "min_tip_throat_m": 0.14647158276279076,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 141,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 143.8599999999998,
+          "buoyancy_gf": 0.1732089950672382,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.2918092508511629,
+          "min_tip_throat_m": 0.027914393276690517,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 142,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 173.2200000000148,
+          "buoyancy_gf": 0.8258843938317764,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 5,
+          "contact_speed_mps": 0.2399130808136706,
+          "min_tip_throat_m": 0.028953562158199834,
+          "aborts_from": {
+            "CAPTURE_PENDING": 5,
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 143,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 165.5800000000109,
+          "buoyancy_gf": 4.063711552614622,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.07879170416606286,
+          "min_tip_throat_m": 0.17330085445871277,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 144,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 151.46000000000367,
+          "buoyancy_gf": -0.5173277828633029,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5190335451565506,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 145,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 187.04000000002188,
+          "buoyancy_gf": 3.7047572253248937,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1613044509896082,
+          "min_tip_throat_m": 0.28371952918402343,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 146,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 160.46000000000828,
+          "buoyancy_gf": -3.6666483327868904,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5478973864122955,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 147,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 137.85999999999672,
+          "buoyancy_gf": 1.0523988040189565,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.3323077402306299,
+          "min_tip_throat_m": 0.03187444249174779,
+          "aborts_from": {
+            "FINAL_APPROACH": 3,
+            "CAPTURE_PENDING": 3
+          }
+        },
+        {
+          "seed": 148,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 202.84000000002996,
+          "buoyancy_gf": -0.9649824572418622,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.29251556278147844,
+          "min_tip_throat_m": 0.11441981253482965,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 149,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 144.38000000000005,
+          "buoyancy_gf": -4.288924925170276,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.19325718910541873,
+          "min_tip_throat_m": 0.000477854277799119,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 150,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 179.58000000001806,
+          "buoyancy_gf": 3.238072419640881,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6865186735758021,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 151,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 204.76000000003094,
+          "buoyancy_gf": 2.0657373524917446,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.203451563018983,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 152,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 164.92000000001056,
+          "buoyancy_gf": 4.7765332278827906,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.03680807535339513,
+          "min_tip_throat_m": 0.017892407928719732,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 153,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 156.72000000000637,
+          "buoyancy_gf": 4.9336767562114545,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 4,
+          "contact_speed_mps": 0.17171423058862287,
+          "min_tip_throat_m": 0.016302965354149376,
+          "aborts_from": {
+            "FINAL_APPROACH": 2,
+            "CAPTURE_PENDING": 4
+          }
+        },
+        {
+          "seed": 154,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 193.04000000002495,
+          "buoyancy_gf": -2.968576936244726,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.39068438491667695,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 155,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 86.57999999999991,
+          "buoyancy_gf": 0.808862932227294,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.31446819075818166,
+          "min_tip_throat_m": 0.0005132398011405319,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 156,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 205.4800000000313,
+          "buoyancy_gf": -0.1222052114004093,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.26191019845060953,
+          "min_tip_throat_m": 0.049010569003263726,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 157,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 29.239999999999466,
+          "buoyancy_gf": 1.1164339252488533,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.20867306133323663,
+          "min_tip_throat_m": 0.0002943586024081829,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 158,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 224.78000000004118,
+          "buoyancy_gf": 1.8425230640308063,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.010086260550063,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 159,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 166.10000000001116,
+          "buoyancy_gf": -1.0548011831478887,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5400175251913507,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 160,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 61.400000000004,
+          "buoyancy_gf": -3.7746298682480948,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.21613423844629148,
+          "min_tip_throat_m": 0.0011384910517558918,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 161,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 178.6600000000176,
+          "buoyancy_gf": 0.18210069866208212,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.34299059955227074,
+          "min_tip_throat_m": 0.11347489596650821,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 162,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 178.60000000001756,
+          "buoyancy_gf": -4.462958299358942,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5106432373035957,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 163,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 96.45999999999795,
+          "buoyancy_gf": 0.41420687893490715,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.17047882261464342,
+          "min_tip_throat_m": 0.0010540445326774402,
+          "aborts_from": {
+            "FINAL_APPROACH": 1,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 164,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 127.21999999999183,
+          "buoyancy_gf": -4.046650995216263,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.09923712092519688,
+          "min_tip_throat_m": 0.0835143887356625,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 165,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 170.14000000001323,
+          "buoyancy_gf": -4.831749941275929,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1332075769523793,
+          "min_tip_throat_m": 0.05382658277224522,
+          "aborts_from": {
+            "CAPTURE_PENDING": 2,
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 166,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 175.42000000001593,
+          "buoyancy_gf": -3.2128564542224956,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.48885285444342486,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 167,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 77.96000000000163,
+          "buoyancy_gf": -2.711710943229172,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.3255510586247365,
+          "min_tip_throat_m": 0.0004971289331500912,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 168,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 128.49999999999193,
+          "buoyancy_gf": 2.455596261835028,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.44300987610379744,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 169,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 159.28000000000767,
+          "buoyancy_gf": -2.4447249978939,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6611229050268287,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 170,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 193.02000000002494,
+          "buoyancy_gf": 2.874013583733741,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.1268871294288123,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 171,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 172.78000000001458,
+          "buoyancy_gf": 2.8155829611743712,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6829697061831432,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 172,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 55.44000000000307,
+          "buoyancy_gf": -1.474801436550932,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.044405686680255615,
+          "min_tip_throat_m": 0.0006439689970701157,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 173,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 204.24000000003068,
+          "buoyancy_gf": -1.7587327594212718,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.7568637368688156,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 174,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 172.52000000001445,
+          "buoyancy_gf": 3.0410304669059514,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.29814097408180334,
+          "min_tip_throat_m": 0.27353850609209535,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 175,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 58.8600000000036,
+          "buoyancy_gf": -0.5604060564457294,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.37521389623127005,
+          "min_tip_throat_m": 0.0008171181302877533,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 176,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 163.72000000000995,
+          "buoyancy_gf": -4.703008304867615,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.16323899459058813,
+          "min_tip_throat_m": 0.01636315711654199,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 177,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 158.24000000000714,
+          "buoyancy_gf": 4.67840173965665,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.19574597940999364,
+          "min_tip_throat_m": 0.02114247390282599,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 178,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 160.5000000000083,
+          "buoyancy_gf": 4.486218252232231,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1624462168263474,
+          "min_tip_throat_m": 0.12684211667408876,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 179,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 164.38000000001028,
+          "buoyancy_gf": 4.015014086403797,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.08255917260518364,
+          "min_tip_throat_m": 0.055734014609531285,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 180,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 129.0399999999922,
+          "buoyancy_gf": -3.557601937650996,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.3749649746029986,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 181,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 91.6599999999989,
+          "buoyancy_gf": 0.809419058172387,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.21899263896100554,
+          "min_tip_throat_m": 0.00024363444863991578,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 182,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 154.6600000000053,
+          "buoyancy_gf": -0.47934134650943516,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.2288536393421264,
+          "min_tip_throat_m": 0.0519191250768999,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 183,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 137.19999999999638,
+          "buoyancy_gf": -3.9205564490524414,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.46894212295273374,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 184,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 123.49999999999257,
+          "buoyancy_gf": -2.2408208990246026,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.15392592824205026,
+          "min_tip_throat_m": 0.00024505766844262137,
+          "aborts_from": {
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 185,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 148.50000000000216,
+          "buoyancy_gf": 4.00223879859313,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.45795674713850837,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 186,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 166.44000000001134,
+          "buoyancy_gf": -1.5770034744623072,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.537204068160232,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 187,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 170.20000000001326,
+          "buoyancy_gf": -1.487625105508478,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.24645825979224484,
+          "min_tip_throat_m": 0.079800214654362,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 188,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 197.90000000002743,
+          "buoyancy_gf": 2.8966391613310556,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.7051932428148532,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 189,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 154.14000000000505,
+          "buoyancy_gf": -0.16567037849995714,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3211733200334763,
+          "min_tip_throat_m": 0.0005387124620450606,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 190,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 156.2200000000061,
+          "buoyancy_gf": -4.254127355772108,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.282536585186708,
+          "min_tip_throat_m": 0.1561247481372863,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 191,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 195.46000000002618,
+          "buoyancy_gf": 2.5917519276997636,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.7120882078296557,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 192,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 135.11999999999531,
+          "buoyancy_gf": -1.2666381275223837,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.13710477024550682,
+          "min_tip_throat_m": 0.0005696931364079326,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 193,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 184.3600000000205,
+          "buoyancy_gf": 0.6179275707769563,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.453494269161501,
+          "min_tip_throat_m": 0.10891515138009664,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 194,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 112.51999999999475,
+          "buoyancy_gf": 3.148915365531588,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.33629020325481623,
+          "min_tip_throat_m": 0.027720838087230748,
+          "aborts_from": {
+            "FINAL_APPROACH": 3,
+            "CAPTURE_PENDING": 3
+          }
+        },
+        {
+          "seed": 195,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 112.31999999999479,
+          "buoyancy_gf": 0.9551873352882732,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 4,
+          "contact_speed_mps": 0.23207280926433277,
+          "min_tip_throat_m": 0.0007283727718789883,
+          "aborts_from": {
+            "CAPTURE_PENDING": 3,
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 196,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 140.5399999999981,
+          "buoyancy_gf": 1.4939944824179685,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5097334021610843,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 197,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 138.9999999999973,
+          "buoyancy_gf": 0.3987663250669291,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.1917569364230019,
+          "min_tip_throat_m": 0.00017946144138692292,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 198,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 125.69999999999213,
+          "buoyancy_gf": -4.470213683514315,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5281155660607932,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 199,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 51.200000000002404,
+          "buoyancy_gf": -1.5575421792059538,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.08810414577492374,
+          "min_tip_throat_m": 0.00103203538750057,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        }
+      ]
+    },
+    "hz10": {
+      "rates": {
+        "episodes": 200.0,
+        "first_attempt": 0.075,
+        "within_one_retry": 0.135,
+        "within_max_attempts": 0.315
+      },
+      "failure_modes": {
+        "max_attempts": 137,
+        "captured": 63
+      },
+      "time_to_dock_s": {
+        "median": 64.1,
+        "p90": 115.5
+      },
+      "contact_speed_mps": {
+        "median": 0.258,
+        "max": 0.423
+      },
+      "episodes": [
+        {
+          "seed": 0,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 158.89999999999526,
+          "buoyancy_gf": 3.4442185152504816,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.8438918938810468,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 1,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 185.39999999999375,
+          "buoyancy_gf": -3.656357558875988,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5952985216804709,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 2,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 157.09999999999536,
+          "buoyancy_gf": 4.560342718892494,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5622236618844304,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 3,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 164.59999999999494,
+          "buoyancy_gf": -2.6203537290810863,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5651687916373621,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 4,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 28.90000000000014,
+          "buoyancy_gf": -2.6395191026256546,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2683122669241578,
+          "min_tip_throat_m": 0.00052701230229626,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 5,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 123.79999999999724,
+          "buoyancy_gf": 1.2290169488970193,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.2337209253129886,
+          "min_tip_throat_m": 0.0003530591315481368,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 6,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 176.69999999999425,
+          "buoyancy_gf": 2.93340083761663,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.0156226653896894,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 7,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 92.99999999999899,
+          "buoyancy_gf": -1.761672351668376,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.27048500303957285,
+          "min_tip_throat_m": 0.0005135274185257307,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 8,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 162.89999999999503,
+          "buoyancy_gf": -2.7329414061895116,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6196081632806203,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 9,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 126.09999999999711,
+          "buoyancy_gf": -0.36992642184978575,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2566498554862299,
+          "min_tip_throat_m": 0.36983088819901855,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 10,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 163.599999999995,
+          "buoyancy_gf": 0.7140259468991346,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.505201108346929,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 11,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 144.2999999999961,
+          "buoyancy_gf": -0.476204464901814,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.530022289040501,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 12,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 158.0999999999953,
+          "buoyancy_gf": -0.25429321311451947,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2831294424957128,
+          "min_tip_throat_m": 0.3117324511043388,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 13,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 155.99999999999542,
+          "buoyancy_gf": -2.4099150828452642,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.832646402353688,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 14,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 137.49999999999648,
+          "buoyancy_gf": -3.931714622983443,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.3821678270927484,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 15,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 107.89999999999814,
+          "buoyancy_gf": 4.65242141552123,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5197201201752047,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 16,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 55.00000000000051,
+          "buoyancy_gf": -1.3847722508592488,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.15782625179474616,
+          "min_tip_throat_m": 0.00040927123938089277,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 17,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 137.1999999999965,
+          "buoyancy_gf": 0.21983909712493244,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.36586916252557855,
+          "min_tip_throat_m": 0.0005258099349582231,
+          "aborts_from": {
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 18,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 90.49999999999913,
+          "buoyancy_gf": -3.1873513666677864,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.669231163631393,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 19,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 166.49999999999483,
+          "buoyancy_gf": 1.7712582680027031,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.501018984939247,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 20,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 138.6999999999964,
+          "buoyancy_gf": 4.056396761745207,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.19387255648072346,
+          "min_tip_throat_m": 0.031369364196771915,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 21,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 114.79999999999775,
+          "buoyancy_gf": -3.35050520166802,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.7068675678474547,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 22,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 73.00000000000013,
+          "buoyancy_gf": 4.582093798172728,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.12749003575303453,
+          "min_tip_throat_m": 0.0003003846129851783,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 23,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 95.69999999999884,
+          "buoyancy_gf": 4.248652516259453,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6092917796018583,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 24,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 172.1999999999945,
+          "buoyancy_gf": 2.123429878269185,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4681373473805253,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 25,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 164.49999999999494,
+          "buoyancy_gf": -1.2303769760961405,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4993011516430193,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 26,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 188.59999999999357,
+          "buoyancy_gf": 2.4729126622328357,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2554779236015851,
+          "min_tip_throat_m": 0.09994032511193396,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 27,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 60.30000000000059,
+          "buoyancy_gf": 1.4849721997888308,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.26681370511788116,
+          "min_tip_throat_m": 0.0005277758699407495,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 28,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 91.49999999999908,
+          "buoyancy_gf": -3.8704282982383695,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.27317843324883456,
+          "min_tip_throat_m": 0.00024192781016841536,
+          "aborts_from": {
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 29,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 115.49999999999771,
+          "buoyancy_gf": 0.48119053811699075,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.23757726045310149,
+          "min_tip_throat_m": 0.0004118468947791766,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 30,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 59.20000000000057,
+          "buoyancy_gf": 0.3908156460581056,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.27693295411958213,
+          "min_tip_throat_m": 0.0004810016402838031,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 31,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 19.60000000000001,
+          "buoyancy_gf": -4.877217526020246,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.25622457836278767,
+          "min_tip_throat_m": 0.0005266365675396763,
+          "aborts_from": {}
+        },
+        {
+          "seed": 32,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 55.00000000000051,
+          "buoyancy_gf": -4.225782161466959,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.1373465391942559,
+          "min_tip_throat_m": 0.0004798952271226955,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 33,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 16.399999999999963,
+          "buoyancy_gf": 0.7032842313687313,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3310410599741359,
+          "min_tip_throat_m": 0.00047531604114953244,
+          "aborts_from": {}
+        },
+        {
+          "seed": 34,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 80.39999999999971,
+          "buoyancy_gf": 0.28935382940412335,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.19883620733586002,
+          "min_tip_throat_m": 0.000527633604106231,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 35,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 76.29999999999994,
+          "buoyancy_gf": 0.48694605643822264,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.36825021715727585,
+          "min_tip_throat_m": 0.00021607101271460633,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 36,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 147.5999999999959,
+          "buoyancy_gf": -1.7129947946690205,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5627427704085982,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 37,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 102.09999999999847,
+          "buoyancy_gf": 1.8200456058797787,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1102367617355675,
+          "min_tip_throat_m": 0.0003752315814538042,
+          "aborts_from": {
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 38,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 84.0999999999995,
+          "buoyancy_gf": 1.394736947203203,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.20058443435628184,
+          "min_tip_throat_m": 0.0005206355417859467,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 39,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 122.39999999999732,
+          "buoyancy_gf": -2.9014875546348273,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5666467711768768,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 40,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 166.39999999999483,
+          "buoyancy_gf": -0.4139329061293857,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.27032987558814203,
+          "min_tip_throat_m": 0.00046874309538048626,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 41,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 34.00000000000021,
+          "buoyancy_gf": -1.1897931000422854,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.17609970578018963,
+          "min_tip_throat_m": 0.0005075347472206255,
+          "aborts_from": {}
+        },
+        {
+          "seed": 42,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 129.39999999999694,
+          "buoyancy_gf": 1.3942679845788373,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4227438523757078,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 43,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 115.5999999999977,
+          "buoyancy_gf": -4.6144816066261996,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.04737016717715185,
+          "min_tip_throat_m": 0.11854025087446354,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 44,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 23.400000000000063,
+          "buoyancy_gf": -0.9146412074550625,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.14449899318330653,
+          "min_tip_throat_m": 0.00047985845586857195,
+          "aborts_from": {}
+        },
+        {
+          "seed": 45,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 128.89999999999696,
+          "buoyancy_gf": -2.2812458561590923,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.8929503082101069,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 46,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 111.69999999999793,
+          "buoyancy_gf": 3.8826807645248813,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.11503695947327651,
+          "min_tip_throat_m": 0.00046398222585431506,
+          "aborts_from": {
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 47,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 131.5999999999968,
+          "buoyancy_gf": -1.4815374417211737,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.28188600250484763,
+          "min_tip_throat_m": 0.08031451931049338,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 48,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 54.90000000000051,
+          "buoyancy_gf": 0.4815782841632963,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.22325390076709936,
+          "min_tip_throat_m": 0.0004140942903944774,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 49,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 148.49999999999585,
+          "buoyancy_gf": -4.331160236572483,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.2576295122018781,
+          "min_tip_throat_m": 0.0001640224949592188,
+          "aborts_from": {
+            "FINAL_APPROACH": 3,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 50,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 124.89999999999718,
+          "buoyancy_gf": -0.024634312413977177,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.1727595432001405,
+          "min_tip_throat_m": 0.11587245775730048,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 51,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 137.2999999999965,
+          "buoyancy_gf": -2.56482237290663,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5334687103532968,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 52,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 51.20000000000046,
+          "buoyancy_gf": 4.783548583709967,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.28397343557750093,
+          "min_tip_throat_m": 0.0005198533384853684,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 53,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 195.99999999999315,
+          "buoyancy_gf": 1.171414766699522,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3602885896956309,
+          "min_tip_throat_m": 0.1271243198560402,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 54,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 126.59999999999708,
+          "buoyancy_gf": 4.136429725548911,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.12858052571543035,
+          "min_tip_throat_m": 0.13806336932881885,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 55,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 144.69999999999607,
+          "buoyancy_gf": -4.096601457306504,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.14630395913505673,
+          "min_tip_throat_m": 0.03324850872436387,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 56,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 25.000000000000085,
+          "buoyancy_gf": 4.659191880249441,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1706767779285958,
+          "min_tip_throat_m": 0.000530283414857547,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 57,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 131.19999999999683,
+          "buoyancy_gf": -4.574342864174231,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.17924026850195843,
+          "min_tip_throat_m": 0.0965180939170651,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 58,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 151.1999999999957,
+          "buoyancy_gf": 0.8075716493395664,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.17842734871857086,
+          "min_tip_throat_m": 0.017001750191806195,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 59,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 219.7999999999918,
+          "buoyancy_gf": -2.7581452515267357,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.0609827804355552,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 60,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 172.0999999999945,
+          "buoyancy_gf": -1.921932452662226,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.551729635246224,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 61,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 162.49999999999505,
+          "buoyancy_gf": -0.05512564020565325,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.41573509256960667,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 62,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 56.50000000000053,
+          "buoyancy_gf": 4.279915658776742,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.04306930385745855,
+          "min_tip_throat_m": 0.000521788184005443,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 63,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 118.09999999999756,
+          "buoyancy_gf": -0.5486077484317722,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.40088066037019504,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 64,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 132.69999999999675,
+          "buoyancy_gf": -0.23841737770654348,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4720349728382877,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 65,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 73.00000000000013,
+          "buoyancy_gf": -0.85256000691321,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.42335505282475755,
+          "min_tip_throat_m": 0.0005160263306150355,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 66,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 132.09999999999678,
+          "buoyancy_gf": -4.291910729409274,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.504465549746197,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 67,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 129.29999999999694,
+          "buoyancy_gf": -4.252062431268893,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5684164328420619,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 68,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 182.7999999999939,
+          "buoyancy_gf": 2.4166893561457323,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.9529768308399154,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 69,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 20.40000000000002,
+          "buoyancy_gf": 1.8424095241207326,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.11250962639001402,
+          "min_tip_throat_m": 0.0004984128959186819,
+          "aborts_from": {}
+        },
+        {
+          "seed": 70,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 39.50000000000029,
+          "buoyancy_gf": 4.097692379238719,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2111637886908696,
+          "min_tip_throat_m": 0.00044637345206472465,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 71,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 185.29999999999376,
+          "buoyancy_gf": -1.7624665417923433,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.0162561051205798,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 72,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 98.49999999999868,
+          "buoyancy_gf": -4.2657334519766845,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6076437953661301,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 73,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 115.6999999999977,
+          "buoyancy_gf": -2.2018452642701214,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.8016767360098045,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 74,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 155.79999999999544,
+          "buoyancy_gf": 3.5972844519186538,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.30348951972035576,
+          "min_tip_throat_m": 0.02467356417540761,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 75,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 160.39999999999517,
+          "buoyancy_gf": -0.4915486585499096,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.17977443393023587,
+          "min_tip_throat_m": 0.10656465328320124,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 76,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 172.59999999999448,
+          "buoyancy_gf": -1.2944335890369296,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.22825435549887002,
+          "min_tip_throat_m": 0.343781867861766,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 77,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 163.89999999999498,
+          "buoyancy_gf": 2.99115369116727,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.04304566391655411,
+          "min_tip_throat_m": 0.02751568918250444,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 78,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 139.99999999999633,
+          "buoyancy_gf": 3.144781454478103,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.17332131962867342,
+          "min_tip_throat_m": 0.0005028114719717735,
+          "aborts_from": {
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 79,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 81.79999999999963,
+          "buoyancy_gf": -3.546638381667193,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2116803088560492,
+          "min_tip_throat_m": 0.0003724588411861558,
+          "aborts_from": {
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 80,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 164.59999999999494,
+          "buoyancy_gf": -2.2850888674005443,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5096435805109766,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 81,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 50.70000000000045,
+          "buoyancy_gf": 0.05940413770247677,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2611170530549227,
+          "min_tip_throat_m": 0.0004886976173381397,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 82,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 154.09999999999553,
+          "buoyancy_gf": -3.5527944736633152,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.032552109865598325,
+          "min_tip_throat_m": 0.10468928401914034,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 83,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 188.0999999999936,
+          "buoyancy_gf": -0.03843830199587295,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3333386757030219,
+          "min_tip_throat_m": 0.06250200627705996,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 84,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 184.5999999999938,
+          "buoyancy_gf": 2.31531130400211,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5905932624040185,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 85,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 175.5999999999943,
+          "buoyancy_gf": -3.0041129364589994,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.42471328333022923,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 86,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 111.49999999999794,
+          "buoyancy_gf": 2.9152593596146588,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.426569043946656,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 87,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 104.49999999999834,
+          "buoyancy_gf": -3.5404519932035305,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.18121132027005868,
+          "min_tip_throat_m": 0.0005097565083183099,
+          "aborts_from": {
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 88,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 142.79999999999617,
+          "buoyancy_gf": -1.0251112301854248,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2136919468914716,
+          "min_tip_throat_m": 0.022491355252413144,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 89,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 126.2999999999971,
+          "buoyancy_gf": -4.189093353761155,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.10592565035665392,
+          "min_tip_throat_m": 0.04462042884156109,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 90,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 70.0000000000003,
+          "buoyancy_gf": -2.9632955257894844,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.26397667644576883,
+          "min_tip_throat_m": 0.0004934872031986885,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 91,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 156.3999999999954,
+          "buoyancy_gf": -4.164794788464143,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2511093003010084,
+          "min_tip_throat_m": 0.03670681276388076,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 92,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 121.69999999999736,
+          "buoyancy_gf": -0.7895538571335372,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.42307837607179655,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 93,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 113.79999999999781,
+          "buoyancy_gf": 4.1234335935974915,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.09857663171587047,
+          "min_tip_throat_m": 0.10811124815987422,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 94,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 23.10000000000006,
+          "buoyancy_gf": 0.4680155353663302,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2910221138223799,
+          "min_tip_throat_m": 0.0004992673109978147,
+          "aborts_from": {}
+        },
+        {
+          "seed": 95,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 118.19999999999756,
+          "buoyancy_gf": 2.6016147830977445,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2158371452258505,
+          "min_tip_throat_m": 0.07730761602827424,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 96,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 165.3999999999949,
+          "buoyancy_gf": -1.2940568987531353,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5118005418128796,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 97,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 164.69999999999493,
+          "buoyancy_gf": -3.0546275206681894,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.614403654621064,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 98,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 178.19999999999416,
+          "buoyancy_gf": -1.4360179323727786,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.40245460170426073,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 99,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 140.4999999999963,
+          "buoyancy_gf": -0.9602192505633367,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 3,
+          "contact_speed_mps": 0.10241739492124963,
+          "min_tip_throat_m": 0.04224073877739618,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 100,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 158.79999999999526,
+          "buoyancy_gf": -3.543307448958697,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6100464984909766,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 101,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 64.10000000000063,
+          "buoyancy_gf": 0.8115213250456463,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.4234782296942518,
+          "min_tip_throat_m": 0.0004077164546449481,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 102,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 135.2999999999966,
+          "buoyancy_gf": -3.5182879361291644,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.522887568582509,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 103,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 145.29999999999603,
+          "buoyancy_gf": 4.790501200727743,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1692047539751757,
+          "min_tip_throat_m": 0.07089533121746572,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 104,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 145.59999999999602,
+          "buoyancy_gf": 4.599609301949554,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.20149906497514827,
+          "min_tip_throat_m": 0.1763548450495199,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 105,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 144.69999999999607,
+          "buoyancy_gf": 3.7809934907649243,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.23758602449021857,
+          "min_tip_throat_m": 0.052323640480642336,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 106,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 209.69999999999237,
+          "buoyancy_gf": 2.106837330624928,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.0926887225703916,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 107,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 154.6999999999955,
+          "buoyancy_gf": -2.5351804033064185,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5100092570206095,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 108,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 157.79999999999532,
+          "buoyancy_gf": -3.6947977009932975,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5778641566270983,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 109,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 123.09999999999728,
+          "buoyancy_gf": -2.204169613941321,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6266726297581663,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 110,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 120.09999999999745,
+          "buoyancy_gf": 4.3426196270397295,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.142129408397219,
+          "min_tip_throat_m": 0.02141221492425734,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 111,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 112.69999999999787,
+          "buoyancy_gf": 3.2717056534231403,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1365061423330885,
+          "min_tip_throat_m": 0.06757525914041812,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 112,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 147.7999999999959,
+          "buoyancy_gf": -0.18753365926691679,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.38768863303179935,
+          "min_tip_throat_m": 0.0005229648469779186,
+          "aborts_from": {
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 113,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 112.49999999999788,
+          "buoyancy_gf": -4.694446798126259,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4664097666528594,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 114,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 57.60000000000055,
+          "buoyancy_gf": -2.590644988215054,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6377614000151923,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 115,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 98.39999999999868,
+          "buoyancy_gf": 3.959023750070166,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5408261166745915,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 116,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 158.2999999999953,
+          "buoyancy_gf": 3.213575314395893,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.25249532315511525,
+          "min_tip_throat_m": 0.11319168608660103,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 117,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 44.90000000000037,
+          "buoyancy_gf": -2.598969699337438,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.22826863930051305,
+          "min_tip_throat_m": 0.0004867360384089828,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 118,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 82.79999999999957,
+          "buoyancy_gf": 2.1098226779628444,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.35421296072800734,
+          "min_tip_throat_m": 0.0004930383204986053,
+          "aborts_from": {
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 119,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 131.49999999999682,
+          "buoyancy_gf": 4.26312858507014,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5019060644177306,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 120,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 13.199999999999969,
+          "buoyancy_gf": 0.14937954007749088,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3799116987835757,
+          "min_tip_throat_m": 0.0004957722177799028,
+          "aborts_from": {}
+        },
+        {
+          "seed": 121,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 123.09999999999728,
+          "buoyancy_gf": -4.126985131341834,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1276016443722159,
+          "min_tip_throat_m": 0.045827041377308725,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 122,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 107.49999999999817,
+          "buoyancy_gf": 0.10018506743479527,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.406680693570133,
+          "min_tip_throat_m": 0.0004848886898183541,
+          "aborts_from": {
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 123,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 95.39999999999885,
+          "buoyancy_gf": -4.476364011490556,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.41554693799452447,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 124,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 97.79999999999872,
+          "buoyancy_gf": 4.607807567552326,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5226762484121874,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 125,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 46.000000000000384,
+          "buoyancy_gf": 4.0005821915565445,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1150143405563167,
+          "min_tip_throat_m": 0.0004768243148921529,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 126,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 165.59999999999488,
+          "buoyancy_gf": 0.7257673934264153,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4451542789686451,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 127,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 125.79999999999713,
+          "buoyancy_gf": -4.554242051216595,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.10404353505035863,
+          "min_tip_throat_m": 0.018075508485042708,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 128,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 55.200000000000514,
+          "buoyancy_gf": 4.400340903508457,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.1861279061610336,
+          "min_tip_throat_m": 0.00017740785281318238,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 129,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 92.29999999999903,
+          "buoyancy_gf": 0.8609776845595754,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.36340612439772885,
+          "min_tip_throat_m": 0.0005120759334320993,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 130,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 132.69999999999675,
+          "buoyancy_gf": 0.19777941893520357,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.19805484842224963,
+          "min_tip_throat_m": 0.0914061207974619,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 131,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 184.7999999999938,
+          "buoyancy_gf": -1.8456481119655486,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.8228529215283439,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 132,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 23.10000000000006,
+          "buoyancy_gf": -0.8757117274572099,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2891864725720624,
+          "min_tip_throat_m": 0.0004852182776916166,
+          "aborts_from": {}
+        },
+        {
+          "seed": 133,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 98.59999999999867,
+          "buoyancy_gf": -0.06167349558428015,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.34566515659387503,
+          "min_tip_throat_m": 0.0003545092769727317,
+          "aborts_from": {
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 134,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 134.69999999999663,
+          "buoyancy_gf": -0.15881243920857813,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1799090044858486,
+          "min_tip_throat_m": 0.0004762381753511058,
+          "aborts_from": {
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 135,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 195.1999999999932,
+          "buoyancy_gf": 1.6953503618824026,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.919400543544192,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 136,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 120.8999999999974,
+          "buoyancy_gf": 0.7571620813643056,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.35076498428586284,
+          "min_tip_throat_m": 0.000521747493831294,
+          "aborts_from": {
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 137,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 151.49999999999568,
+          "buoyancy_gf": -4.276334257305292,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1825328013563293,
+          "min_tip_throat_m": 0.09525141606686485,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 138,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 160.79999999999515,
+          "buoyancy_gf": -3.0656366510761677,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5924459189626617,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 139,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 101.89999999999849,
+          "buoyancy_gf": -4.984898272198292,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5860494852101386,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 140,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 126.2999999999971,
+          "buoyancy_gf": 2.7159093969833057,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.42857193792839804,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 141,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 100.19999999999858,
+          "buoyancy_gf": 0.1732089950672382,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2794434094564189,
+          "min_tip_throat_m": 0.05209512518461561,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 142,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 85.59999999999941,
+          "buoyancy_gf": 0.8258843938317764,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.42077924782238685,
+          "min_tip_throat_m": 0.000501349021202095,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 143,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 153.39999999999557,
+          "buoyancy_gf": 4.063711552614622,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.12981708374763115,
+          "min_tip_throat_m": 0.10044481338195962,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 144,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 71.00000000000024,
+          "buoyancy_gf": -0.5173277828633029,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2866542632706599,
+          "min_tip_throat_m": 0.0005248846980594083,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 145,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 161.29999999999512,
+          "buoyancy_gf": 3.7047572253248937,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2674640491712231,
+          "min_tip_throat_m": 0.40191822345305256,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 146,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 94.5999999999989,
+          "buoyancy_gf": -3.6666483327868904,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6255034040730997,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 147,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 17.799999999999983,
+          "buoyancy_gf": 1.0523988040189565,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.27343181807455,
+          "min_tip_throat_m": 0.0005275605688675922,
+          "aborts_from": {}
+        },
+        {
+          "seed": 148,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 140.5999999999963,
+          "buoyancy_gf": -0.9649824572418622,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.40238586169155927,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 149,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 19.400000000000006,
+          "buoyancy_gf": -4.288924925170276,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.16152181148996636,
+          "min_tip_throat_m": 0.0005232921992945722,
+          "aborts_from": {}
+        },
+        {
+          "seed": 150,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 156.1999999999954,
+          "buoyancy_gf": 3.238072419640881,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6167777972393939,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 151,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 204.29999999999268,
+          "buoyancy_gf": 2.0657373524917446,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.1149287265126502,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 152,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 143.29999999999615,
+          "buoyancy_gf": 4.7765332278827906,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.19982690922913737,
+          "min_tip_throat_m": 0.022377041106331527,
+          "aborts_from": {
+            "CAPTURE_PENDING": 2,
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 153,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 124.29999999999721,
+          "buoyancy_gf": 4.9336767562114545,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.21185897370558943,
+          "min_tip_throat_m": 0.029743160588998962,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 154,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 188.39999999999358,
+          "buoyancy_gf": -2.968576936244726,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.0368503999642695,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 155,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 156.99999999999537,
+          "buoyancy_gf": 0.808862932227294,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2295069979011768,
+          "min_tip_throat_m": 0.1577346645185821,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 156,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 173.09999999999445,
+          "buoyancy_gf": -0.1222052114004093,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.18004455937788388,
+          "min_tip_throat_m": 0.021570843943555195,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 157,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 94.79999999999889,
+          "buoyancy_gf": 1.1164339252488533,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.08814703360765287,
+          "min_tip_throat_m": 0.000519955993242372,
+          "aborts_from": {
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 158,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 199.39999999999296,
+          "buoyancy_gf": 1.8425230640308063,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.887827329154897,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 159,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 165.59999999999488,
+          "buoyancy_gf": -1.0548011831478887,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3542510519681937,
+          "min_tip_throat_m": 0.37179341857492487,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 160,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 114.49999999999777,
+          "buoyancy_gf": -3.7746298682480948,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.21201183938902057,
+          "min_tip_throat_m": 0.06652423342827908,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 161,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 64.40000000000062,
+          "buoyancy_gf": 0.18210069866208212,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.2979876459597144,
+          "min_tip_throat_m": 0.0004757802590348176,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 162,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 162.19999999999507,
+          "buoyancy_gf": -4.462958299358942,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5995313595715087,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 163,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 134.79999999999663,
+          "buoyancy_gf": 0.41420687893490715,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.49167191993473564,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 164,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 118.19999999999756,
+          "buoyancy_gf": -4.046650995216263,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.22684280445947572,
+          "min_tip_throat_m": 0.10660156555364411,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 165,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 31.500000000000178,
+          "buoyancy_gf": -4.831749941275929,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.20197380119679895,
+          "min_tip_throat_m": 0.00047228649804673204,
+          "aborts_from": {}
+        },
+        {
+          "seed": 166,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 163.19999999999501,
+          "buoyancy_gf": -3.2128564542224956,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.068506769239971,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 167,
+          "ok": true,
+          "retries": 3,
+          "sim_time_s": 84.0999999999995,
+          "buoyancy_gf": -2.711710943229172,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.15064324983920505,
+          "min_tip_throat_m": 0.0005136243118074982,
+          "aborts_from": {
+            "FINAL_APPROACH": 3
+          }
+        },
+        {
+          "seed": 168,
+          "ok": true,
+          "retries": 1,
+          "sim_time_s": 40.3000000000003,
+          "buoyancy_gf": 2.455596261835028,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3590507475192804,
+          "min_tip_throat_m": 0.0004890871333953483,
+          "aborts_from": {
+            "FINAL_APPROACH": 1
+          }
+        },
+        {
+          "seed": 169,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 206.29999999999256,
+          "buoyancy_gf": -2.4447249978939,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 1.0736728112032081,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 170,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 164.39999999999495,
+          "buoyancy_gf": 2.874013583733741,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.7182354562707721,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 171,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 160.89999999999515,
+          "buoyancy_gf": 2.8155829611743712,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.653252998622228,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 172,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 24.60000000000008,
+          "buoyancy_gf": -1.474801436550932,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.27744305880890285,
+          "min_tip_throat_m": 0.00047532012483950727,
+          "aborts_from": {}
+        },
+        {
+          "seed": 173,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 143.09999999999616,
+          "buoyancy_gf": -1.7587327594212718,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6535191434301671,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 174,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 108.99999999999808,
+          "buoyancy_gf": 3.0410304669059514,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.19135215782855516,
+          "min_tip_throat_m": 0.08563357721342735,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 175,
+          "ok": true,
+          "retries": 2,
+          "sim_time_s": 58.700000000000564,
+          "buoyancy_gf": -0.5604060564457294,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3656097284490902,
+          "min_tip_throat_m": 0.0003367659504169642,
+          "aborts_from": {
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 176,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 100.09999999999859,
+          "buoyancy_gf": -4.703008304867615,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.14472293607116832,
+          "min_tip_throat_m": 0.0959168778751004,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 177,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 133.29999999999671,
+          "buoyancy_gf": 4.67840173965665,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 4,
+          "contact_speed_mps": 0.1122939695195024,
+          "min_tip_throat_m": 0.06354738142969384,
+          "aborts_from": {
+            "CAPTURE_PENDING": 4,
+            "FINAL_APPROACH": 2
+          }
+        },
+        {
+          "seed": 178,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 98.79999999999866,
+          "buoyancy_gf": 4.486218252232231,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5544930224493531,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 179,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 17.49999999999998,
+          "buoyancy_gf": 4.015014086403797,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.27266920092078084,
+          "min_tip_throat_m": 0.0005097978967861671,
+          "aborts_from": {}
+        },
+        {
+          "seed": 180,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 138.7999999999964,
+          "buoyancy_gf": -3.557601937650996,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.11410864386686569,
+          "min_tip_throat_m": 0.026473800664920413,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 181,
+          "ok": true,
+          "retries": 4,
+          "sim_time_s": 92.39999999999903,
+          "buoyancy_gf": 0.809419058172387,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.1666210947438136,
+          "min_tip_throat_m": 0.00047405730570394486,
+          "aborts_from": {
+            "FINAL_APPROACH": 4
+          }
+        },
+        {
+          "seed": 182,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 145.59999999999602,
+          "buoyancy_gf": -0.47934134650943516,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5537495264059731,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 183,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 123.09999999999728,
+          "buoyancy_gf": -3.9205564490524414,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.39713929896998856,
+          "aborts_from": {
+            "CAPTURE_PENDING": 1,
+            "FINAL_APPROACH": 5
+          }
+        },
+        {
+          "seed": 184,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 102.59999999999845,
+          "buoyancy_gf": -2.2408208990246026,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5394342312554566,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 185,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 160.69999999999516,
+          "buoyancy_gf": 4.00223879859313,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.17142916569082217,
+          "min_tip_throat_m": 0.10901773751862566,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 2
+          }
+        },
+        {
+          "seed": 186,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 154.99999999999548,
+          "buoyancy_gf": -1.5770034744623072,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.30541065119076105,
+          "min_tip_throat_m": 0.12461073587290476,
+          "aborts_from": {
+            "FINAL_APPROACH": 5,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 187,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 149.99999999999577,
+          "buoyancy_gf": -1.487625105508478,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.6173408504276009,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 188,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 207.3999999999925,
+          "buoyancy_gf": 2.8966391613310556,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.7837836954807603,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 189,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 24.200000000000074,
+          "buoyancy_gf": -0.16567037849995714,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.3981282736724446,
+          "min_tip_throat_m": 0.0005172303476955616,
+          "aborts_from": {}
+        },
+        {
+          "seed": 190,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 122.7999999999973,
+          "buoyancy_gf": -4.254127355772108,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5415147709745155,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 191,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 160.49999999999517,
+          "buoyancy_gf": 2.5917519276997636,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.9844681353744602,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 192,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 135.0999999999966,
+          "buoyancy_gf": -1.2666381275223837,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.46492506223915464,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 193,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 161.7999999999951,
+          "buoyancy_gf": 0.6179275707769563,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.380866548190475,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 194,
+          "ok": true,
+          "retries": 0,
+          "sim_time_s": 25.100000000000087,
+          "buoyancy_gf": 3.148915365531588,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 1,
+          "contact_speed_mps": 0.08247135094463938,
+          "min_tip_throat_m": 0.0004642406471443106,
+          "aborts_from": {}
+        },
+        {
+          "seed": 195,
+          "ok": true,
+          "retries": 5,
+          "sim_time_s": 104.59999999999833,
+          "buoyancy_gf": 0.9551873352882732,
+          "end_phase": "CAPTURED",
+          "mouth_entries": 2,
+          "contact_speed_mps": 0.17316164064792333,
+          "min_tip_throat_m": 0.00011847408496147837,
+          "aborts_from": {
+            "FINAL_APPROACH": 4,
+            "CAPTURE_PENDING": 1
+          }
+        },
+        {
+          "seed": 196,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 155.19999999999547,
+          "buoyancy_gf": 1.4939944824179685,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4487431955532801,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 197,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 133.3999999999967,
+          "buoyancy_gf": 0.3987663250669291,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.4908547769280935,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 198,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 135.99999999999656,
+          "buoyancy_gf": -4.470213683514315,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.5252274214744161,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        },
+        {
+          "seed": 199,
+          "ok": false,
+          "retries": 6,
+          "sim_time_s": 133.99999999999667,
+          "buoyancy_gf": -1.5575421792059538,
+          "end_phase": "DOCK_FAILED",
+          "mouth_entries": 0,
+          "contact_speed_mps": null,
+          "min_tip_throat_m": 0.3976516313395258,
+          "aborts_from": {
+            "FINAL_APPROACH": 6
+          }
+        }
+      ]
+    }
+  },
+  "bump": {
+    "hz50": {
+      "damper_on": {
+        "episodes": 50,
+        "settled": 10,
+        "median_settle_s": 5.4,
+        "max_tilt_deg_median": 18.7
+      },
+      "damper_off": {
+        "episodes": 50,
+        "settled": 6,
+        "median_settle_s": 5.88,
+        "max_tilt_deg_median": 18.9
+      }
+    },
+    "hz10": {
+      "damper_on": {
+        "episodes": 50,
+        "settled": 6,
+        "median_settle_s": 12.8,
+        "max_tilt_deg_median": 17.6
+      },
+      "damper_off": {
+        "episodes": 50,
+        "settled": 4,
+        "median_settle_s": 14.1,
+        "max_tilt_deg_median": 17.7
+      }
+    }
+  }
+}
