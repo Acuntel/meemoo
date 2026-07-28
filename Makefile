@@ -5,7 +5,7 @@
 PIO ?= pio
 PIO_HINT = PlatformIO is not installed. Fix: python3 -m venv ~/.pio && ~/.pio/bin/pip install platformio, then rerun with PIO=~/.pio/bin/pio (or add it to PATH). See firmware/README.md.
 
-.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain demo-guardian demo-flight flash-bench flash-flight firmware-check physics3d
+.PHONY: dev api web-dev install migrate test lint type check web-install web-typecheck web-build demo-voice demo-brain demo-guardian demo-flight flash-bench flash-flight firmware-check physics3d dock-bench
 
 # ------------------------------------------------------------------ install
 install:
@@ -80,6 +80,14 @@ firmware-check:
 # uv run --group installs it on demand; make check never needs it.
 physics3d:
 	uv run --group physics3d python -m sim3d.experiment --episodes 200 --bumps 50 --plots
+
+# The 2D half of the same measurement: the Phase-6 docking gate, same episode
+# contract MuJoCo flies. Needs nothing beyond the base install (~2 min for all
+# three cells). Numbers land in docs/assets/physics2d_results.json.
+dock-bench:
+	uv run python -m meemoo.flight.dock_bench --episodes 200 --hz 50
+	uv run python -m meemoo.flight.dock_bench --episodes 200 --hz 10
+	uv run python -m meemoo.flight.dock_bench --episodes 200 --no-drafts
 
 # --------------------------------------------------------------------- test
 test:

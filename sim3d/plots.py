@@ -111,6 +111,82 @@ def _plot_bump(path: Path, series: dict[str, list[tuple[float, float]]]) -> None
     plt.close(fig)
 
 
+# Controller v1 (reactive beam-hold), as published 2026-07-28 before the
+# planner landed. Kept as constants so the comparison figure is honest about
+# what it is comparing: these are measurements, not a baseline re-run under
+# different conditions. Cells: first-attempt, within-one-retry, within-six.
+_V1 = {
+    "2D sim\n50 Hz": (0.160, 0.350, 0.635),
+    "MuJoCo\n50 Hz": (0.070, 0.105, 0.280),
+    "MuJoCo\n10 Hz": (0.075, 0.135, 0.315),
+}
+
+
+def _plot_before_after(path: Path, after: dict[str, tuple[float, float, float]]
+                       ) -> None:
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    cells = [c for c in _V1 if c in after]
+    fig, axes = plt.subplots(1, 3, figsize=(11.5, 4.0), sharey=True)
+    titles = ("first attempt", "within one retry", "within six attempts")
+    for i, (ax, title) in enumerate(zip(axes, titles, strict=True)):
+        _style(ax)
+        xs = range(len(cells))
+        ax.bar([x - 0.19 for x in xs], [_V1[c][i] * 100 for c in cells],
+               width=0.36, color=_MUTED, label="controller v1")
+        ax.bar([x + 0.19 for x in xs], [after[c][i] * 100 for c in cells],
+               width=0.36, color=_PHASE_COLORS["FINAL_APPROACH"],
+               label="controller v2")
+        for x, c in zip(xs, cells, strict=True):
+            ax.annotate(f"{after[c][i] * 100:.0f}%", xy=(x + 0.19, after[c][i] * 100),
+                        xytext=(0, 3), textcoords="offset points", ha="center",
+                        fontsize=8, color=_INK)
+        ax.set_xticks(list(xs))
+        ax.set_xticklabels(cells, fontsize=8, color=_INK)
+        ax.set_title(title, color=_INK, fontsize=10)
+        ax.set_ylim(0, 105)
+    axes[0].set_ylabel("success (%)", color=_INK)
+    # the Phase-6 gate is BOTH bars: >95% first attempt and >99% within one
+    for ax, bar in ((axes[0], 95.0), (axes[1], 99.0)):
+        ax.axhline(bar, color=_PHASE_COLORS["ABORT"], linewidth=1, linestyle="--")
+        ax.annotate(f"Phase-6 gate ({bar:.0f}%)", xy=(0.02, bar + 1.5),
+                    xycoords=("axes fraction", "data"), fontsize=8,
+                    color=_PHASE_COLORS["ABORT"])
+    axes[2].legend(loc="lower right", fontsize=8, frameon=False, labelcolor=_INK)
+    fig.suptitle("Docking success, 200 randomized episodes per cell "
+                 "(same episode contract, same physics)", color=_INK, fontsize=11)
+    fig.tight_layout()
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
+def write_before_after(out_dir: Path) -> Path:
+    """Read both engines' result files and draw the v1-vs-v2 comparison."""
+    import json
+
+    after: dict[str, tuple[float, float, float]] = {}
+    two = out_dir / "physics2d_results.json"
+    three = out_dir / "physics3d_results.json"
+    if two.exists():
+        d = json.loads(two.read_text()).get("hz50", {}).get("rates")
+        if d:
+            after["2D sim\n50 Hz"] = (d["first_attempt"], d["within_one_retry"],
+                                      d["within_max_attempts"])
+    if three.exists():
+        doc = json.loads(three.read_text())["docking"]
+        for key, cell in (("hz50", "MuJoCo\n50 Hz"), ("hz10", "MuJoCo\n10 Hz")):
+            d = doc.get(key, {}).get("rates")
+            if d:
+                after[cell] = (d["first_attempt"], d["within_one_retry"],
+                               d["within_max_attempts"])
+    path = out_dir / "docking_v1_vs_v2.png"
+    _plot_before_after(path, after)
+    return path
+
+
 def write_plots(out_dir: Path, results: list[Episode3DResult],
                 *, control_hz: float = 50.0) -> list[Path]:
     """Re-run one success + one failure with tracing, plus a bump pair."""
@@ -146,3 +222,13 @@ def write_plots(out_dir: Path, results: list[Episode3DResult],
     _plot_bump(p, series)
     written.append(p)
     return written
+
+
+def main() -> None:
+    """CLI: refresh the v1-vs-v2 comparison from both engines' result files."""
+    path = write_before_after(Path("docs/assets"))
+    print(f"wrote {path}")  # noqa: T201 - CLI progress is this tool's UI
+
+
+if __name__ == "__main__":
+    main()

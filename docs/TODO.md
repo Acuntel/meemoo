@@ -422,26 +422,39 @@
 - [x] pytest: capture NEVER confirmed on a single signal (unit + full-
       episode sweeps); battery auto-return; ±20% constant perturbation
       doesn't collapse the controller; 70 flight tests, 425 total green
-- [ ] ⚠️ **GATE NOT MET — docking success rate** (honest, 2026-07-26,
-      100 randomized episodes at spec: buoyancy ±5 gf both signs, drafts
-      on, random start): **16% first-attempt, 32% within one retry, 61%
-      within six attempts; calm air 47% first-attempt.** Round-context
-      docking (short return from a waypoint) is much better — the demo
-      round docks and the e2e test is deterministic-green — but the spec
-      gate is >95%/99%. Root cause analysis (all measured, in
-      flight/docking.py comments): underactuated lateral authority vs
-      drafts of the same magnitude + near-zero drag = a reactive
-      controller cannot hold speed AND steer; braking poisons the lateral
-      loop. The physics was NOT loosened (Art. II §4). Next lever is a
-      short-horizon trajectory planner (bang-coast with terminal
-      constraints) + draft-state estimator, and/or the Phase-10 Isaac
-      track; Phase-9 funnel bench data will recalibrate R_capture/v_max.
-      The gate test exists and is skipped with this reason
-      (tests/flight/test_docking.py::test_gate_docking_success_rate).
-- Gate: ⚠️ PARTIAL 2026-07-26 — `make check` ALL GREEN (425 tests);
-  `make demo-flight` shows the full manual gate loop (round → person
-  waypoint → return → two-signal dock → charge → depart, exit 0); the
-  >95% Monte-Carlo bar is the honest miss recorded above
+- [ ] ⚠️ **GATE STILL NOT MET — docking success rate** (honest, controller
+      v2, 2026-07-28, 200 randomized episodes at spec: buoyancy ±5 gf both
+      signs, drafts on, σ-5 cm pose, 100 ms latency, 6 attempts):
+      **90.5% first-attempt, 99.0% within one retry, 100% within six** at
+      50 Hz; 78.5 / 96.0 / 99.5 at the 10 Hz interface rate; **100% / 100%
+      first-attempt in calm air with zero aborts.** The spec gate is
+      >95% first-attempt AND >99% within one retry — both missed, narrowly.
+      v1 measured 16% / 32% / 61% on the same contract, so this is a 5.7x
+      improvement that still does not clear the bar, and the physics was NOT
+      loosened to get it (Art. II §4).
+      What v2 changed (control layer only, all in flight/): a short-horizon
+      commit planner that HOLDS the corridor instead of going around
+      (dock_plan.py), rewritten in-funnel gates that trust contact over dead
+      reckoning and never abort while the range is shrinking (dock_slide.py),
+      an online draft estimator — the blimp as its own anemometer — feeding
+      the crab forward (draft.py), and boom placement: heading places the
+      NOSE kinematically while thrust magnitude carries the closing speed
+      (docking_laws.py). Arrival speed is now planned under v_max_capture,
+      which v1 silently exceeded.
+      What is left is authority vs drafts, not control logic: calm air is
+      perfect, and every remaining failure has wind in it (the dominant abort
+      is losing camera tracking while being blown off the corridor). Next
+      levers are physical — more control margin, a shallower cone needing
+      less boom, or an upwind-biased corridor — and Phase-9 bench data on
+      R_capture / v_max / real draft magnitudes decides which.
+      Both engines' numbers, the failure histograms and the plots are in
+      **docs/PHYSICS_VALIDATION.md**. The gate test exists and is skipped
+      with this reason (tests/flight/test_docking.py::
+      test_gate_docking_success_rate).
+- Gate: ⚠️ PARTIAL 2026-07-28 — `make check` ALL GREEN; `make demo-flight`
+  shows the full manual gate loop (round → person waypoint → return →
+  two-signal dock → charge → depart, exit 0, docks first-attempt); the
+  >95% Monte-Carlo bar is the honest miss recorded above (90.5%)
 
 ## Phase 7 — API + Web
 - [x] REST CRUD `/api/v1/...` for all tables (devices, persons, contacts,
@@ -684,7 +697,7 @@
       equality electromagnet (15 mm engage + remanence), ±5 gf both-sign
       buoyancy drift, OU wind drafts; adapter reproduces the 2D telemetry
       contract so the UNMODIFIED DockingController flies it. 18 rig tests
-      (skip cleanly without mujoco), 695 green total.
+      (skip cleanly without mujoco), 715 green total after the v2 work.
 - [x] Experiment run (200 episodes × {50, 10} Hz + 50 paired bumps, honest,
       2026-07-28): **7% first-attempt / 28% within six in MuJoCo vs 16% /
       63.5% re-measured same-day in 2D** — same failure signature (lateral
@@ -703,8 +716,24 @@
       path: AWS g6/g5 instance or NVIDIA Brev; Brady has NVIDIA API
       relationships) — MuJoCo rig covers the physics cross-check; Isaac now
       only pays off for photoreal camera sim / RL training
-- [ ] Trajectory planner + draft estimator for the docking controller, to be
-      proven in BOTH engines (the >95% gate lever; unchanged by this work)
+- [x] **Trajectory planner + draft estimator SHIPPED 2026-07-28, proven in
+      BOTH engines** (control layer only — no physics, no episode-contract
+      change): first-attempt **16% → 90.5% in 2D and 7% → 64% in
+      MuJoCo**; within six **63.5% → 100%** and **28% → 85%**. New
+      modules meemoo/flight/{dock_plan,dock_slide,draft,dock_hover}.py, 19
+      unit tests, and a reproducible 2D bench
+      (`make dock-bench`) beside `make physics3d`. The
+      >95% gate is still NOT met in either engine — see Phase 6 and
+      docs/PHYSICS_VALIDATION.md "After controller v2"
+- [ ] Remaining docking lever is AUTHORITY, not logic: calm air is 100%
+      first-attempt with zero aborts, so what is left is drafts of the same
+      magnitude as control authority. Candidates: more thrust margin, a
+      shallower cone (less boom, but the boom is also the best lateral
+      actuator — finding 1 now cuts both ways), fins that buy damping for
+      free, or siting the dock out of the draft field. Decide against
+      Phase-9 bench numbers, not sim tuning (an upwind-biased corridor was
+      considered and is already implicit in the crab equilibrium — see
+      PHYSICS_VALIDATION "Evaluated, and what happened to each")
 - [ ] Decision memo: is Isaac worth it vs. upgrading our own sim to 2.5D
 
 ## Phase 11 — Go-live gates (BLOCKING before any real user)

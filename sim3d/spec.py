@@ -142,7 +142,9 @@ class Episode3DResult:
     mouth_entries: int
     contact_speed_mps: float | None  # |v| at the mouth crossing that captured
     min_tip_throat_m: float
+    replans: int = 0
     aborts_from: dict[str, int] = field(default_factory=dict)
+    abort_reasons: dict[str, int] = field(default_factory=dict)
 
     @property
     def failure_mode(self) -> str:

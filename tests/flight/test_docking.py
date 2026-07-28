@@ -1,12 +1,15 @@
 """Docking state machine + Monte-Carlo behavior.
 
-GATE STATUS (honest, 2026-07-26, 100 randomized episodes at spec —
-buoyancy ±5 gf both signs, drafts on): first-attempt 7%, within one retry
-18%, within six attempts 42%. Calm air (drafts off): ~30% first-attempt.
-The Phase-6 gate (>95% first-attempt / >99% with one retry) is NOT MET —
-see docs/TODO.md Phase 6 for the analysis and the planner/Isaac follow-up.
-The tests below lock the safety invariants hard and pin honest performance
-FLOORS as regression protection; the skipped test is the real gate.
+GATE STATUS (honest, controller v2, 2026-07-28, 200 randomized episodes at
+spec — buoyancy ±5 gf both signs, drafts on, σ-5 cm pose, 100 ms latency,
+6 attempts): **first-attempt 90.5%, within one retry 99.0%, within six
+100%** at 50 Hz (78.5 / 96.0 / 99.5 at the 10 Hz interface rate). Calm air:
+100% first-attempt, zero aborts. The Phase-6 gate (>95% first-attempt AND
+>99% within one retry) is STILL NOT MET — both numbers land just under the
+bar, and the miss is entirely the draft-vs-authority problem the calm-air
+column isolates. Full analysis + the MuJoCo column in
+docs/PHYSICS_VALIDATION.md. The tests below lock the safety invariants hard
+and pin honest performance FLOORS; the skipped test is the real gate.
 """
 
 from __future__ import annotations
@@ -110,15 +113,22 @@ class TestStateMachine:
         assert ctl.phase is DockPhase.DOCK_FAILED
         assert ctl.retries == 2
 
-    def test_monotonic_urgency_of_capture_pending_timeout(self) -> None:
+    def test_never_waits_forever_at_the_mouth(self) -> None:
+        """A stalled slide must always END. v2 changed WHERE it goes: a nose
+        that is not sliding hands back to the planner (re-plan the line, keep
+        the attempt) instead of retreating to the standoff — but it still
+        leaves CAPTURE_PENDING promptly, which is the invariant."""
         ctl = make_ctl()
         ctl.phase = DockPhase.CAPTURE_PENDING
         near = RelativePose(0.0, 0.0, 60.0, 0.0, tracking_valid=True, tracking_age_ms=0.0)
-        for _ in range(int(16.0 / 0.02)):
+        left_at = None
+        for i in range(int(26.0 / 0.02)):
             ctl.drive(idle_pose(x=1.0), near, NO_CAPTURE, 80.0, 0.02)
-            if ctl.phase is DockPhase.ABORT:
+            if ctl.phase is not DockPhase.CAPTURE_PENDING:
+                left_at = i * 0.02
                 break
-        assert ctl.phase is DockPhase.ABORT  # never waits forever at the mouth
+        assert left_at is not None and left_at < 10.0
+        assert ctl.phase in (DockPhase.FINAL_APPROACH, DockPhase.ABORT)
 
 
 class TestEpisodes:
@@ -130,33 +140,51 @@ class TestEpisodes:
             assert res.single_signal_confirms == 0
 
     def test_docks_in_calm_air_regression_floor(self) -> None:
-        # seeds 10–19 measured 4/10 overall, 3 first-attempt (2026-07-26)
+        # seeds 10-19 measured 10/10, all first-attempt (v2, 2026-07-28;
+        # v1 scored 4/10 with 3 first-attempt on the same seeds)
         results = [run_episode(s, drafts=False) for s in range(10, 20)]
         ok = sum(1 for r in results if r.ok)
         first = sum(1 for r in results if r.ok and r.retries == 0)
-        assert ok >= 2
-        assert first >= 1
+        assert ok >= 9
+        assert first >= 8
 
     def test_docks_with_drafts_regression_floor(self) -> None:
-        # seeds 0–9 measured 3/10 within six attempts (2026-07-26)
+        # seeds 0-9 measured 10/10 within six, 8 first-attempt (v2; v1: 3/10)
         results = [run_episode(s, drafts=True) for s in range(10)]
-        assert sum(1 for r in results if r.ok) >= 1
+        assert sum(1 for r in results if r.ok) >= 8
+        assert sum(1 for r in results if r.ok and r.retries == 0) >= 6
 
     def test_perturbed_constants_do_not_collapse(self) -> None:
         """±20% mass/thrust perturbation must not zero the controller out
         (tuned-with-honest-physics-stays-tuned, in its honest state).
-        Seeds 10–17 measured 3/8 perturbed vs 3-4/8 baseline."""
+        Seeds 10-17 measured 8/8 perturbed (v1: 3/8)."""
         cfg = PhysicsConfig(vehicle_mass_kg=0.125 * 1.2,
                             thrust_max_gf_per_motor=8.0)
         results = [run_episode(s, drafts=False, cfg=cfg) for s in range(10, 18)]
-        assert sum(1 for r in results if r.ok) >= 1
+        assert sum(1 for r in results if r.ok) >= 6
+        assert sum(1 for r in results if r.ok and r.retries == 0) >= 5
+
+    def test_perturbed_constants_survive_drafts_too(self) -> None:
+        """The planner reads the vehicle's own numbers (mass, thrust,
+        capture speed) to decide when to commit, so a wrong model is a
+        pointed risk: measure it. Seeds 0-19 at +20% mass / -20% thrust WITH
+        drafts measured 20/20, 19 first-attempt."""
+        cfg = PhysicsConfig(vehicle_mass_kg=0.125 * 1.2,
+                            thrust_max_gf_per_motor=8.0)
+        results = [run_episode(s, drafts=True, cfg=cfg) for s in range(20)]
+        assert sum(1 for r in results if r.ok) >= 15
 
     @pytest.mark.skip(reason=(
-        "PHASE-6 GATE NOT MET (honest): >95% first-attempt required; measured "
-        "7% first / 42% within six attempts over 100 randomized episodes. "
-        "Controller needs a trajectory planner / draft estimator or the "
-        "Isaac track (Phase 10). Unskip when reworked. Do NOT loosen the "
-        "physics to pass this (Constitution Art. II §4)."
+        "PHASE-6 GATE NOT MET (honest, controller v2 2026-07-28): >95% "
+        "first-attempt AND >99% within one retry required; measured 90.5% "
+        "first / 99.0% within one / 100% within six over 200 randomized "
+        "episodes at 50 Hz. Both bars missed, narrowly. Calm air is 100% "
+        "first-attempt, so what is left is entirely drafts of the same "
+        "magnitude as control authority (research/06 §G.5) — the remaining "
+        "aborts are tracking losses while the vehicle is blown off the "
+        "corridor. Do NOT loosen the physics or the episode contract to "
+        "pass this (Constitution Art. II §4). Unskip when it genuinely "
+        "passes; docs/PHYSICS_VALIDATION.md carries both engines' numbers."
     ))
     def test_gate_docking_success_rate(self) -> None:
         results = [run_episode(s, drafts=True) for s in range(200)]

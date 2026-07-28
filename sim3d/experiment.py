@@ -89,7 +89,8 @@ def run_episode3d(
         buoyancy_gf=buoy, end_phase=str(ctl.phase),
         mouth_entries=world.mouth_entries,
         contact_speed_mps=world.last_entry_speed,
-        min_tip_throat_m=world.min_tip_throat, aborts_from=aborts,
+        min_tip_throat_m=world.min_tip_throat, replans=ctl.replans,
+        aborts_from=aborts, abort_reasons=dict(ctl.abort_reasons),
     )
 
 

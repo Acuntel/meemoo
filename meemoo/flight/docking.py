@@ -20,7 +20,10 @@ import math
 from dataclasses import dataclass, field
 
 from meemoo.flight.constants import DockConfig, PhysicsConfig
+from meemoo.flight.dock_plan import ApproachPlanner
+from meemoo.flight.dock_slide import SlideMonitor
 from meemoo.flight.docking_laws import ApproachLaws
+from meemoo.flight.draft import DraftEstimator
 from meemoo.flight.floorplan import DockPose
 from meemoo.flight.nav import WorldNav
 from meemoo.flight.types import (
@@ -32,12 +35,25 @@ from meemoo.flight.types import (
     ThrustCommand,
 )
 
+# Phase backstops. FINAL_APPROACH and CAPTURE_PENDING are longer than the
+# v1 reactive controller needed because the planner deliberately SPENDS time:
+# it holds range waiting for a cross-error window instead of committing to a
+# line it can already see will miss, and it rides a 35 cm cone slide out
+# rather than bailing on one noisy sample. Both are still hard caps — the
+# clock does not restart on an in-approach re-plan.
 _TIMEOUT_S: dict[DockPhase, float] = {
     DockPhase.TRANSIT: 90.0,
     DockPhase.ALIGN: 30.0,
-    DockPhase.FINAL_APPROACH: 40.0,
-    DockPhase.CAPTURE_PENDING: 15.0,
+    DockPhase.FINAL_APPROACH: 75.0,
+    DockPhase.CAPTURE_PENDING: 25.0,
 }
+
+# While the cone holds the nose, "commanded thrust with no acceleration" is
+# the wall talking, not the wind: the draft observer must not learn from it.
+_NO_LEARN = frozenset({
+    DockPhase.CAPTURE_PENDING, DockPhase.CAPTURED, DockPhase.CHARGING,
+    DockPhase.CHARGE_COMPLETE, DockPhase.RELEASE,
+})
 
 
 @dataclass(slots=True)
@@ -79,20 +95,26 @@ class DockingController(ApproachLaws):
         self.dock_cfg = dock_cfg
         self.dock_pose = dock_pose
         self.nav = nav or WorldNav(phys_cfg)
+        self.draft = DraftEstimator(phys_cfg)
+        self.planner = ApproachPlanner(phys_cfg, dock_cfg)
+        self.slide = SlideMonitor()
         self.max_attempts = max_attempts
         self.standoff_m = standoff_m
         self.phase = DockPhase.FLYING
         self.retries = 0
+        self.replans = 0  # in-approach line corrections (never a full retreat)
+        self.abort_reasons: dict[str, int] = {}  # which gate fired, for the bench
         self._phase_t = 0.0
         self._settle_t = 0.0
-        self._steer_i = 0.0  # crab-angle integrator (path following)
+        self._last_thrust_gf = 3.0  # last commanded magnitude (crab sizing)
+        self._nose_lat_f = 0.0  # slow boom offset for the hover target
         # EMA-filtered settle signals: judging a noisy pose sample-by-sample
         # never strings enough consecutive "good" samples together
         self._ema_dist = 1.0
         self._ema_speed = 1.0
         self._ema_lat = 1.0
-        self._ema_pm = 0.0  # smoothed predicted miss at the mouth plane
         self._stale_t = 0.0  # camera-loss grace timer (dead-reckon briefly)
+        self._no_reenter = False  # bounced out: fly back to the gate first
         self._buoy_ff_gf = 0.0  # netBuoyancy telemetry feedforward
         self._hold_pt: tuple[float, float] | None = None  # pirouette anchor
         self._transitions: list[tuple[DockPhase, DockPhase]] = []
@@ -106,11 +128,17 @@ class DockingController(ApproachLaws):
     def request_dock(self) -> None:
         if self.phase in (DockPhase.FLYING, DockPhase.DEPARTED, DockPhase.DOCK_FAILED):
             self.retries = 0
+            self.draft.reset()
             self._enter(DockPhase.DOCK_REQUESTED)
 
     def abort(self) -> None:
         if self.phase in APPROACH_PHASES:
-            self._enter(DockPhase.ABORT)
+            self._abort("commanded")
+
+    def _abort(self, reason: str) -> None:
+        """Go around, recording WHICH gate fired (the bench histograms it)."""
+        self.abort_reasons[reason] = self.abort_reasons.get(reason, 0) + 1
+        self._enter(DockPhase.ABORT)
 
     def request_undock(self) -> None:
         if self.phase in (DockPhase.CAPTURED, DockPhase.CHARGING,
@@ -139,6 +167,8 @@ class DockingController(ApproachLaws):
         while the slow integrator catches up."""
         self._phase_t += dt
         self._buoy_ff_gf = buoyancy_est_gf
+        self.draft.update(pose, dt, buoyancy_gf=buoyancy_est_gf,
+                          learn=self.phase not in _NO_LEARN)
         err = self._errors(pose, relpose)
         cmd = ThrustCommand()
         retention = self.docked or self.phase is DockPhase.CAPTURE_PENDING
@@ -170,7 +200,8 @@ class DockingController(ApproachLaws):
             cmd = self._recover(pose, dt)
 
         if self.phase in _TIMEOUT_S and self._phase_t > _TIMEOUT_S[self.phase]:
-            self._enter(DockPhase.ABORT)
+            self._abort(f"timeout_{self.phase}")
+        self.draft.record(cmd, pose.t)
         transitions, self._transitions = self._transitions, []
         return DockingOutput(cmd, retention, charge, transitions)
 
@@ -199,15 +230,13 @@ class DockingController(ApproachLaws):
         self._phase_t = 0.0
         self._settle_t = 0.0
         if phase is DockPhase.FINAL_APPROACH:
-            # seed the crab integrator from the draft trim ALIGN just learned
-            # (+δ steers force toward −l_hat, so δ carries the OPPOSITE sign
-            # of the lateral trim force the integrators hold)
-            ax, ay = self._axis
-            lat_gf = -self.nav.ix * ay + self.nav.iy * ax
-            self._steer_i = min(0.5, max(-0.5, math.atan2(-lat_gf, 5.0)))
-            self._ema_pm = 0.0
+            # A bounce back out of the cone is the same attempt continued, so
+            # it keeps the commit budget; a fresh approach off ALIGN resets it.
+            self.planner.reset(keep_commits=prev is DockPhase.CAPTURE_PENDING)
+            self._last_thrust_gf = 3.0
             self._stale_t = 0.0
             self._hold_pt = None
+            self._no_reenter = prev is DockPhase.CAPTURE_PENDING
         if phase in (DockPhase.ALIGN, DockPhase.ABORT, DockPhase.TRANSIT):
             self.nav.reset_hover()
             self._ema_dist = 1.0
